@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "4060679862",
+    "project_id": "polaby-tuiq67",
+    "storage_bucket": "polaby-tuiq67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4060679862:android:441d775ffd737ff798a017",
+        "android_client_info": {
+          "package_name": "com.childe.polaby"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOrodk2EGR_A5gIFccyl1_6KaZxxkARLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4060679862:android:548bef17ed12a36f98a017",
+        "android_client_info": {
+          "package_name": "com.mycompany.polabymobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOrodk2EGR_A5gIFccyl1_6KaZxxkARLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

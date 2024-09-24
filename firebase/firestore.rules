@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /note/{document} {
+      allow create: if request.auth.uid == request.resource.data.userId;
+      allow read: if request.auth.uid == resource.data.userId;
+      allow write: if request.auth.uid == resource.data.userId;
+      allow delete: if request.auth.uid == resource.data.userId;
+    }
+
+    match /Daily/{document} {
+      allow create: if request.auth.uid == request.resource.data.userId;
+      allow read: if request.auth.uid == resource.data.userId;
+      allow write: if request.auth.uid == resource.data.userId;
+      allow delete: if request.auth.uid == resource.data.userId;
+    }
+
+    match /Daily/{parent}/emotion/{document} {
+      allow create: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow read: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow write: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow delete: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+    }
+
+    match /Daily/{parent}/noteDaily/{document} {
+      allow create: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow read: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow write: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow delete: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+    }
+
+    match /Daily/{parent}/schedule/{document} {
+      allow create: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow read: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow write: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+      allow delete: if request.auth.uid == get(/databases/$(database)/documents/Daily/$(parent)).data.userId;
+    }
+
+    match /users/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /posts/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /posts/{parent}/comments/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/comments/{document} {
+      allow read: if true;
+    }
+
+
+    match /note/{parent}/noteDetail/{document} {
+      allow create: if request.auth.uid == get(/databases/$(database)/documents/note/$(parent)).data.userId;
+      allow read: if request.auth.uid == get(/databases/$(database)/documents/note/$(parent)).data.userId;
+      allow write: if request.auth.uid == get(/databases/$(database)/documents/note/$(parent)).data.userId;
+      allow delete: if request.auth.uid == get(/databases/$(database)/documents/note/$(parent)).data.userId;
+    }
+
+    match /noteExample/{document} {
+      allow create: if false;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+  }
+}
