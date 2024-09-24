@@ -170,6 +170,8 @@ class PolabyGroup {
   static RatingsGETCall ratingsGETCall = RatingsGETCall();
   static MenuUserGETCall menuUserGETCall = MenuUserGETCall();
   static AccountGetCall accountGetCall = AccountGetCall();
+  static AccountSubscriptionCall accountSubscriptionCall =
+      AccountSubscriptionCall();
 }
 
 class ApiV1AccountsPOSTCall {
@@ -3485,6 +3487,39 @@ class AccountGetCall {
         'ngrok-skip-browser-warning': '69420',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class AccountSubscriptionCall {
+  Future<ApiCallResponse> call({
+    String? id = '',
+    int? type,
+    int? price,
+  }) async {
+    final baseUrl = PolabyGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "subscriptionType":$type,
+  "price": $price
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'accountSubscription',
+      apiUrl: '$baseUrl/api/v1/accounts/$id/subscription',
+      callType: ApiCallType.POST,
+      headers: {
+        'ngrok-skip-browser-warning': '69420',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

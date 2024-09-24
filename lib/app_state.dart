@@ -595,6 +595,18 @@ class FFAppState extends ChangeNotifier {
     healthSize.insert(index, value);
   }
 
+  bool _monthly = false;
+  bool get monthly => _monthly;
+  set monthly(bool value) {
+    _monthly = value;
+  }
+
+  bool _yearly = false;
+  bool get yearly => _yearly;
+  set yearly(bool value) {
+    _yearly = value;
+  }
+
   final _ingredientManager = FutureRequestManager<ApiCallResponse>();
   Future<ApiCallResponse> ingredient({
     String? uniqueQueryKey,

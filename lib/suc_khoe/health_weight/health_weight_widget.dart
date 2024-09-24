@@ -178,14 +178,16 @@ class _HealthWeightWidgetState extends State<HealthWeightWidget> {
                       Text(
                         valueOrDefault<String>(
                           functions.calculatePercentageChange(
-                                      widget.oldValue, widget.newValue)! >=
+                                      widget.oldValue,
+                                      double.tryParse(
+                                          widget.newValue!.toString()))! >=
                                   0.0
                               ? valueOrDefault<String>(
-                                  'Tăng ${functions.calculatePercentageChange(widget.oldValue, widget.newValue)?.toString()}%',
+                                  'Tăng ${functions.calculatePercentageChange(widget.oldValue, double.tryParse(widget.newValue!.toString()))?.toString()}%',
                                   '20',
                                 )
                               : valueOrDefault<String>(
-                                  'Giảm ${functions.calculatePercentageChange(widget.oldValue, widget.newValue)?.toString()}%',
+                                  'Giảm ${functions.calculatePercentageChange(widget.oldValue, double.tryParse(widget.newValue!.toString()))?.toString()}%',
                                   '30',
                                 ),
                           '20',

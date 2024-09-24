@@ -1,8 +1,12 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -103,7 +107,7 @@ class _ChonGoiWidgetState extends State<ChonGoiWidget> {
                       child: SvgPicture.asset(
                         'assets/images/Header_-_Trang_ch.svg',
                         width: double.infinity,
-                        height: 224.0,
+                        height: double.infinity,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -286,6 +290,11 @@ class _ChonGoiWidgetState extends State<ChonGoiWidget> {
                                                   FFAppState()
                                                           .freemiumSelection =
                                                       false;
+                                                  FFAppState().yearly = true;
+                                                  FFAppState().monthly = false;
+                                                  safeSetState(() {});
+                                                  _model.type = 1;
+                                                  _model.price = 480000;
                                                   safeSetState(() {});
                                                 },
                                                 value: FFAppState()
@@ -560,6 +569,8 @@ class _ChonGoiWidgetState extends State<ChonGoiWidget> {
                                                   FFAppState()
                                                           .freemiumSelection =
                                                       false;
+                                                  FFAppState().yearly = false;
+                                                  FFAppState().monthly = true;
                                                   safeSetState(() {});
                                                 },
                                                 value: FFAppState()
@@ -839,6 +850,11 @@ class _ChonGoiWidgetState extends State<ChonGoiWidget> {
                                                       .freemiumSelection = true;
                                                   FFAppState()
                                                       .premiumSelection = false;
+                                                  FFAppState().monthly = true;
+                                                  FFAppState().yearly = false;
+                                                  safeSetState(() {});
+                                                  _model.type = 0;
+                                                  _model.price = 49000;
                                                   safeSetState(() {});
                                                 },
                                                 value: FFAppState()
@@ -1030,6 +1046,8 @@ class _ChonGoiWidgetState extends State<ChonGoiWidget> {
                                                       .freemiumSelection = true;
                                                   FFAppState()
                                                       .premiumSelection = false;
+                                                  FFAppState().monthly = false;
+                                                  FFAppState().yearly = true;
                                                   safeSetState(() {});
                                                 },
                                                 value: FFAppState()
@@ -1184,8 +1202,89 @@ class _ChonGoiWidgetState extends State<ChonGoiWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        _model.isPurchaseSuccessful =
+                            await revenue_cat.purchasePackage(revenue_cat
+                                .offerings!
+                                .current!
+                                .availablePackages[
+                                    (FFAppState().premiumSelection == true) &&
+                                            (FFAppState().yearly == true)
+                                        ? 0
+                                        : 1]
+                                .identifier);
+                        if (_model.isPurchaseSuccessful!) {
+                          _model.updateSubscription =
+                              await PolabyGroup.accountSubscriptionCall.call(
+                            id: currentUserUid,
+                            type: _model.type,
+                            price: _model.price,
+                          );
+
+                          if ((_model.updateSubscription?.succeeded ?? true)) {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: const Text('Thanh toán'),
+                                  content: const Text(
+                                      'Chức mừng bạn đã nâng cấp tài khoản thành công'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Đồng ý'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            FFAppState().updateUserInfoStruct(
+                              (e) => e
+                                ..data = DataStruct(
+                                  isSubscriptionActive: true,
+                                ),
+                            );
+                            FFAppState().update(() {});
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: const Text('Thanh toán'),
+                                  content: const Text('Lỗi giao dịch'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Đồng ý'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: const Text('Thanh toán'),
+                                content:
+                                    const Text('Hệ thống thanh toán đang gặp sự cố'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: const Text('Đồng ý'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+
+                        safeSetState(() {});
                       },
                       text: 'Tiếp tục',
                       options: FFButtonOptions(
