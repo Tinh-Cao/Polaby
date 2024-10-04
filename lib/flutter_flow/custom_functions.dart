@@ -131,6 +131,54 @@ String? caculatePregnantWeekV4(
   }
 }
 
+String? caculatePregnantWeekV5(
+  int day,
+  int month,
+  int year,
+) {
+  try {
+    DateTime currentDate = DateTime.now();
+    DateTime startDate = DateTime(year, month, day);
+    if (day != currentDate.day) {
+      day += 1;
+    }
+    if (month != currentDate.month) {
+      month += 1;
+    }
+    // Kiểm tra nếu tháng nhập vào nhỏ hơn tháng hiện tại
+    if (month < currentDate.month) {
+      // Tính toán số ngày từ ngày nhập vào của năm sau so với tháng hiện tại
+      DateTime startDateNextYear = DateTime(year + 1, month, day);
+      int daysUntilNextYear = startDateNextYear.difference(currentDate).inDays;
+
+      // Nếu số ngày tính từ tháng nhập vào của năm sau so với hiện tại nhỏ hơn 280 thì tăng năm lên 1
+      if (daysUntilNextYear < 280) {
+        year += 1;
+        startDate = DateTime(year, month, day);
+      }
+    }
+
+    // Kiểm tra nếu ngày nhập vào cách thời gian hiện tại quá 280 ngày trước hoặc sau thời gian hiện tại 1 ngày
+    if (startDate.isBefore(currentDate.subtract(Duration(days: 280))) ||
+        startDate.isAfter(currentDate.add(Duration(days: 1)))) {
+      startDate = currentDate;
+    }
+
+    // Tính số ngày đã mang thai
+    int daysPregnant = currentDate.difference(startDate).inDays;
+
+    // Tính số tuần và số ngày từ ngày đã mang thai
+    int weeks = daysPregnant ~/ 7;
+    int days = daysPregnant % 7;
+
+    // Trả về số tuần và số ngày đã mang thai
+    return '$weeks tuần $days ngày';
+  } catch (e) {
+    // Xử lý lỗi nếu có
+    return 'Error: $e';
+  }
+}
+
 String? caculatePregnantWeekV3(
   int day,
   int month,
@@ -277,6 +325,62 @@ String? changeFormatDatime(String? dateTimeStr) {
   }
 }
 
+String? calculateDueDateV3(
+  int day,
+  int month,
+  int year,
+) {
+  try {
+    DateTime today = DateTime.now();
+
+    // Nếu ngày và tháng nhập vào khác ngày và tháng hiện tại thì tăng thêm 1
+    if (day != today.day) {
+      day += 1;
+    }
+    if (month != today.month) {
+      month += 1;
+    }
+
+    // Tạo ngày dự sinh từ giá trị đã xử lý cho tháng và ngày
+    DateTime dueDate = DateTime(year, month, day);
+
+    // Kiểm tra xem tháng nhập vào có nhỏ hơn tháng hiện tại hay không
+    if (month < today.month || (month == today.month && day < today.day)) {
+      // Tính ngày nhập vào của năm tiếp theo
+      DateTime inputDateNextYear = DateTime(today.year + 1, month, day);
+
+      // Tính số ngày từ hôm nay đến ngày nhập vào của năm tiếp theo
+      int daysToNextYearInput = inputDateNextYear.difference(today).inDays;
+
+      // Nếu số ngày đến ngày nhập vào của năm tiếp theo nhỏ hơn 280, tăng năm lên 1
+      if (daysToNextYearInput <= 280) {
+        year += 1;
+      }
+    }
+
+    // Cập nhật ngày dự sinh với giá trị năm đã chỉnh sửa
+    dueDate = DateTime(year, month, day);
+
+    // Kiểm tra ngày dự sinh không vượt quá 280 ngày kể từ ngày hiện tại
+    DateTime maxDueDate = today.add(Duration(days: 280));
+
+    // Kiểm tra xem ngày dự sinh có hợp lệ không (không được nằm trong quá khứ hoặc vượt quá ngày tối đa)
+    if (dueDate.isBefore(today) || dueDate.isAfter(maxDueDate)) {
+      return DateFormat('yyyy-MM-dd')
+          .format(today); // Trả về ngày hiện tại nếu không hợp lệ
+    }
+
+    // Định dạng ngày dưới dạng yyyy-MM-dd
+    String formattedDate = DateFormat('yyyy-MM-dd').format(dueDate);
+
+    return formattedDate;
+  } catch (e) {
+    // Xử lý lỗi nếu có
+    return DateFormat('yyyy-MM-dd')
+        .format(DateTime.now()); // Trả về ngày hiện tại nếu có lỗi
+  }
+}
+
 String convertToApiDateFormatString(String dateString) {
   if (dateString != null || dateString.trim().isNotEmpty) {
     // Phân tích chuỗi ngày tháng với thời gian
@@ -324,6 +428,52 @@ List<int>? years() {
     yearList.add(i);
   }
   return yearList;
+}
+
+String? calculateWeeksAndDaysRemainingV4(
+  int day,
+  int month,
+  int year,
+) {
+  // Ngày hiện tại
+  final DateTime today = DateTime.now();
+
+  // Nếu giá trị đầu vào cho ngày, tháng khác với ngày, tháng hiện tại, cộng thêm 1
+  if (day != today.day) {
+    day += 1;
+  }
+  if (month != today.month) {
+    month += 1;
+  }
+
+  // Kiểm tra nếu tháng và ngày nhập vào nhỏ hơn tháng và ngày hiện tại
+  if (month < today.month || (month == today.month && day < today.day)) {
+    // Tạo ngày dự sinh từ giá trị nhập vào của năm sau
+    DateTime nextYearDueDate = DateTime(year + 1, month, day);
+
+    // Tính số ngày giữa ngày hiện tại và ngày dự sinh của năm sau
+    int daysUntilNextYear = nextYearDueDate.difference(today).inDays;
+
+    // Kiểm tra nếu số ngày tính từ hôm nay đến ngày dự sinh của năm sau hợp lý
+    if (daysUntilNextYear <= 280) {
+      year += 1; // Tăng năm lên 1
+    }
+  }
+
+  // Ngày dự sinh
+  final DateTime dueDate = DateTime(year, month, day);
+
+  // Tổng số tuần thai kỳ và số ngày mỗi tuần
+  const int daysPerWeek = 7;
+
+  // Tính số ngày giữa ngày hiện tại và ngày dự sinh
+  final int daysRemaining = dueDate.difference(today).inDays;
+
+  // Tính số tuần và ngày còn lại
+  final int remainingWeeks = daysRemaining ~/ daysPerWeek;
+  final int remainingDays = daysRemaining % daysPerWeek;
+
+  return '$remainingWeeks tuần $remainingDays ngày';
 }
 
 String? calculateWeeksAndDaysRemainingV2(
@@ -441,9 +591,14 @@ int getDayIndex(int day) {
 
 int getMonthFromIndex(int index) {
   List<int> monthsList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  if (index >= 1 && index <= monthsList.length) {
+  if (index == 0) {
+    // Trả về tháng hiện tại nếu index là 0
+    return DateTime.now().month;
+  } else if (index >= 1 && index <= monthsList.length) {
     return monthsList[index - 1];
   }
+
+  // Trả về giá trị mặc định nếu index không hợp lệ
   return 99;
 }
 
@@ -561,9 +716,14 @@ int getYearFromIndex(int index) {
     2100
   ];
 
-  if (index >= 0 && index < yearsList.length) {
-    return yearsList[index];
+  if (index == 0) {
+    // Trả về năm hiện tại nếu index là 0
+    return DateTime.now().year;
+  } else if (index >= 1 && index < yearsList.length) {
+    return yearsList[index - 1];
   }
+
+  // Trả về 0 nếu index không hợp lệ
   return 0;
 }
 
@@ -909,9 +1069,14 @@ int getDayFromIndex(int index) {
     30,
     31
   ];
-  if (index >= 1 && index <= dayList.length) {
+  if (index == 0) {
+    // Trả về ngày hiện tại nếu index là 0
+    return DateTime.now().day;
+  } else if (index >= 1 && index <= dayList.length) {
     return dayList[index - 1];
   }
+
+  // Trả về giá trị mặc định nếu index không hợp lệ
   return 99;
 }
 
@@ -1795,7 +1960,7 @@ double? calculateDifference(
 
   // Lấy phần tử tại chỉ mục và phần tử kế tiếp
   var firstItem = jsonList[index];
-  var secondItem = jsonList[index + 1];
+  var secondItem = index - 1 < 0 ? jsonList[0] : jsonList[index - 1];
 
   // Kiểm tra nếu giá trị của phần tử tại chỉ mục hoặc phần tử kế tiếp là null
   if (firstItem['value'] == null || secondItem['value'] == null) {
@@ -1846,6 +2011,27 @@ String? calculateDueDateV2(
 ) {
   try {
     DateTime today = DateTime.now();
+
+    // Kiểm tra và thay thế giá trị 0 cho day, month, year nếu cần
+    if (day == 0 && month == 0) {
+      // Nếu cả ngày và tháng đều bằng 0, sử dụng ngày và tháng hiện tại
+      day = today.day;
+      month = today.month;
+    } else if (month == 0 && year == 0) {
+      // Nếu cả tháng và năm đều bằng 0, sử dụng tháng và năm hiện tại
+      month = today.month;
+      year = today.year;
+    } else if (day == 0 && year == 0) {
+      // Nếu cả ngày và năm đều bằng 0, sử dụng ngày và năm hiện tại
+      day = today.day;
+      year = today.year;
+    } else {
+      // Thay thế bất kỳ giá trị 0 nào riêng lẻ nếu có
+      if (day == 0) day = today.day;
+      if (month == 0) month = today.month;
+      if (year == 0) year = today.year;
+    }
+
     DateTime inputDate = DateTime(year, month, day);
 
     // Nếu ngày nhập vào quá khứ hơn 280 ngày so với ngày hiện tại hoặc sau ngày hiện tại

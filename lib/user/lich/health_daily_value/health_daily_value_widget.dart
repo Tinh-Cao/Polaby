@@ -84,16 +84,16 @@ class _HealthDailyValueWidgetState extends State<HealthDailyValueWidget> {
                           child: InputHealthWidget(
                             date: widget.date,
                             isWeight: true,
-                            value: valueOrDefault<double>(
+                            value: double.tryParse(valueOrDefault<String>(
                               getJsonField(
                                 functions
                                     .getItemsWithType(
                                         widget.healths?.toList(), 0)
                                     ?.first,
                                 r'''$.value''',
-                              ),
-                              0.0,
-                            ),
+                              )?.toString(),
+                              '0',
+                            )),
                             id: valueOrDefault<String>(
                               getJsonField(
                                 functions
@@ -193,16 +193,16 @@ class _HealthDailyValueWidgetState extends State<HealthDailyValueWidget> {
                           child: InputHealthWidget(
                             date: widget.date,
                             isSize: true,
-                            value: valueOrDefault<double>(
+                            value: double.tryParse(valueOrDefault<String>(
                               getJsonField(
                                 functions
                                     .getItemsWithType(
                                         widget.healths?.toList(), 2)
                                     ?.first,
                                 r'''$.value''',
-                              ),
-                              0.0,
-                            ),
+                              )?.toString(),
+                              '0',
+                            )),
                             id: valueOrDefault<String>(
                               getJsonField(
                                 functions
@@ -304,26 +304,26 @@ class _HealthDailyValueWidgetState extends State<HealthDailyValueWidget> {
                             isBloodSys: true,
                             isBloodDia: true,
                             isSize: false,
-                            bloodSys: valueOrDefault<double>(
+                            bloodSys: double.tryParse(valueOrDefault<String>(
                               getJsonField(
                                 functions
                                     .getItemsWithType(
                                         widget.healths?.toList(), 3)
                                     ?.first,
                                 r'''$.value''',
-                              ),
-                              0.0,
-                            ),
-                            bloodDia: valueOrDefault<double>(
+                              )?.toString(),
+                              '0',
+                            )),
+                            bloodDia: double.tryParse(valueOrDefault<String>(
                               getJsonField(
                                 functions
                                     .getItemsWithType(
                                         widget.healths?.toList(), 4)
                                     ?.first,
                                 r'''$.value''',
-                              ),
-                              0.0,
-                            ),
+                              )?.toString(),
+                              '0',
+                            )),
                             id: valueOrDefault<String>(
                               getJsonField(
                                 functions

@@ -84,27 +84,21 @@ class _ChiTietTaiKhoanExpertWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: responsiveVisibility(
-          context: context,
-          desktop: false,
-        )
-            ? AppBar(
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                automaticallyImplyLeading: false,
-                title: Text(
-                  'Thông tin chuyên gia',
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
-                      ),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Thông tin chuyên gia',
+            style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Inter',
+                  fontSize: 16.0,
+                  letterSpacing: 0.0,
                 ),
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
-            : null,
+          ),
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Stack(

@@ -92,6 +92,7 @@ class _CalendarComponentWidgetState extends State<CalendarComponentWidget> {
         List<DailyRecord> containerDailyRecordList = snapshot.data!;
 
         return Container(
+          width: double.infinity,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
           ),

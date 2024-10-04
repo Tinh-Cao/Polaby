@@ -685,6 +685,10 @@ class ApiV1AuthenticationLoginPOSTCall {
         response,
         r'''$.informationRequired''',
       ));
+  String? errors(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.errors.Email[0]''',
+      ));
 }
 
 class ApiV1AuthenticationTokenRefreshPOSTCall {

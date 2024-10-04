@@ -10,17 +10,12 @@ class TaoBaiPostModel extends FlutterFlowModel<TaoBaiPostWidget> {
 
   ///  State fields for stateful widgets in this component.
 
-  // Stores action output result for [Custom Action - uploadImageToFirebaseStorage] action in Text widget.
-  String? imageUrl;
   // Stores action output result for [Firestore Query - Query a collection] action in Text widget.
   UsersRecord? userID;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
 
   @override
   void initState(BuildContext context) {}

@@ -57,83 +57,78 @@ class _AnToanThucPhamWidgetState extends State<AnToanThucPhamWidget> {
         body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, _) => [
-            if (responsiveVisibility(
-              context: context,
-              desktop: false,
-            ))
-              SliverAppBar(
-                pinned: false,
-                floating: true,
-                snap: false,
-                backgroundColor: const Color(0x00FFFFFF),
-                automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 54.0,
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    FFAppState().filterState = 0;
-                    FFAppState().search = '';
-                    safeSetState(() {});
-                    context.pop();
-                  },
+            SliverAppBar(
+              pinned: false,
+              floating: true,
+              snap: false,
+              backgroundColor: const Color(0x00FFFFFF),
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 54.0,
+                icon: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 24.0,
                 ),
-                title: Align(
-                  alignment: const AlignmentDirectional(1.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        isDismissible: false,
-                        enableDrag: false,
-                        context: context,
-                        builder: (context) {
-                          return GestureDetector(
-                            onTap: () => FocusScope.of(context).unfocus(),
-                            child: Padding(
-                              padding: MediaQuery.viewInsetsOf(context),
-                              child: SizedBox(
-                                height: MediaQuery.sizeOf(context).height * 0.4,
-                                child: FilterPickerWidget(
-                                  index: valueOrDefault<int>(
-                                    FFAppState().filterState,
-                                    0,
-                                  ),
+                onPressed: () async {
+                  FFAppState().filterState = 0;
+                  FFAppState().search = '';
+                  safeSetState(() {});
+                  context.pop();
+                },
+              ),
+              title: Align(
+                alignment: const AlignmentDirectional(1.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      isDismissible: false,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () => FocusScope.of(context).unfocus(),
+                          child: Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.4,
+                              child: FilterPickerWidget(
+                                index: valueOrDefault<int>(
+                                  FFAppState().filterState,
+                                  0,
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      ).then((value) => safeSetState(() {}));
-                    },
-                    child: Text(
-                      'Bộ lọc',
-                      style:
-                          FlutterFlowTheme.of(context).headlineLarge.override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).primary,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.normal,
-                              ),
-                    ),
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  },
+                  child: Text(
+                    'Bộ lọc',
+                    style: FlutterFlowTheme.of(context).headlineLarge.override(
+                          fontFamily: 'Inter',
+                          color: FlutterFlowTheme.of(context).primary,
+                          fontSize: 16.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.normal,
+                        ),
                   ),
                 ),
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
+              ),
+              actions: const [],
+              centerTitle: true,
+              elevation: 0.0,
+            )
           ],
           body: Builder(
             builder: (context) {

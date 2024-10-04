@@ -103,11 +103,11 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Icon(
-                              FFIcons.khome,
+                              Icons.home_outlined,
                               color: widget.page == 'home'
                                   ? FlutterFlowTheme.of(context).primary
                                   : FlutterFlowTheme.of(context).accent4,
-                              size: 20.0,
+                              size: 22.0,
                             ),
                             Text(
                               'Trang chủ',
@@ -119,7 +119,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                     color: widget.page == 'home'
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context).accent4,
-                                    fontSize: 10.0,
+                                    fontSize: 8.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -202,7 +202,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                     color: widget.page == 'calendar'
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context).accent4,
-                                    fontSize: 10.0,
+                                    fontSize: 8.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -286,7 +286,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                     color: widget.page == 'community'
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context).accent4,
-                                    fontSize: 10.0,
+                                    fontSize: 8.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -371,7 +371,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                     color: widget.page == 'note'
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context).accent4,
-                                    fontSize: 10.0,
+                                    fontSize: 8.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -441,7 +441,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                     color: widget.page == 'account'
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context).accent4,
-                                    fontSize: 10.0,
+                                    fontSize: 8.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -524,7 +524,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                     color: widget.page == 'community'
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context).accent4,
-                                    fontSize: 10.0,
+                                    fontSize: 8.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -607,7 +607,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                     color: widget.page == 'notification'
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context).accent4,
-                                    fontSize: 10.0,
+                                    fontSize: 8.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -677,7 +677,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                                     color: widget.page == 'account'
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context).accent4,
-                                    fontSize: 10.0,
+                                    fontSize: 8.0,
                                     letterSpacing: 0.0,
                                   ),
                             ),

@@ -1,8 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/empty_v2_widget.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'chi_tiet_mon_an_model.dart';
 export 'chi_tiet_mon_an_model.dart';
@@ -63,8 +66,8 @@ class _ChiTietMonAnWidgetState extends State<ChiTietMonAnWidget> {
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(15.0),
-          topRight: Radius.circular(15.0),
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
         ),
       ),
       child: Padding(
@@ -153,12 +156,43 @@ class _ChiTietMonAnWidgetState extends State<ChiTietMonAnWidget> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(
-                        widget.dishImage!,
-                        height: 192.0,
-                        fit: BoxFit.cover,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: FlutterFlowExpandedImageView(
+                              image: CachedNetworkImage(
+                                fadeInDuration: const Duration(milliseconds: 500),
+                                fadeOutDuration: const Duration(milliseconds: 500),
+                                imageUrl: widget.dishImage!,
+                                fit: BoxFit.contain,
+                              ),
+                              allowRotation: false,
+                              tag: widget.dishImage!,
+                              useHeroAnimation: true,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Hero(
+                        tag: widget.dishImage!,
+                        transitionOnUserGestures: true,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: CachedNetworkImage(
+                            fadeInDuration: const Duration(milliseconds: 500),
+                            fadeOutDuration: const Duration(milliseconds: 500),
+                            imageUrl: widget.dishImage!,
+                            height: 192.0,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
                     Column(
@@ -166,10 +200,7 @@ class _ChiTietMonAnWidgetState extends State<ChiTietMonAnWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${valueOrDefault<String>(
-                            widget.kcal?.toString(),
-                            '560',
-                          )} Kcal',
+                          '${(widget.kcal!).toStringAsFixed(1)} Kcal',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
@@ -394,7 +425,7 @@ class _ChiTietMonAnWidgetState extends State<ChiTietMonAnWidget> {
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Inter',
-                                          fontSize: 16.0,
+                                          fontSize: 18.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -409,7 +440,7 @@ class _ChiTietMonAnWidgetState extends State<ChiTietMonAnWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
-                                            fontSize: 16.0,
+                                            fontSize: 18.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -427,91 +458,82 @@ class _ChiTietMonAnWidgetState extends State<ChiTietMonAnWidget> {
                         ),
                       ].divide(const SizedBox(height: 24.0)),
                     ),
-                    FutureBuilder<ApiCallResponse>(
-                      future: FFAppState().nutrient(
-                        uniqueQueryKey: valueOrDefault<String>(
-                          widget.dishId,
-                          '0',
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                      child: FutureBuilder<ApiCallResponse>(
+                        future: FFAppState().nutrient(
+                          uniqueQueryKey: valueOrDefault<String>(
+                            widget.dishId,
+                            '0',
+                          ),
+                          requestFn: () =>
+                              PolabyGroup.apiV1IngredientsGETCall.call(
+                            dishId: widget.dishId,
+                            isDeleted: false,
+                            order: 'kcal',
+                            pageIndex: 1,
+                            pageSize: 100,
+                            orderByDescending: false,
+                          ),
                         ),
-                        requestFn: () =>
-                            PolabyGroup.apiV1IngredientsGETCall.call(
-                          dishId: widget.dishId,
-                          isDeleted: false,
-                          order: 'kcal',
-                          pageIndex: 1,
-                          pageSize: 100,
-                        ),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 32.0,
-                              height: 32.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 32.0,
+                                height: 32.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        }
-                        final listViewApiV1IngredientsGETResponse =
-                            snapshot.data!;
+                            );
+                          }
+                          final listViewApiV1IngredientsGETResponse =
+                              snapshot.data!;
 
-                        return Builder(
-                          builder: (context) {
-                            final ingredients =
-                                PolabyGroup.apiV1IngredientsGETCall
-                                        .ingredients(
-                                          listViewApiV1IngredientsGETResponse
-                                              .jsonBody,
-                                        )
-                                        ?.toList() ??
-                                    [];
+                          return Builder(
+                            builder: (context) {
+                              final ingredients =
+                                  PolabyGroup.apiV1IngredientsGETCall
+                                          .ingredients(
+                                            listViewApiV1IngredientsGETResponse
+                                                .jsonBody,
+                                          )
+                                          ?.toList() ??
+                                      [];
+                              if (ingredients.isEmpty) {
+                                return const SizedBox(
+                                  width: double.infinity,
+                                  height: 250.0,
+                                  child: EmptyV2Widget(),
+                                );
+                              }
 
-                            return ListView.separated(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: ingredients.length,
-                              separatorBuilder: (_, __) =>
-                                  const SizedBox(height: 8.0),
-                              itemBuilder: (context, ingredientsIndex) {
-                                final ingredientsItem =
-                                    ingredients[ingredientsIndex];
-                                return Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        getJsonField(
-                                          ingredientsItem,
-                                          r'''$.name''',
-                                        ).toString(),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    ),
-                                    Flexible(
-                                      child: Align(
-                                        alignment:
-                                            const AlignmentDirectional(0.5, 0.0),
+                              return ListView.separated(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: ingredients.length,
+                                separatorBuilder: (_, __) =>
+                                    const SizedBox(height: 8.0),
+                                itemBuilder: (context, ingredientsIndex) {
+                                  final ingredientsItem =
+                                      ingredients[ingredientsIndex];
+                                  return Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
                                         child: Text(
-                                          '${getJsonField(
+                                          getJsonField(
                                             ingredientsItem,
-                                            r'''$.weight''',
-                                          ).toString()}g',
+                                            r'''$.name''',
+                                          ).toString(),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -519,23 +541,46 @@ class _ChiTietMonAnWidgetState extends State<ChiTietMonAnWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
+                                                fontSize: 16.0,
                                                 letterSpacing: 0.0,
                                               ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                        );
-                      },
+                                      Flexible(
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.5, 0.0),
+                                          child: Text(
+                                            '${(double.tryParse(getJsonField(
+                                              ingredientsItem,
+                                              r'''$.weight''',
+                                            ).toString()))?.toString()} g',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
                   ]
                       .divide(const SizedBox(height: 16.0))
                       .addToStart(const SizedBox(height: 8.0))
-                      .addToEnd(const SizedBox(height: 8.0)),
+                      .addToEnd(const SizedBox(height: 32.0)),
                 ),
               ),
             ),

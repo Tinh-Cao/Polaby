@@ -10,7 +10,7 @@ import '/suc_khoe/health_size/health_size_widget.dart';
 import '/suc_khoe/health_size_empty/health_size_empty_widget.dart';
 import '/suc_khoe/health_weight/health_weight_widget.dart';
 import '/suc_khoe/health_weight_empty/health_weight_empty_widget.dart';
-import '/user/lich/hang_ngay/hang_ngay_widget.dart';
+import '/user/tai_khoan/nang_cap_tai_khoan/nang_cap_tai_khoan_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -330,113 +330,102 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                     color: const Color(0xFFFCE4EC),
                                     borderRadius: BorderRadius.circular(16.0),
                                   ),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        useSafeArea: true,
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => FocusScope.of(context)
-                                                .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: SizedBox(
-                                                height:
-                                                    MediaQuery.sizeOf(context)
-                                                            .height *
-                                                        0.95,
-                                                child: HangNgayWidget(
-                                                  datePicked: functions
-                                                      .dateTimeParse(functions
-                                                          .convertToApiDateFormatDate(
-                                                              getCurrentTimestamp))!,
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 0.0, 8.0, 0.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {},
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        8.0, 0.0, 0.0, 0.0),
+                                                child: FlutterFlowIconButton(
+                                                  borderRadius: 20.0,
+                                                  borderWidth: 1.0,
+                                                  buttonSize: 40.0,
+                                                  fillColor: const Color(0xFFFDEBF1),
+                                                  icon: Icon(
+                                                    Icons.add_sharp,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 24.0,
+                                                  ),
+                                                  onPressed: () {
+                                                    print(
+                                                        'IconButton pressed ...');
+                                                  },
                                                 ),
                                               ),
+                                              Container(
+                                                width: 202.0,
+                                                decoration: const BoxDecoration(),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Hôm nay bạn cảm thấy thế nào?',
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            fontSize: 16.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                    ),
+                                                    Text(
+                                                      'Ghi lại hành trình của bản thân',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: const Color(
+                                                                0xFFF48FB1),
+                                                            fontSize: 12.0,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ].divide(const SizedBox(width: 8.0)),
+                                          ),
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: SvgPicture.asset(
+                                              'assets/images/Frame_11.svg',
+                                              width: 64.0,
+                                              height: 112.0,
+                                              fit: BoxFit.cover,
                                             ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        FlutterFlowIconButton(
-                                          borderRadius: 20.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 40.0,
-                                          fillColor: const Color(0xFFFDEBF1),
-                                          icon: Icon(
-                                            Icons.add_sharp,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 24.0,
                                           ),
-                                          onPressed: () {
-                                            print('IconButton pressed ...');
-                                          },
-                                        ),
-                                        Container(
-                                          width: 202.0,
-                                          decoration: const BoxDecoration(),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Hôm nay bạn cảm thấy thế nào?',
-                                                textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Ghi lại hành trình của bản thân',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color:
-                                                              const Color(0xFFF48FB1),
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: SvgPicture.asset(
-                                            'assets/images/Frame_11.svg',
-                                            width: 64.0,
-                                            height: 112.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -444,10 +433,7 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                             ),
                             Builder(
                               builder: (context) {
-                                if (valueOrDefault<bool>(
-                                  FFAppState().healthWeight1.isNotEmpty,
-                                  false,
-                                )) {
+                                if (FFAppState().healthWeight1.isNotEmpty) {
                                   return Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -533,20 +519,55 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          context.pushNamed(
-                                            'vong_bung_hang_ngay',
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  const TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType
-                                                        .rightToLeft,
-                                                duration:
-                                                    Duration(milliseconds: 200),
-                                              ),
-                                            },
-                                          );
+                                          if (FFAppState()
+                                                  .UserInfo
+                                                  .data
+                                                  .isSubscriptionActive ==
+                                              true) {
+                                            context.pushNamed(
+                                              'vong_bung_hang_ngay',
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    const TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType
+                                                          .rightToLeft,
+                                                  duration: Duration(
+                                                      milliseconds: 200),
+                                                ),
+                                              },
+                                            );
+                                          } else {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              useSafeArea: true,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () =>
+                                                      FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: SizedBox(
+                                                      height: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .height *
+                                                          0.9,
+                                                      child:
+                                                          const NangCapTaiKhoanWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          }
                                         },
                                         child: wrapWithModel(
                                           model: _model.healthSizeModel,
@@ -587,18 +608,51 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed(
-                                        'vong_bung_hang_ngay',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.rightToLeft,
-                                            duration:
-                                                Duration(milliseconds: 200),
-                                          ),
-                                        },
-                                      );
+                                      if (FFAppState()
+                                              .UserInfo
+                                              .data
+                                              .isSubscriptionActive ==
+                                          true) {
+                                        context.pushNamed(
+                                          'vong_bung_hang_ngay',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType: PageTransitionType
+                                                  .rightToLeft,
+                                              duration:
+                                                  Duration(milliseconds: 200),
+                                            ),
+                                          },
+                                        );
+                                      } else {
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          useSafeArea: true,
+                                          context: context,
+                                          builder: (context) {
+                                            return GestureDetector(
+                                              onTap: () =>
+                                                  FocusScope.of(context)
+                                                      .unfocus(),
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: SizedBox(
+                                                  height:
+                                                      MediaQuery.sizeOf(context)
+                                                              .height *
+                                                          0.9,
+                                                  child:
+                                                      const NangCapTaiKhoanWidget(),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ).then((value) => safeSetState(() {}));
+                                      }
                                     },
                                     child: wrapWithModel(
                                       model: _model.healthSizeEmptyModel,
@@ -640,7 +694,7 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
+                                        8.0, 0.0, 8.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -649,22 +703,27 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
-                                              fillColor: const Color(0xFF5CBCB3),
-                                              icon: Icon(
-                                                Icons.people_alt_outlined,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                size: 24.0,
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 20.0,
+                                                borderWidth: 1.0,
+                                                buttonSize: 40.0,
+                                                fillColor: const Color(0xFF5CBCB3),
+                                                icon: Icon(
+                                                  Icons.people_alt_outlined,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  size: 24.0,
+                                                ),
+                                                onPressed: () {
+                                                  print(
+                                                      'IconButton pressed ...');
+                                                },
                                               ),
-                                              onPressed: () {
-                                                print('IconButton pressed ...');
-                                              },
                                             ),
                                             Container(
                                               width: 170.0,
@@ -710,13 +769,15 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                             ),
                                           ].divide(const SizedBox(width: 8.0)),
                                         ),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: SvgPicture.asset(
-                                            'assets/images/Motherhood-rafiki_1.svg',
-                                            height: 112.0,
-                                            fit: BoxFit.cover,
+                                        Flexible(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: SvgPicture.asset(
+                                              'assets/images/Motherhood-rafiki_1.svg',
+                                              height: 112.0,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -771,7 +832,7 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
+                                        8.0, 0.0, 8.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -780,22 +841,27 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
-                                              fillColor: const Color(0xFF71BCF8),
-                                              icon: Icon(
-                                                Icons.lightbulb_outline,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                size: 24.0,
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 20.0,
+                                                borderWidth: 1.0,
+                                                buttonSize: 40.0,
+                                                fillColor: const Color(0xFF71BCF8),
+                                                icon: Icon(
+                                                  Icons.lightbulb_outline,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  size: 24.0,
+                                                ),
+                                                onPressed: () {
+                                                  print(
+                                                      'IconButton pressed ...');
+                                                },
                                               ),
-                                              onPressed: () {
-                                                print('IconButton pressed ...');
-                                              },
                                             ),
                                             Container(
                                               width: 170.0,
@@ -841,13 +907,15 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                             ),
                                           ].divide(const SizedBox(width: 8.0)),
                                         ),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: SvgPicture.asset(
-                                            'assets/images/Eating_healthy_food-amico_1.svg',
-                                            height: 112.0,
-                                            fit: BoxFit.cover,
+                                        Flexible(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: SvgPicture.asset(
+                                              'assets/images/Eating_healthy_food-amico_1.svg',
+                                              height: 112.0,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -888,7 +956,7 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
+                                        8.0, 0.0, 8.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -897,22 +965,27 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
-                                              fillColor: const Color(0xFF9E81D1),
-                                              icon: Icon(
-                                                Icons.blender,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                size: 24.0,
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 20.0,
+                                                borderWidth: 1.0,
+                                                buttonSize: 40.0,
+                                                fillColor: const Color(0xFF9E81D1),
+                                                icon: Icon(
+                                                  Icons.blender,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  size: 24.0,
+                                                ),
+                                                onPressed: () {
+                                                  print(
+                                                      'IconButton pressed ...');
+                                                },
                                               ),
-                                              onPressed: () {
-                                                print('IconButton pressed ...');
-                                              },
                                             ),
                                             Container(
                                               width: 170.0,
@@ -958,13 +1031,15 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                             ),
                                           ].divide(const SizedBox(width: 8.0)),
                                         ),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: SvgPicture.asset(
-                                            'assets/images/Choice-pana_1.svg',
-                                            height: 112.0,
-                                            fit: BoxFit.cover,
+                                        Flexible(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: SvgPicture.asset(
+                                              'assets/images/Choice-pana_1.svg',
+                                              height: 112.0,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -979,17 +1054,46 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.pushNamed(
-                                  'an_toan_thuc_pham',
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: const TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType:
-                                          PageTransitionType.rightToLeft,
-                                      duration: Duration(milliseconds: 200),
-                                    ),
-                                  },
-                                );
+                                if (FFAppState()
+                                        .UserInfo
+                                        .data
+                                        .isSubscriptionActive ==
+                                    true) {
+                                  context.pushNamed(
+                                    'an_toan_thuc_pham',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType:
+                                            PageTransitionType.rightToLeft,
+                                        duration: Duration(milliseconds: 200),
+                                      ),
+                                    },
+                                  );
+                                } else {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    useSafeArea: true,
+                                    context: context,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () =>
+                                            FocusScope.of(context).unfocus(),
+                                        child: Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: SizedBox(
+                                            height: MediaQuery.sizeOf(context)
+                                                    .height *
+                                                0.9,
+                                            child: const NangCapTaiKhoanWidget(),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
+                                }
                               },
                               child: Material(
                                 color: Colors.transparent,
@@ -1013,22 +1117,27 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
-                                              fillColor: const Color(0xFFFFD75E),
-                                              icon: Icon(
-                                                Icons.fastfood_outlined,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                size: 24.0,
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 20.0,
+                                                borderWidth: 1.0,
+                                                buttonSize: 40.0,
+                                                fillColor: const Color(0xFFFFD75E),
+                                                icon: Icon(
+                                                  Icons.fastfood_outlined,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  size: 24.0,
+                                                ),
+                                                onPressed: () {
+                                                  print(
+                                                      'IconButton pressed ...');
+                                                },
                                               ),
-                                              onPressed: () {
-                                                print('IconButton pressed ...');
-                                              },
                                             ),
                                             Container(
                                               width: 170.0,
@@ -1074,13 +1183,15 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                             ),
                                           ].divide(const SizedBox(width: 8.0)),
                                         ),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: SvgPicture.asset(
-                                            'assets/images/Eating_healthy_food-rafiki_1.svg',
-                                            height: 112.0,
-                                            fit: BoxFit.cover,
+                                        Flexible(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: SvgPicture.asset(
+                                              'assets/images/Eating_healthy_food-rafiki_1.svg',
+                                              height: 112.0,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ],

@@ -2,13 +2,10 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/upload_data.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'tao_bai_post_model.dart';
 export 'tao_bai_post_model.dart';
 
@@ -126,10 +123,6 @@ class _TaoBaiPostWidgetState extends State<TaoBaiPostWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          _model.imageUrl =
-                              await actions.uploadImageToFirebaseStorage(
-                            _model.uploadedLocalFile,
-                          );
                           _model.userID = await queryUsersRecordOnce(
                             queryBuilder: (usersRecord) => usersRecord.where(
                               'userId',
@@ -137,17 +130,28 @@ class _TaoBaiPostWidgetState extends State<TaoBaiPostWidget> {
                             ),
                             singleRecord: true,
                           ).then((s) => s.firstOrNull);
+                          if (_model.userID?.role == 'Expert') {
+                            await PostsRecord.collection
+                                .doc()
+                                .set(createPostsRecordData(
+                                  content: _model.textController.text,
+                                  createDate: functions.getDateNow(),
+                                  isProfessional: true,
+                                  tilte: '',
+                                  postUser: _model.userID?.reference,
+                                ));
+                          } else {
+                            await PostsRecord.collection
+                                .doc()
+                                .set(createPostsRecordData(
+                                  content: _model.textController.text,
+                                  createDate: functions.getDateNow(),
+                                  isProfessional: false,
+                                  tilte: '',
+                                  postUser: _model.userID?.reference,
+                                ));
+                          }
 
-                          await PostsRecord.collection
-                              .doc()
-                              .set(createPostsRecordData(
-                                content: _model.textController.text,
-                                imageUrl: _model.imageUrl,
-                                createDate: functions.getDateNow(),
-                                isProfessional: false,
-                                tilte: '',
-                                postUser: _model.userID?.reference,
-                              ));
                           Navigator.pop(context);
 
                           safeSetState(() {});
@@ -187,9 +191,8 @@ class _TaoBaiPostWidgetState extends State<TaoBaiPostWidget> {
                       if (_model.isOpen == true)
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: Image.memory(
-                            _model.uploadedLocalFile.bytes ??
-                                Uint8List.fromList([]),
+                          child: Image.network(
+                            'https://picsum.photos/seed/776/600',
                             height: 175.0,
                             fit: BoxFit.fill,
                             errorBuilder: (context, error, stackTrace) =>
@@ -259,77 +262,6 @@ class _TaoBaiPostWidgetState extends State<TaoBaiPostWidget> {
                       child: Container(
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
-                        ),
-                        child: Align(
-                          alignment: const AlignmentDirectional(0.0, 1.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  final selectedMedia =
-                                      await selectMediaWithSourceBottomSheet(
-                                    context: context,
-                                    allowPhoto: true,
-                                    includeDimensions: true,
-                                    includeBlurHash: true,
-                                  );
-                                  if (selectedMedia != null &&
-                                      selectedMedia.every((m) =>
-                                          validateFileFormat(
-                                              m.storagePath, context))) {
-                                    safeSetState(
-                                        () => _model.isDataUploading = true);
-                                    var selectedUploadedFiles =
-                                        <FFUploadedFile>[];
-
-                                    try {
-                                      selectedUploadedFiles = selectedMedia
-                                          .map((m) => FFUploadedFile(
-                                                name: m.storagePath
-                                                    .split('/')
-                                                    .last,
-                                                bytes: m.bytes,
-                                                height: m.dimensions?.height,
-                                                width: m.dimensions?.width,
-                                                blurHash: m.blurHash,
-                                              ))
-                                          .toList();
-                                    } finally {
-                                      _model.isDataUploading = false;
-                                    }
-                                    if (selectedUploadedFiles.length ==
-                                        selectedMedia.length) {
-                                      safeSetState(() {
-                                        _model.uploadedLocalFile =
-                                            selectedUploadedFiles.first;
-                                      });
-                                    } else {
-                                      safeSetState(() {});
-                                      return;
-                                    }
-                                  }
-
-                                  _model.isOpen = true;
-                                  safeSetState(() {});
-                                },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset(
-                                    'assets/images/camera.svg',
-                                    width: 24.0,
-                                    height: 24.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                     ),

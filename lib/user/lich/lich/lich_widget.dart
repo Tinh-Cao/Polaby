@@ -43,27 +43,21 @@ class _LichWidgetState extends State<LichWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: responsiveVisibility(
-          context: context,
-          desktop: false,
-        )
-            ? AppBar(
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                automaticallyImplyLeading: false,
-                title: Text(
-                  'Lịch',
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
-                      ),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Lịch',
+            style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Inter',
+                  fontSize: 16.0,
+                  letterSpacing: 0.0,
                 ),
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
-            : null,
+          ),
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Stack(
@@ -79,23 +73,16 @@ class _LichWidgetState extends State<LichWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        ListView(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          children: [
-                            wrapWithModel(
-                              model: _model.calendarComponentModel,
-                              updateCallback: () => safeSetState(() {}),
-                              child: CalendarComponentWidget(
-                                inputDate: getCurrentTimestamp,
-                                onSelectDateAction: (selectedDate) async {
-                                  _model.selectedDate = selectedDate;
-                                  safeSetState(() {});
-                                },
-                              ),
-                            ),
-                          ],
+                        wrapWithModel(
+                          model: _model.calendarComponentModel,
+                          updateCallback: () => safeSetState(() {}),
+                          child: CalendarComponentWidget(
+                            inputDate: getCurrentTimestamp,
+                            onSelectDateAction: (selectedDate) async {
+                              _model.selectedDate = selectedDate;
+                              safeSetState(() {});
+                            },
+                          ),
                         ),
                       ],
                     ),

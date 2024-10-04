@@ -50,41 +50,33 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: responsiveVisibility(
-          context: context,
-          desktop: false,
-        )
-            ? AppBar(
-                backgroundColor: const Color(0x00FFFFFF),
-                automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 54.0,
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    context.safePop();
-                  },
-                ),
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
-            : null,
+        appBar: AppBar(
+          backgroundColor: const Color(0x00FFFFFF),
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 54.0,
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: FlutterFlowTheme.of(context).primary,
+              size: 24.0,
+            ),
+            onPressed: () async {
+              context.safePop();
+            },
+          ),
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
-          child: Visibility(
-            visible: responsiveVisibility(
-              context: context,
-              desktop: false,
-            ),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            child: SingleChildScrollView(
+              primary: false,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -136,62 +128,69 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
                               letterSpacing: 0.0,
                             ),
                       ),
-                      TextFormField(
-                        controller: _model.textController1,
-                        focusNode: _model.textFieldFocusNode1,
-                        autofocus: true,
-                        textInputAction: TextInputAction.done,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
+                      Form(
+                        key: _model.formKey,
+                        autovalidateMode: AutovalidateMode.always,
+                        child: TextFormField(
+                          controller: _model.textController1,
+                          focusNode: _model.textFieldFocusNode1,
+                          autofocus: true,
+                          textInputAction: TextInputAction.done,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                ),
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
-                                    fontSize: 14.0,
                                     letterSpacing: 0.0,
                                   ),
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          filled: true,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          validator: _model.textController1Validator
+                              .asValidator(context),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                            ),
-                        validator: _model.textController1Validator
-                            .asValidator(context),
                       ),
                     ].divide(const SizedBox(height: 8.0)),
                   ),
@@ -315,11 +314,16 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
 
                         context.pushNamedAuth('trang_chu', context.mounted);
                       } else {
-                        if (PolabyGroup.apiV1AuthenticationLoginPOSTCall
-                                .message(
-                              (_model.loginResponse?.jsonBody ?? ''),
-                            ) ==
-                            'Invalid email or password') {
+                        if ((PolabyGroup.apiV1AuthenticationLoginPOSTCall
+                                    .message(
+                                  (_model.loginResponse?.jsonBody ?? ''),
+                                ) ==
+                                'Invalid email or password') ||
+                            (PolabyGroup.apiV1AuthenticationLoginPOSTCall
+                                    .errors(
+                                  (_model.loginResponse?.jsonBody ?? ''),
+                                ) ==
+                                'Invalid email format')) {
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
@@ -338,37 +342,60 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
                             },
                           );
                         } else {
-                          FFAppState().loginInfo = LoginInfoStruct(
-                            username: _model.textController1.text,
-                            password: _model.textController2.text,
-                          );
-                          safeSetState(() {});
-                          var confirmDialogResponse = await showDialog<bool>(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: const Text('Thông tin tài khoản '),
-                                    content: const Text(
-                                        'Thông tin tài khoản còn thiếu, vui lòng chọn Đồng ý để bổ sung'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, false),
-                                        child: const Text('Không đồng ý'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, true),
-                                        child: const Text('Đồng ý'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ) ??
-                              false;
-                          if (confirmDialogResponse) {
-                            context.pushNamedAuth(
-                                'thong_tin_dang_ky_ca_nhan', context.mounted);
+                          if (PolabyGroup.apiV1AuthenticationLoginPOSTCall
+                                  .message(
+                                (_model.loginResponse?.jsonBody ?? ''),
+                              ) ==
+                              'Account has been deleted') {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: const Text('Thông báo'),
+                                  content: const Text('Tài khoản không tồn tại'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Đồng ý'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            FFAppState().loginInfo = LoginInfoStruct(
+                              username: _model.textController1.text,
+                              password: _model.textController2.text,
+                            );
+                            safeSetState(() {});
+                            var confirmDialogResponse = await showDialog<bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: const Text('Thông tin tài khoản '),
+                                      content: const Text(
+                                          'Thông tin tài khoản còn thiếu, vui lòng chọn Đồng ý để bổ sung'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: const Text('Không đồng ý'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: const Text('Đồng ý'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ) ??
+                                false;
+                            if (confirmDialogResponse) {
+                              context.pushNamedAuth(
+                                  'thong_tin_dang_ky_ca_nhan', context.mounted);
+                            }
                           }
                         }
                       }
@@ -448,37 +475,6 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
                                     letterSpacing: 0.0,
                                   ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Bạn là chuyên gia? ',
-                            textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          Text(
-                            'Tiếp tục',
-                            textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                ),
                           ),
                         ],
                       ),

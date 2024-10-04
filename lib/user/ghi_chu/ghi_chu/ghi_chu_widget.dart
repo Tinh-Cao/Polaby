@@ -83,91 +83,84 @@ class _GhiChuWidgetState extends State<GhiChuWidget> {
         body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, _) => [
-            if (responsiveVisibility(
-              context: context,
-              desktop: false,
-            ))
-              SliverAppBar(
-                pinned: false,
-                floating: true,
-                snap: true,
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                automaticallyImplyLeading: false,
-                title: Text(
-                  'Ghi chú',
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
-                      ),
-                ),
-                actions: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        _model.numberOfNoteDetail =
-                            await queryNoteDetailRecordCount(
-                          parent: _model.noteDocument?.reference,
-                        );
+            SliverAppBar(
+              pinned: false,
+              floating: true,
+              snap: true,
+              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+              automaticallyImplyLeading: false,
+              title: Text(
+                'Ghi chú',
+                style: FlutterFlowTheme.of(context).headlineLarge.override(
+                      fontFamily: 'Inter',
+                      fontSize: 16.0,
+                      letterSpacing: 0.0,
+                    ),
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      _model.numberOfNoteDetail =
+                          await queryNoteDetailRecordCount(
+                        parent: _model.noteDocument?.reference,
+                      );
 
-                        await NoteDetailRecord.createDoc(
-                                _model.noteDocument!.reference)
-                            .set(createNoteDetailRecordData(
-                          isSelected: false,
-                          index: _model.numberOfNoteDetail! + 1,
-                          type: 1,
-                        ));
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          isDismissible: false,
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return GestureDetector(
-                              onTap: () => FocusScope.of(context).unfocus(),
-                              child: Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: SizedBox(
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.9,
-                                  child: ThemGhiChuWidget(
-                                    isAdd: true,
-                                    isCalendar: false,
-                                    index: _model.numberOfNoteDetail! + 1,
-                                  ),
+                      await NoteDetailRecord.createDoc(
+                              _model.noteDocument!.reference)
+                          .set(createNoteDetailRecordData(
+                        isSelected: false,
+                        index: _model.numberOfNoteDetail! + 1,
+                        type: 1,
+                      ));
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
+                        isDismissible: false,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return GestureDetector(
+                            onTap: () => FocusScope.of(context).unfocus(),
+                            child: Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: SizedBox(
+                                height: MediaQuery.sizeOf(context).height * 0.9,
+                                child: ThemGhiChuWidget(
+                                  isAdd: true,
+                                  isCalendar: false,
+                                  index: _model.numberOfNoteDetail! + 1,
                                 ),
                               ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
 
-                        safeSetState(() {});
-                      },
-                      child: Text(
-                        'Thêm',
-                        textAlign: TextAlign.start,
-                        style:
-                            FlutterFlowTheme.of(context).headlineLarge.override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  fontSize: 16.0,
-                                  letterSpacing: 0.0,
-                                ),
-                      ),
+                      safeSetState(() {});
+                    },
+                    child: Text(
+                      'Thêm',
+                      textAlign: TextAlign.start,
+                      style:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                fontFamily: 'Inter',
+                                color: FlutterFlowTheme.of(context).primary,
+                                fontSize: 16.0,
+                                letterSpacing: 0.0,
+                              ),
                     ),
                   ),
-                ],
-                centerTitle: true,
-              )
+                ),
+              ],
+              centerTitle: true,
+            )
           ],
           body: Builder(
             builder: (context) {

@@ -53,12 +53,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-	<key>NSCameraUsageDescription</key>
-    <string>Để có thể tải được hình từ máy ảnh của bạn lên ứng dụng, hãy cho phépứng dụng truy cập máy ảnh.</string>
+
+	<key>PermissionGroupNotification</key>
+    <string>Để có thể nhận được các thông báo, hãy bật nhận thông báo.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>Để có thể tải được hình từ thư viện ảnh của bạn lên ứng dụng, hãy cho phép ứng dụng truy cập thư viện ảnh.</string>
-	<key>PermissionGroupNotification</key>
-    <string>Để có thể nhận được các thông báo và lịch hẹn, hãy bật nhận thông báo.</string>
 
 
 	<key>UILaunchStoryboardName</key>

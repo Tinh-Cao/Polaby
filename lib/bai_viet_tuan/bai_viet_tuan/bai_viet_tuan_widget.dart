@@ -51,49 +51,51 @@ class _BaiVietTuanWidgetState extends State<BaiVietTuanWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: const Color(0xFFF5F5F5),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              height: 250.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: Image.asset(
-                    'assets/images/Header_-_S_pht_trin_ca_thai_nhi.png',
-                  ).image,
+        body: SingleChildScrollView(
+          primary: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                height: 250.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: Image.asset(
+                      'assets/images/Header_-_S_pht_trin_ca_thai_nhi.png',
+                    ).image,
+                  ),
                 ),
-              ),
-              child: Align(
-                alignment: const AlignmentDirectional(-1.0, 0.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pop();
-                  },
-                  child: Container(
-                    width: 64.0,
-                    height: 64.0,
-                    decoration: const BoxDecoration(),
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: Icon(
-                        Icons.arrow_back_ios_rounded,
-                        color: FlutterFlowTheme.of(context).primary,
-                        size: 24.0,
+                child: Align(
+                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pop();
+                    },
+                    child: Container(
+                      width: 64.0,
+                      height: 64.0,
+                      decoration: const BoxDecoration(),
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: Icon(
+                          Icons.arrow_back_ios_rounded,
+                          color: FlutterFlowTheme.of(context).primary,
+                          size: 24.0,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Flexible(
-              child: SingleChildScrollView(
+              SingleChildScrollView(
+                primary: false,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -393,8 +395,8 @@ class _BaiVietTuanWidgetState extends State<BaiVietTuanWidget> {
                       .addToEnd(const SizedBox(height: 32.0)),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

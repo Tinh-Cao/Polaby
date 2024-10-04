@@ -202,8 +202,10 @@ class _HealthSizeWidgetState extends State<HealthSizeWidget> {
                               fontFamily: 'Inter',
                               color: valueOrDefault<Color>(
                                 functions.calculatePercentageChange(
-                                            widget.oldValue,
-                                            widget.newValue)! >=
+                                            double.tryParse(
+                                                widget.oldValue!.toString()),
+                                            double.tryParse(widget.newValue!
+                                                .toString()))! >=
                                         0.0
                                     ? FlutterFlowTheme.of(context).success
                                     : FlutterFlowTheme.of(context).error,

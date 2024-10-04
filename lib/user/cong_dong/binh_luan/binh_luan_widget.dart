@@ -195,6 +195,8 @@ class _BinhLuanWidgetState extends State<BinhLuanWidget> {
                             StreamBuilder<List<CommentsRecord>>(
                               stream: queryCommentsRecord(
                                 parent: widget.postID,
+                                queryBuilder: (commentsRecord) => commentsRecord
+                                    .orderBy('createDate', descending: true),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.

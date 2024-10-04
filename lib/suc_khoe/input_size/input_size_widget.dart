@@ -336,7 +336,7 @@ class _InputSizeWidgetState extends State<InputSizeWidget> {
                                   )!
                                   .toList()
                                   .cast<dynamic>();
-                          safeSetState(() {});
+                          FFAppState().update(() {});
                         }
                       } else {
                         _model.apiResultb7y =
@@ -373,7 +373,7 @@ class _InputSizeWidgetState extends State<InputSizeWidget> {
                                   )!
                                   .toList()
                                   .cast<dynamic>();
-                          safeSetState(() {});
+                          FFAppState().update(() {});
                         }
                       }
 

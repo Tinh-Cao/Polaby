@@ -193,7 +193,7 @@ class _DisplayItemHeaderWidgetState extends State<DisplayItemHeaderWidget> {
                           ),
                     ),
                     Text(
-                      '${widget.size?.toString()}cm',
+                      '${widget.size?.toString()} cm',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
                             fontSize: 16.0,
@@ -238,7 +238,7 @@ class _DisplayItemHeaderWidgetState extends State<DisplayItemHeaderWidget> {
                       '${valueOrDefault<String>(
                         widget.weight?.toString(),
                         '0',
-                      )}g',
+                      )} g',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
                             fontSize: 16.0,

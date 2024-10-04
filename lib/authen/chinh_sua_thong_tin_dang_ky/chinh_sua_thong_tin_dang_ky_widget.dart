@@ -90,75 +90,69 @@ class _ChinhSuaThongTinDangKyWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: responsiveVisibility(
-          context: context,
-          desktop: false,
-        )
-            ? AppBar(
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 54.0,
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 24.0,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 54.0,
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: FlutterFlowTheme.of(context).primary,
+              size: 24.0,
+            ),
+            onPressed: () async {
+              context.pushNamed(
+                'thong_tin_dang_ky_ca_nhan',
+                queryParameters: {
+                  'lastName': serializeParam(
+                    _model.textController1.text,
+                    ParamType.String,
                   ),
-                  onPressed: () async {
-                    context.pushNamed(
-                      'thong_tin_dang_ky_ca_nhan',
-                      queryParameters: {
-                        'lastName': serializeParam(
-                          _model.textController1.text,
-                          ParamType.String,
-                        ),
-                        'firstName': serializeParam(
-                          _model.textController2.text,
-                          ParamType.String,
-                        ),
-                        'dateOfBirth': serializeParam(
-                          _model.displayDate,
-                          ParamType.DateTime,
-                        ),
-                        'height': serializeParam(
-                          double.tryParse(_model.textController3.text),
-                          ParamType.double,
-                        ),
-                        'weight': serializeParam(
-                          double.tryParse(_model.textController4.text),
-                          ParamType.double,
-                        ),
-                      }.withoutNulls,
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.leftToRight,
-                          duration: Duration(milliseconds: 200),
-                        ),
-                      },
-                    );
-                  },
-                ),
-                title: Text(
-                  valueOrDefault<String>(
-                    widget.txtTitle,
-                    'Tên',
+                  'firstName': serializeParam(
+                    _model.textController2.text,
+                    ParamType.String,
                   ),
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
-                      ),
+                  'dateOfBirth': serializeParam(
+                    _model.displayDate,
+                    ParamType.DateTime,
+                  ),
+                  'height': serializeParam(
+                    double.tryParse(_model.textController3.text),
+                    ParamType.double,
+                  ),
+                  'weight': serializeParam(
+                    double.tryParse(_model.textController4.text),
+                    ParamType.double,
+                  ),
+                }.withoutNulls,
+                extra: <String, dynamic>{
+                  kTransitionInfoKey: const TransitionInfo(
+                    hasTransition: true,
+                    transitionType: PageTransitionType.leftToRight,
+                    duration: Duration(milliseconds: 200),
+                  ),
+                },
+              );
+            },
+          ),
+          title: Text(
+            valueOrDefault<String>(
+              widget.txtTitle,
+              'Tên',
+            ),
+            style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Inter',
+                  fontSize: 16.0,
+                  letterSpacing: 0.0,
                 ),
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
-            : null,
+          ),
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Container(

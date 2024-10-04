@@ -340,7 +340,7 @@ class _InputWeightWidgetState extends State<InputWeightWidget> {
                                   )!
                                   .toList()
                                   .cast<dynamic>();
-                          safeSetState(() {});
+                          FFAppState().update(() {});
                         }
                       } else {
                         _model.apiResultb7y =
@@ -377,7 +377,7 @@ class _InputWeightWidgetState extends State<InputWeightWidget> {
                                   )!
                                   .toList()
                                   .cast<dynamic>();
-                          safeSetState(() {});
+                          FFAppState().update(() {});
                         }
                       }
 

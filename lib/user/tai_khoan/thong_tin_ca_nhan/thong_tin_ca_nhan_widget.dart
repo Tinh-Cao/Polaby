@@ -50,58 +50,52 @@ class _ThongTinCaNhanWidgetState extends State<ThongTinCaNhanWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: responsiveVisibility(
-          context: context,
-          desktop: false,
-        )
-            ? AppBar(
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 54.0,
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    await PolabyGroup.apiV1AccountsidUserPUTCall.call(
-                      id: currentUserUid,
-                      firstName: FFAppState().UserInfo.data.firstName,
-                      lastName: FFAppState().UserInfo.data.lastName,
-                      dateOfBirth: FFAppState().UserInfo.data.dateOfBirth,
-                      height: FFAppState().UserInfo.data.height,
-                      initialWeight: FFAppState().UserInfo.data.initialWeight,
-                      diet: FFAppState().UserInfo.data.diet,
-                      frequencyOfActivity:
-                          FFAppState().UserInfo.data.frequencyOfActivity,
-                      image: FFAppState().UserInfo.data.image,
-                      babyName: FFAppState().UserInfo.data.babyName,
-                      dueDate: FFAppState().UserInfo.data.dueDate,
-                      babyGender: FFAppState().UserInfo.data.babyGender,
-                      frequencyOfStress:
-                          FFAppState().UserInfo.data.frequencyOfStress,
-                    );
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 54.0,
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: FlutterFlowTheme.of(context).primary,
+              size: 24.0,
+            ),
+            onPressed: () async {
+              await PolabyGroup.apiV1AccountsidUserPUTCall.call(
+                id: currentUserUid,
+                firstName: FFAppState().UserInfo.data.firstName,
+                lastName: FFAppState().UserInfo.data.lastName,
+                dateOfBirth: FFAppState().UserInfo.data.dateOfBirth,
+                height: FFAppState().UserInfo.data.height,
+                initialWeight: FFAppState().UserInfo.data.initialWeight,
+                diet: FFAppState().UserInfo.data.diet,
+                frequencyOfActivity:
+                    FFAppState().UserInfo.data.frequencyOfActivity,
+                image: FFAppState().UserInfo.data.image,
+                babyName: FFAppState().UserInfo.data.babyName,
+                dueDate: FFAppState().UserInfo.data.dueDate,
+                babyGender: FFAppState().UserInfo.data.babyGender,
+                frequencyOfStress: FFAppState().UserInfo.data.frequencyOfStress,
+              );
 
-                    context.pop();
-                  },
+              context.pop();
+            },
+          ),
+          title: Text(
+            'Thông tin cá nhân',
+            style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Inter',
+                  fontSize: 16.0,
+                  letterSpacing: 0.0,
                 ),
-                title: Text(
-                  'Thông tin cá nhân',
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
-                      ),
-                ),
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
-            : null,
+          ),
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Padding(

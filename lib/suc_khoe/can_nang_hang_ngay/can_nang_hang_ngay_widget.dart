@@ -47,41 +47,35 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: responsiveVisibility(
-          context: context,
-          desktop: false,
-        )
-            ? AppBar(
-                backgroundColor:
-                    FlutterFlowTheme.of(context).secondaryBackground,
-                automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 54.0,
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    context.pop();
-                  },
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 54.0,
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: FlutterFlowTheme.of(context).primary,
+              size: 24.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
+          title: Text(
+            'Cân nặng hằng ngày',
+            style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Inter',
+                  fontSize: 16.0,
+                  letterSpacing: 0.0,
                 ),
-                title: Text(
-                  'Cân nặng hằng ngày',
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
-                      ),
-                ),
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
-            : null,
+          ),
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Padding(
@@ -93,45 +87,49 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
                 children: [
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Builder(
-                              builder: (context) {
-                                if (FFAppState().healthWeight1.isNotEmpty) {
-                                  return Material(
-                                    color: Colors.transparent,
-                                    elevation: 0.0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16.0),
-                                    ),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 64.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Column(
+                    child: SingleChildScrollView(
+                      primary: false,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Builder(
+                                  builder: (context) {
+                                    if (FFAppState().healthWeight1.isNotEmpty) {
+                                      return Material(
+                                        color: Colors.transparent,
+                                        elevation: 0.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16.0),
+                                        ),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 64.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(16.0),
+                                          ),
+                                          child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                MainAxisAlignment.spaceAround,
                                             children: [
-                                              Text(
-                                                '${FFAppState().UserInfo.data.initialWeight.toString()} Kg',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '${FFAppState().UserInfo.data.initialWeight.toString()} Kg',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .labelLarge
                                                         .override(
                                                           fontFamily: 'Inter',
@@ -143,11 +141,11 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
-                                              ),
-                                              Text(
-                                                'Ban đầu',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                                  ),
+                                                  Text(
+                                                    'Ban đầu',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Inter',
@@ -157,37 +155,87 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
                                                           fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  getJsonField(
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    valueOrDefault<String>(
+                                                      getJsonField(
+                                                                FFAppState()
+                                                                    .healthWeight1
+                                                                    .last,
+                                                                r'''$.date''',
+                                                              ).toString() ==
+                                                              functions.convertToApiDateFormatString(
+                                                                  functions
+                                                                      .getDateNow()!
+                                                                      .toString())
+                                                          ? '${getJsonField(
+                                                              FFAppState()
+                                                                  .healthWeight1
+                                                                  .last,
+                                                              r'''$.value''',
+                                                            ).toString()} Kg'
+                                                          : '0 Kg',
+                                                      '0 Kg',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 18.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    'Hôm nay',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    valueOrDefault<String>(
+                                                      '${getJsonField(
                                                             FFAppState()
                                                                 .healthWeight1
                                                                 .last,
                                                             r'''$.date''',
-                                                          ).toString() ==
-                                                          functions.convertToApiDateFormatString(
-                                                              functions
-                                                                  .getDateNow()!
-                                                                  .toString())
-                                                      ? '${getJsonField(
-                                                          FFAppState()
-                                                              .healthWeight1
-                                                              .last,
-                                                          r'''$.value''',
-                                                        ).toString()} Kg'
-                                                      : '0 Kg',
-                                                  '0 Kg',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                                          ).toString() == functions.convertToApiDateFormatString(functions.getDateNow()!.toString()) ? (double.parse((getJsonField(
+                                                            FFAppState()
+                                                                .healthWeight1
+                                                                .last,
+                                                            r'''$.value''',
+                                                          ) - FFAppState().UserInfo.data.initialWeight).toStringAsFixed(1))).toString() : '0'} Kg',
+                                                      '0 Kg',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .labelLarge
                                                         .override(
                                                           fontFamily: 'Inter',
@@ -199,11 +247,11 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
                                                           fontWeight:
                                                               FontWeight.w600,
                                                         ),
-                                              ),
-                                              Text(
-                                                'Hôm nay',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                                  ),
+                                                  Text(
+                                                    'Thay đổi',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily: 'Inter',
@@ -213,413 +261,380 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
                                                           fontSize: 12.0,
                                                           letterSpacing: 0.0,
                                                         ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  '${getJsonField(
-                                                        FFAppState()
-                                                            .healthWeight1
-                                                            .last,
-                                                        r'''$.date''',
-                                                      ).toString() == functions.convertToApiDateFormatString(functions.getDateNow()!.toString()) ? (double.parse((getJsonField(
-                                                        FFAppState()
-                                                            .healthWeight1
-                                                            .last,
-                                                        r'''$.value''',
-                                                      ) - FFAppState().UserInfo.data.initialWeight).toStringAsFixed(1))).toString() : '0'} Kg',
-                                                  '0 Kg',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Thay đổi',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  return Material(
-                                    color: Colors.transparent,
-                                    elevation: 0.0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16.0),
-                                    ),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 64.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '${FFAppState().UserInfo.data.initialWeight.toString()} Kg',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Ban đầu',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '0 Kg',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Hôm nay',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '0 Kg',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelLarge
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Thay đổi',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
-                            Builder(
-                              builder: (context) {
-                                if (FFAppState().healthWeight1.isNotEmpty) {
-                                  return Material(
-                                    color: Colors.transparent,
-                                    elevation: 0.0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16.0),
-                                    ),
-                                    child: Container(
-                                      height: 250.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 32.0, 16.0, 0.0),
-                                        child: SizedBox(
-                                          height: 218.0,
-                                          child: FlutterFlowLineChart(
-                                            data: [
-                                              FFLineChartData(
-                                                xData: functions
-                                                    .calculateDateDifferences(
-                                                        FFAppState()
-                                                            .healthWeight1
-                                                            .map((e) =>
-                                                                getJsonField(
-                                                                  e,
-                                                                  r'''$.date''',
-                                                                ))
-                                                            .toList()
-                                                            .map((e) =>
-                                                                e.toString())
-                                                            .toList()),
-                                                yData: functions
-                                                    .convertToDoubleList(
-                                                        FFAppState()
-                                                            .healthWeight1
-                                                            .map((e) =>
-                                                                getJsonField(
-                                                                  e,
-                                                                  r'''$.value''',
-                                                                ))
-                                                            .toList()
-                                                            .map((e) =>
-                                                                e.toString())
-                                                            .toList())!,
-                                                settings: LineChartBarData(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  barWidth: 2.0,
-                                                  isCurved: true,
-                                                ),
-                                              )
-                                            ],
-                                            chartStylingInfo: ChartStylingInfo(
-                                              enableTooltip: true,
-                                              tooltipBackgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .pink50,
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              showGrid: true,
-                                              borderColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderWidth: 1.0,
-                                            ),
-                                            axisBounds: const AxisBounds(
-                                              minY: 0.0,
-                                              maxY: 100.0,
-                                            ),
-                                            xAxisLabelInfo: AxisLabelInfo(
-                                              showLabels: true,
-                                              labelTextStyle: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 12.0,
-                                              ),
-                                              labelInterval: 10.0,
-                                              reservedSize: 32.0,
-                                            ),
-                                            yAxisLabelInfo: AxisLabelInfo(
-                                              title: 'Kg',
-                                              titleTextStyle: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 14.0,
-                                              ),
-                                              showLabels: true,
-                                              labelTextStyle: const TextStyle(),
-                                              labelInterval: 10.0,
-                                              reservedSize: 40.0,
-                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  return Material(
-                                    color: Colors.transparent,
-                                    elevation: 0.0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16.0),
-                                    ),
-                                    child: Container(
-                                      height: 200.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: SizedBox(
-                                          height: 184.0,
-                                          child: FlutterFlowLineChart(
-                                            data: [
-                                              FFLineChartData(
-                                                xData: functions.sampleData(),
-                                                yData: functions.sampleData(),
-                                                settings: LineChartBarData(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  barWidth: 2.0,
-                                                  isCurved: true,
-                                                ),
-                                              )
+                                      );
+                                    } else {
+                                      return Material(
+                                        color: Colors.transparent,
+                                        elevation: 0.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16.0),
+                                        ),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 64.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(16.0),
+                                          ),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '${FFAppState().UserInfo.data.initialWeight.toString()} Kg',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 18.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    'Ban đầu',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '0 Kg',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 18.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    'Hôm nay',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '0 Kg',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 18.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    'Thay đổi',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
                                             ],
-                                            chartStylingInfo: ChartStylingInfo(
-                                              enableTooltip: true,
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              showGrid: true,
-                                              borderColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              borderWidth: 1.0,
-                                            ),
-                                            axisBounds: const AxisBounds(
-                                              minX: 1.0,
-                                              minY: 40.0,
-                                              maxX: 30.0,
-                                              maxY: 100.0,
-                                            ),
-                                            xAxisLabelInfo: AxisLabelInfo(
-                                              showLabels: true,
-                                              labelTextStyle: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .accent4,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 12.0,
-                                              ),
-                                              labelInterval: 10.0,
-                                              reservedSize: 32.0,
-                                            ),
-                                            yAxisLabelInfo: AxisLabelInfo(
-                                              title: 'Kg',
-                                              titleTextStyle: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 14.0,
-                                              ),
-                                              showLabels: true,
-                                              labelTextStyle: const TextStyle(),
-                                              labelInterval: 10.0,
-                                              reservedSize: 40.0,
-                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
-                          ].divide(const SizedBox(height: 16.0)),
-                        ),
-                        Flexible(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(-1.0, 0.0),
-                                child: Text(
-                                  'Cân nặng chi tiết',
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
+                                      );
+                                    }
+                                  },
                                 ),
-                              ),
-                              Flexible(
-                                child: SingleChildScrollView(
+                                Builder(
+                                  builder: (context) {
+                                    if (FFAppState().healthWeight1.isNotEmpty) {
+                                      return Material(
+                                        color: Colors.transparent,
+                                        elevation: 0.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16.0),
+                                        ),
+                                        child: Container(
+                                          height: 250.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(16.0),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 32.0, 16.0, 0.0),
+                                            child: SizedBox(
+                                              height: 218.0,
+                                              child: FlutterFlowLineChart(
+                                                data: [
+                                                  FFLineChartData(
+                                                    xData: functions
+                                                        .calculateDateDifferences(
+                                                            FFAppState()
+                                                                .healthWeight1
+                                                                .map((e) =>
+                                                                    getJsonField(
+                                                                      e,
+                                                                      r'''$.date''',
+                                                                    ))
+                                                                .toList()
+                                                                .map((e) => e
+                                                                    .toString())
+                                                                .toList()),
+                                                    yData: functions
+                                                        .convertToDoubleList(
+                                                            FFAppState()
+                                                                .healthWeight1
+                                                                .map((e) =>
+                                                                    getJsonField(
+                                                                      e,
+                                                                      r'''$.value''',
+                                                                    ))
+                                                                .toList()
+                                                                .map((e) => e
+                                                                    .toString())
+                                                                .toList())!,
+                                                    settings: LineChartBarData(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      barWidth: 2.0,
+                                                      isCurved: true,
+                                                    ),
+                                                  )
+                                                ],
+                                                chartStylingInfo:
+                                                    ChartStylingInfo(
+                                                  enableTooltip: true,
+                                                  tooltipBackgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .pink50,
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  showGrid: true,
+                                                  borderColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  borderWidth: 1.0,
+                                                ),
+                                                axisBounds: const AxisBounds(
+                                                  minY: 0.0,
+                                                  maxY: 100.0,
+                                                ),
+                                                xAxisLabelInfo: AxisLabelInfo(
+                                                  showLabels: true,
+                                                  labelTextStyle: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 12.0,
+                                                  ),
+                                                  labelInterval: 10.0,
+                                                  reservedSize: 32.0,
+                                                ),
+                                                yAxisLabelInfo: AxisLabelInfo(
+                                                  title: 'Kg',
+                                                  titleTextStyle: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 14.0,
+                                                  ),
+                                                  showLabels: true,
+                                                  labelTextStyle: const TextStyle(),
+                                                  labelInterval: 10.0,
+                                                  reservedSize: 40.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return Material(
+                                        color: Colors.transparent,
+                                        elevation: 0.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16.0),
+                                        ),
+                                        child: Container(
+                                          height: 200.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(16.0),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: SizedBox(
+                                              height: 184.0,
+                                              child: FlutterFlowLineChart(
+                                                data: [
+                                                  FFLineChartData(
+                                                    xData:
+                                                        functions.sampleData(),
+                                                    yData:
+                                                        functions.sampleData(),
+                                                    settings: LineChartBarData(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      barWidth: 2.0,
+                                                      isCurved: true,
+                                                    ),
+                                                  )
+                                                ],
+                                                chartStylingInfo:
+                                                    ChartStylingInfo(
+                                                  enableTooltip: true,
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  showGrid: true,
+                                                  borderColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  borderWidth: 1.0,
+                                                ),
+                                                axisBounds: const AxisBounds(
+                                                  minX: 1.0,
+                                                  minY: 40.0,
+                                                  maxX: 30.0,
+                                                  maxY: 100.0,
+                                                ),
+                                                xAxisLabelInfo: AxisLabelInfo(
+                                                  showLabels: true,
+                                                  labelTextStyle: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .accent4,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 12.0,
+                                                  ),
+                                                  labelInterval: 10.0,
+                                                  reservedSize: 32.0,
+                                                ),
+                                                yAxisLabelInfo: AxisLabelInfo(
+                                                  title: 'Kg',
+                                                  titleTextStyle: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 14.0,
+                                                  ),
+                                                  showLabels: true,
+                                                  labelTextStyle: const TextStyle(),
+                                                  labelInterval: 10.0,
+                                                  reservedSize: 40.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ].divide(const SizedBox(height: 16.0)),
+                            ),
+                          ),
+                          Flexible(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Align(
+                                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                                  child: Text(
+                                    'Cân nặng chi tiết',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                                SingleChildScrollView(
                                   primary: false,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -652,6 +667,7 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
                                               return ListView.separated(
                                                 padding: EdgeInsets.zero,
                                                 reverse: true,
+                                                primary: false,
                                                 shrinkWrap: true,
                                                 scrollDirection: Axis.vertical,
                                                 itemCount: eachWeight.length,
@@ -935,13 +951,13 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
                                     ],
                                   ),
                                 ),
-                              ),
-                            ].divide(const SizedBox(height: 8.0)),
+                              ].divide(const SizedBox(height: 8.0)),
+                            ),
                           ),
-                        ),
-                      ]
-                          .divide(const SizedBox(height: 16.0))
-                          .around(const SizedBox(height: 16.0)),
+                        ]
+                            .divide(const SizedBox(height: 16.0))
+                            .around(const SizedBox(height: 16.0)),
+                      ),
                     ),
                   ),
                   Align(

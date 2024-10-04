@@ -651,6 +651,21 @@ class FFAppState extends ChangeNotifier {
   void clearNutrientCache() => _nutrientManager.clear();
   void clearNutrientCacheKey(String? uniqueKey) =>
       _nutrientManager.clearRequest(uniqueKey);
+
+  final _thucDonManager = FutureRequestManager<ApiCallResponse>();
+  Future<ApiCallResponse> thucDon({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ApiCallResponse> Function() requestFn,
+  }) =>
+      _thucDonManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearThucDonCache() => _thucDonManager.clear();
+  void clearThucDonCacheKey(String? uniqueKey) =>
+      _thucDonManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {

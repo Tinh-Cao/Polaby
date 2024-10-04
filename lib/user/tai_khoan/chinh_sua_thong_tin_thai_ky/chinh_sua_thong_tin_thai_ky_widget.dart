@@ -86,65 +86,60 @@ class _ChinhSuaThongTinThaiKyWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        appBar: responsiveVisibility(
-          context: context,
-          desktop: false,
-        )
-            ? AppBar(
-                backgroundColor: const Color(0x00FFFFFF),
-                automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 54.0,
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    if (widget.isYearOfBirth == true) {
-                      FFAppState().updateUserInfoStruct(
-                        (e) => e
-                          ..updateData(
-                            (e) => e
-                              ..dueDate =
-                                  '${FFAppState().year.toString()}-${functions.getMonthFromIndex(FFAppState().month) < 10 ? '0${functions.getMonthFromIndex(FFAppState().month).toString()}' : functions.getMonthFromIndex(FFAppState().month).toString()}-${functions.getDayFromIndex(FFAppState().day) < 10 ? '0${functions.getDayFromIndex(FFAppState().day).toString()}' : functions.getDayFromIndex(FFAppState().day).toString()}',
-                          ),
-                      );
-                      safeSetState(() {});
-                    } else {
-                      if (widget.isPregnantWeek == true) {
-                        FFAppState().updateUserInfoStruct(
-                          (e) => e
-                            ..updateData(
-                              (e) => e,
-                            ),
-                        );
-                        safeSetState(() {});
-                      }
-                    }
-
-                    context.safePop();
-                  },
-                ),
-                title: Text(
-                  valueOrDefault<String>(
-                    widget.txtTitle,
-                    'Tên',
-                  ),
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
+        appBar: AppBar(
+          backgroundColor: const Color(0x00FFFFFF),
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 54.0,
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: FlutterFlowTheme.of(context).primary,
+              size: 24.0,
+            ),
+            onPressed: () async {
+              if (widget.isYearOfBirth == true) {
+                FFAppState().updateUserInfoStruct(
+                  (e) => e
+                    ..updateData(
+                      (e) => e
+                        ..dueDate =
+                            '${FFAppState().year.toString()}-${functions.getMonthFromIndex(FFAppState().month) < 10 ? '0${functions.getMonthFromIndex(FFAppState().month).toString()}' : functions.getMonthFromIndex(FFAppState().month).toString()}-${functions.getDayFromIndex(FFAppState().day) < 10 ? '0${functions.getDayFromIndex(FFAppState().day).toString()}' : functions.getDayFromIndex(FFAppState().day).toString()}',
+                    ),
+                );
+                safeSetState(() {});
+              } else {
+                if (widget.isPregnantWeek == true) {
+                  FFAppState().updateUserInfoStruct(
+                    (e) => e
+                      ..updateData(
+                        (e) => e,
                       ),
+                  );
+                  safeSetState(() {});
+                }
+              }
+
+              context.safePop();
+            },
+          ),
+          title: Text(
+            valueOrDefault<String>(
+              widget.txtTitle,
+              'Tên',
+            ),
+            style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Inter',
+                  fontSize: 16.0,
+                  letterSpacing: 0.0,
                 ),
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
-            : null,
+          ),
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Padding(

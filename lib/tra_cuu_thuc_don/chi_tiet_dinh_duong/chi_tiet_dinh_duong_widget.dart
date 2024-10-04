@@ -323,7 +323,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                       ),
                       Container(
                         width: double.infinity,
-                        height: 380.0,
+                        height: 500.0,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(16.0),
@@ -359,7 +359,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
-                                              fontSize: 14.0,
+                                              fontSize: 15.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -378,7 +378,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -396,7 +396,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -455,6 +455,8 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                               ),
                               paginated: false,
                               selectable: false,
+                              width: double.infinity,
+                              height: double.infinity,
                               headingRowHeight: 56.0,
                               dataRowHeight: 48.0,
                               columnSpacing: 32.0,
@@ -471,7 +473,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                       ),
                       Container(
                         width: double.infinity,
-                        height: 420.0,
+                        height: 600.0,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(16.0),
@@ -502,7 +504,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -520,7 +522,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -538,7 +540,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -615,7 +617,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                       ),
                       Container(
                         width: double.infinity,
-                        height: 500.0,
+                        height: 1000.0,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(16.0),
@@ -643,7 +645,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -661,7 +663,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -679,7 +681,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -756,7 +758,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                       ),
                       Container(
                         width: double.infinity,
-                        height: 500.0,
+                        height: 1000.0,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(16.0),
@@ -784,7 +786,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -802,7 +804,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -820,7 +822,7 @@ class _ChiTietDinhDuongWidgetState extends State<ChiTietDinhDuongWidget> {
                                             fontFamily: 'Inter',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 14.0,
+                                            fontSize: 15.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w600,
                                           ),

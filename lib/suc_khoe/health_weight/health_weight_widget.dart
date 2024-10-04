@@ -68,74 +68,68 @@ class _HealthWeightWidgetState extends State<HealthWeightWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 357.0,
-                decoration: const BoxDecoration(),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: SvgPicture.asset(
-                              'assets/images/weight.svg',
-                              width: 20.0,
-                              height: 20.0,
-                              fit: BoxFit.cover,
-                            ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: SvgPicture.asset(
+                            'assets/images/weight.svg',
+                            width: 20.0,
+                            height: 20.0,
+                            fit: BoxFit.cover,
                           ),
-                          Text(
-                            'Cân nặng',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  fontSize: 18.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ].divide(const SizedBox(width: 8.0)),
-                      ),
+                        ),
+                        Text(
+                          'Cân nặng',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    fontSize: 18.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ].divide(const SizedBox(width: 8.0)),
                     ),
-                    Container(
-                      decoration: const BoxDecoration(),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            valueOrDefault<String>(
-                              functions.timeDifferenceInDays(
-                                  widget.creationDate!.toString()),
-                              '10',
-                            ),
-                            textAlign: TextAlign.end,
-                            style: FlutterFlowTheme.of(context)
-                                .labelLarge
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context).accent4,
-                                  fontSize: 10.0,
-                                  letterSpacing: 0.0,
-                                ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          valueOrDefault<String>(
+                            functions.timeDifferenceInDays(
+                                widget.creationDate!.toString()),
+                            '10',
                           ),
-                          const Icon(
-                            Icons.arrow_forward_ios,
-                            color: Color(0xFFBDBDBD),
-                            size: 12.0,
-                          ),
-                        ],
-                      ),
+                          textAlign: TextAlign.end,
+                          style:
+                              FlutterFlowTheme.of(context).labelLarge.override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context).accent4,
+                                    fontSize: 10.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color(0xFFBDBDBD),
+                          size: 12.0,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -178,16 +172,17 @@ class _HealthWeightWidgetState extends State<HealthWeightWidget> {
                       Text(
                         valueOrDefault<String>(
                           functions.calculatePercentageChange(
-                                      widget.oldValue,
+                                      double.tryParse(
+                                          widget.oldValue.toString()),
                                       double.tryParse(
                                           widget.newValue!.toString()))! >=
                                   0.0
                               ? valueOrDefault<String>(
-                                  'Tăng ${functions.calculatePercentageChange(widget.oldValue, double.tryParse(widget.newValue!.toString()))?.toString()}%',
+                                  'Tăng ${functions.calculatePercentageChange(double.tryParse(widget.oldValue.toString()), double.tryParse(widget.newValue!.toString()))?.toString()}%',
                                   '20',
                                 )
                               : valueOrDefault<String>(
-                                  'Giảm ${functions.calculatePercentageChange(widget.oldValue, double.tryParse(widget.newValue!.toString()))?.toString()}%',
+                                  'Giảm ${functions.calculatePercentageChange(double.tryParse(widget.oldValue.toString()), double.tryParse(widget.newValue!.toString()))?.toString()}%',
                                   '30',
                                 ),
                           '20',
@@ -196,8 +191,10 @@ class _HealthWeightWidgetState extends State<HealthWeightWidget> {
                               fontFamily: 'Inter',
                               color: valueOrDefault<Color>(
                                 functions.calculatePercentageChange(
-                                            widget.oldValue,
-                                            widget.newValue)! >=
+                                            double.tryParse(
+                                                widget.oldValue.toString()),
+                                            double.tryParse(widget.newValue!
+                                                .toString()))! >=
                                         0.0
                                     ? FlutterFlowTheme.of(context).success
                                     : FlutterFlowTheme.of(context).error,

@@ -59,399 +59,412 @@ class _ThongTinDangKyCaNhanWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: responsiveVisibility(
-          context: context,
-          desktop: false,
-        )
-            ? AppBar(
-                backgroundColor: const Color(0x00FFFFFF),
-                automaticallyImplyLeading: false,
-                actions: const [],
-                centerTitle: true,
-                elevation: 0.0,
-              )
-            : null,
+        appBar: AppBar(
+          backgroundColor: const Color(0x00FFFFFF),
+          automaticallyImplyLeading: false,
+          actions: const [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'Thông tin cá nhân',
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        fontSize: 30.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          'Thông tin cá nhân',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .headlineLarge
+                              .override(
+                                fontFamily: 'Inter',
+                                fontSize: 30.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  'chinh_sua_thong_tin_dang_ky',
+                                  queryParameters: {
+                                    'txtTitle': serializeParam(
+                                      'Họ và tên đệm',
+                                      ParamType.String,
+                                    ),
+                                    'isDate': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isFirstName': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isLastName': serializeParam(
+                                      true,
+                                      ParamType.bool,
+                                    ),
+                                    'isHeight': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isWeight': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'lastName': serializeParam(
+                                      widget.lastName,
+                                      ParamType.String,
+                                    ),
+                                    'firstName': serializeParam(
+                                      widget.firstName,
+                                      ParamType.String,
+                                    ),
+                                    'height': serializeParam(
+                                      widget.height,
+                                      ParamType.double,
+                                    ),
+                                    'weight': serializeParam(
+                                      widget.weight,
+                                      ParamType.double,
+                                    ),
+                                    'date': serializeParam(
+                                      widget.dateOfBirth,
+                                      ParamType.DateTime,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: const TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType:
+                                          PageTransitionType.rightToLeft,
+                                      duration: Duration(milliseconds: 200),
+                                    ),
+                                  },
+                                );
+                              },
+                              child: wrapWithModel(
+                                model: _model.displayItemModel,
+                                updateCallback: () => safeSetState(() {}),
+                                child: DisplayItemWidget(
+                                  lastName: widget.lastName,
+                                  txtTitle: 'Họ và tên đệm',
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  'chinh_sua_thong_tin_dang_ky',
+                                  queryParameters: {
+                                    'txtTitle': serializeParam(
+                                      'Tên',
+                                      ParamType.String,
+                                    ),
+                                    'isDate': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isFirstName': serializeParam(
+                                      true,
+                                      ParamType.bool,
+                                    ),
+                                    'isLastName': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isHeight': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isWeight': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'firstName': serializeParam(
+                                      widget.firstName,
+                                      ParamType.String,
+                                    ),
+                                    'lastName': serializeParam(
+                                      widget.lastName,
+                                      ParamType.String,
+                                    ),
+                                    'height': serializeParam(
+                                      widget.height,
+                                      ParamType.double,
+                                    ),
+                                    'weight': serializeParam(
+                                      widget.weight,
+                                      ParamType.double,
+                                    ),
+                                    'date': serializeParam(
+                                      widget.dateOfBirth,
+                                      ParamType.DateTime,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              },
+                              child: wrapWithModel(
+                                model: _model.displayItemNoUnitModel,
+                                updateCallback: () => safeSetState(() {}),
+                                child: DisplayItemNoUnitWidget(
+                                  txtTitle: 'Tên của bạn',
+                                  value: widget.firstName,
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  'chinh_sua_thong_tin_dang_ky',
+                                  queryParameters: {
+                                    'txtTitle': serializeParam(
+                                      'Ngày sinh',
+                                      ParamType.String,
+                                    ),
+                                    'lastName': serializeParam(
+                                      widget.lastName,
+                                      ParamType.String,
+                                    ),
+                                    'isDate': serializeParam(
+                                      true,
+                                      ParamType.bool,
+                                    ),
+                                    'isFirstName': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isLastName': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isHeight': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isWeight': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'firstName': serializeParam(
+                                      widget.firstName,
+                                      ParamType.String,
+                                    ),
+                                    'height': serializeParam(
+                                      widget.height,
+                                      ParamType.double,
+                                    ),
+                                    'weight': serializeParam(
+                                      widget.weight,
+                                      ParamType.double,
+                                    ),
+                                    'date': serializeParam(
+                                      widget.dateOfBirth,
+                                      ParamType.DateTime,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: const TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType:
+                                          PageTransitionType.rightToLeft,
+                                      duration: Duration(milliseconds: 200),
+                                    ),
+                                  },
+                                );
+                              },
+                              child: wrapWithModel(
+                                model: _model.displayItemForDateModel,
+                                updateCallback: () => safeSetState(() {}),
+                                child: DisplayItemForDateWidget(
+                                  txtTitle: 'Ngày sinh của bạn',
+                                  value: widget.dateOfBirth?.toString(),
+                                  date: widget.dateOfBirth,
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  'chinh_sua_thong_tin_dang_ky',
+                                  queryParameters: {
+                                    'txtTitle': serializeParam(
+                                      'Chiều cao',
+                                      ParamType.String,
+                                    ),
+                                    'lastName': serializeParam(
+                                      widget.lastName,
+                                      ParamType.String,
+                                    ),
+                                    'isDate': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isHeight': serializeParam(
+                                      true,
+                                      ParamType.bool,
+                                    ),
+                                    'isFirstName': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isLastName': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isWeight': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'firstName': serializeParam(
+                                      widget.firstName,
+                                      ParamType.String,
+                                    ),
+                                    'height': serializeParam(
+                                      widget.height,
+                                      ParamType.double,
+                                    ),
+                                    'weight': serializeParam(
+                                      widget.weight,
+                                      ParamType.double,
+                                    ),
+                                    'date': serializeParam(
+                                      widget.dateOfBirth,
+                                      ParamType.DateTime,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: const TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType:
+                                          PageTransitionType.rightToLeft,
+                                      duration: Duration(milliseconds: 200),
+                                    ),
+                                  },
+                                );
+                              },
+                              child: wrapWithModel(
+                                model: _model.displayItemV2Model,
+                                updateCallback: () => safeSetState(() {}),
+                                child: DisplayItemV2Widget(
+                                  txtTitle: 'Chiều cao',
+                                  value: widget.height?.toString(),
+                                  unit: 'cm',
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  'chinh_sua_thong_tin_dang_ky',
+                                  queryParameters: {
+                                    'txtTitle': serializeParam(
+                                      'Cân nặng',
+                                      ParamType.String,
+                                    ),
+                                    'lastName': serializeParam(
+                                      widget.lastName,
+                                      ParamType.String,
+                                    ),
+                                    'isDate': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isWeight': serializeParam(
+                                      true,
+                                      ParamType.bool,
+                                    ),
+                                    'isFirstName': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isLastName': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'isHeight': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                    'firstName': serializeParam(
+                                      widget.firstName,
+                                      ParamType.String,
+                                    ),
+                                    'height': serializeParam(
+                                      widget.height,
+                                      ParamType.double,
+                                    ),
+                                    'weight': serializeParam(
+                                      widget.weight,
+                                      ParamType.double,
+                                    ),
+                                    'date': serializeParam(
+                                      widget.dateOfBirth,
+                                      ParamType.DateTime,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: const TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType:
+                                          PageTransitionType.rightToLeft,
+                                      duration: Duration(milliseconds: 200),
+                                    ),
+                                  },
+                                );
+                              },
+                              child: wrapWithModel(
+                                model: _model.displayItemV3Model,
+                                updateCallback: () => safeSetState(() {}),
+                                child: DisplayItemV3Widget(
+                                  txtTitle: 'Cân nặng trước sinh',
+                                  value: widget.weight?.toString(),
+                                  unit: 'kg',
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ].divide(const SizedBox(height: 16.0)),
+                    ),
+                  ),
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed(
-                          'chinh_sua_thong_tin_dang_ky',
-                          queryParameters: {
-                            'txtTitle': serializeParam(
-                              'Họ và tên đệm',
-                              ParamType.String,
-                            ),
-                            'isDate': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isFirstName': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isLastName': serializeParam(
-                              true,
-                              ParamType.bool,
-                            ),
-                            'isHeight': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isWeight': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'lastName': serializeParam(
-                              widget.lastName,
-                              ParamType.String,
-                            ),
-                            'firstName': serializeParam(
-                              widget.firstName,
-                              ParamType.String,
-                            ),
-                            'height': serializeParam(
-                              widget.height,
-                              ParamType.double,
-                            ),
-                            'weight': serializeParam(
-                              widget.weight,
-                              ParamType.double,
-                            ),
-                            'date': serializeParam(
-                              widget.dateOfBirth,
-                              ParamType.DateTime,
-                            ),
-                          }.withoutNulls,
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.rightToLeft,
-                              duration: Duration(milliseconds: 200),
-                            ),
-                          },
-                        );
-                      },
-                      child: wrapWithModel(
-                        model: _model.displayItemModel,
-                        updateCallback: () => safeSetState(() {}),
-                        child: DisplayItemWidget(
-                          lastName: widget.lastName,
-                          txtTitle: 'Họ và tên đệm',
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed(
-                          'chinh_sua_thong_tin_dang_ky',
-                          queryParameters: {
-                            'txtTitle': serializeParam(
-                              'Tên',
-                              ParamType.String,
-                            ),
-                            'isDate': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isFirstName': serializeParam(
-                              true,
-                              ParamType.bool,
-                            ),
-                            'isLastName': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isHeight': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isWeight': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'firstName': serializeParam(
-                              widget.firstName,
-                              ParamType.String,
-                            ),
-                            'lastName': serializeParam(
-                              widget.lastName,
-                              ParamType.String,
-                            ),
-                            'height': serializeParam(
-                              widget.height,
-                              ParamType.double,
-                            ),
-                            'weight': serializeParam(
-                              widget.weight,
-                              ParamType.double,
-                            ),
-                            'date': serializeParam(
-                              widget.dateOfBirth,
-                              ParamType.DateTime,
-                            ),
-                          }.withoutNulls,
-                        );
-                      },
-                      child: wrapWithModel(
-                        model: _model.displayItemNoUnitModel,
-                        updateCallback: () => safeSetState(() {}),
-                        child: DisplayItemNoUnitWidget(
-                          txtTitle: 'Tên của bạn',
-                          value: widget.firstName,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed(
-                          'chinh_sua_thong_tin_dang_ky',
-                          queryParameters: {
-                            'txtTitle': serializeParam(
-                              'Ngày sinh',
-                              ParamType.String,
-                            ),
-                            'lastName': serializeParam(
-                              widget.lastName,
-                              ParamType.String,
-                            ),
-                            'isDate': serializeParam(
-                              true,
-                              ParamType.bool,
-                            ),
-                            'isFirstName': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isLastName': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isHeight': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isWeight': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'firstName': serializeParam(
-                              widget.firstName,
-                              ParamType.String,
-                            ),
-                            'height': serializeParam(
-                              widget.height,
-                              ParamType.double,
-                            ),
-                            'weight': serializeParam(
-                              widget.weight,
-                              ParamType.double,
-                            ),
-                            'date': serializeParam(
-                              widget.dateOfBirth,
-                              ParamType.DateTime,
-                            ),
-                          }.withoutNulls,
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.rightToLeft,
-                              duration: Duration(milliseconds: 200),
-                            ),
-                          },
-                        );
-                      },
-                      child: wrapWithModel(
-                        model: _model.displayItemForDateModel,
-                        updateCallback: () => safeSetState(() {}),
-                        child: DisplayItemForDateWidget(
-                          txtTitle: 'Ngày sinh của bạn',
-                          value: widget.dateOfBirth?.toString(),
-                          date: widget.dateOfBirth,
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed(
-                          'chinh_sua_thong_tin_dang_ky',
-                          queryParameters: {
-                            'txtTitle': serializeParam(
-                              'Chiều cao',
-                              ParamType.String,
-                            ),
-                            'lastName': serializeParam(
-                              widget.lastName,
-                              ParamType.String,
-                            ),
-                            'isDate': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isHeight': serializeParam(
-                              true,
-                              ParamType.bool,
-                            ),
-                            'isFirstName': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isLastName': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isWeight': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'firstName': serializeParam(
-                              widget.firstName,
-                              ParamType.String,
-                            ),
-                            'height': serializeParam(
-                              widget.height,
-                              ParamType.double,
-                            ),
-                            'weight': serializeParam(
-                              widget.weight,
-                              ParamType.double,
-                            ),
-                            'date': serializeParam(
-                              widget.dateOfBirth,
-                              ParamType.DateTime,
-                            ),
-                          }.withoutNulls,
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.rightToLeft,
-                              duration: Duration(milliseconds: 200),
-                            ),
-                          },
-                        );
-                      },
-                      child: wrapWithModel(
-                        model: _model.displayItemV2Model,
-                        updateCallback: () => safeSetState(() {}),
-                        child: DisplayItemV2Widget(
-                          txtTitle: 'Chiều cao',
-                          value: widget.height?.toString(),
-                          unit: 'cm',
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed(
-                          'chinh_sua_thong_tin_dang_ky',
-                          queryParameters: {
-                            'txtTitle': serializeParam(
-                              'Cân nặng',
-                              ParamType.String,
-                            ),
-                            'lastName': serializeParam(
-                              widget.lastName,
-                              ParamType.String,
-                            ),
-                            'isDate': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isWeight': serializeParam(
-                              true,
-                              ParamType.bool,
-                            ),
-                            'isFirstName': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isLastName': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'isHeight': serializeParam(
-                              false,
-                              ParamType.bool,
-                            ),
-                            'firstName': serializeParam(
-                              widget.firstName,
-                              ParamType.String,
-                            ),
-                            'height': serializeParam(
-                              widget.height,
-                              ParamType.double,
-                            ),
-                            'weight': serializeParam(
-                              widget.weight,
-                              ParamType.double,
-                            ),
-                            'date': serializeParam(
-                              widget.dateOfBirth,
-                              ParamType.DateTime,
-                            ),
-                          }.withoutNulls,
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.rightToLeft,
-                              duration: Duration(milliseconds: 200),
-                            ),
-                          },
-                        );
-                      },
-                      child: wrapWithModel(
-                        model: _model.displayItemV3Model,
-                        updateCallback: () => safeSetState(() {}),
-                        child: DisplayItemV3Widget(
-                          txtTitle: 'Cân nặng trước sinh',
-                          value: widget.weight?.toString(),
-                          unit: 'kg',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Flexible(
+              ),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -552,8 +565,8 @@ class _ThongTinDangKyCaNhanWidgetState
                     ],
                   ),
                 ),
-              ].divide(const SizedBox(height: 16.0)),
-            ),
+              ),
+            ],
           ),
         ),
       ),

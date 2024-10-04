@@ -57,309 +57,347 @@ class _DanhSachMonAnWidgetState extends State<DanhSachMonAnWidget> {
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(15.0),
-          topRight: Radius.circular(15.0),
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0),
         ),
       ),
-      child: SingleChildScrollView(
-        primary: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
-                  child: Container(
-                    width: 36.0,
-                    height: 5.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).accent4,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Align(
+                alignment: const AlignmentDirectional(0.0, 0.0),
+                child: Container(
+                  width: 36.0,
+                  height: 5.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).accent4,
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      child: Align(
-                        alignment: const AlignmentDirectional(-1.0, 0.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pop();
-                          },
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Align(
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pop();
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: FlutterFlowTheme.of(context).primary,
+                          size: 24.0,
                         ),
                       ),
                     ),
-                    Flexible(
+                  ),
+                  Flexible(
+                    child: Text(
+                      functions.getMealNameInVietnamese(widget.mealName!),
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            fontSize: 16.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: 0.0,
+                    child: Align(
+                      alignment: const AlignmentDirectional(1.0, 0.0),
                       child: Text(
-                        functions.getMealNameInVietnamese(widget.mealName!),
-                        textAlign: TextAlign.center,
+                        'Lưu trữ',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).primary,
                               fontSize: 16.0,
                               letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                       ),
                     ),
-                    Opacity(
-                      opacity: 0.0,
-                      child: Align(
-                        alignment: const AlignmentDirectional(1.0, 0.0),
-                        child: Text(
-                          'Lưu trữ',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ]
-                      .addToStart(const SizedBox(width: 8.0))
-                      .addToEnd(const SizedBox(width: 8.0)),
-                ),
-              ].divide(const SizedBox(height: 8.0)).addToStart(const SizedBox(height: 4.0)),
-            ),
-            FutureBuilder<ApiCallResponse>(
-              future: _model.getMeal(
-                requestFn: () => PolabyGroup.apiV1DishesGETCall.call(
-                  mealId: widget.mealId,
-                  isDeleted: false,
-                  orderByDescending: false,
-                  order: 'kcal',
-                  pageIndex: 1,
-                  pageSize: 50,
-                ),
+                  ),
+                ]
+                    .addToStart(const SizedBox(width: 8.0))
+                    .addToEnd(const SizedBox(width: 8.0)),
               ),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      width: 32.0,
-                      height: 32.0,
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          FlutterFlowTheme.of(context).primary,
-                        ),
-                      ),
+            ].divide(const SizedBox(height: 8.0)).addToStart(const SizedBox(height: 4.0)),
+          ),
+          SingleChildScrollView(
+            primary: false,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                FutureBuilder<ApiCallResponse>(
+                  future: _model.getMeal(
+                    uniqueQueryKey: valueOrDefault<String>(
+                      widget.mealId,
+                      '0',
                     ),
-                  );
-                }
-                final listViewApiV1DishesGETResponse = snapshot.data!;
-
-                return Builder(
-                  builder: (context) {
-                    final eachDish = PolabyGroup.apiV1DishesGETCall
-                            .dishes(
-                              listViewApiV1DishesGETResponse.jsonBody,
-                            )
-                            ?.toList() ??
-                        [];
-                    if (eachDish.isEmpty) {
-                      return const SizedBox(
-                        height: 250.0,
-                        child: EmptyWidget(),
+                    requestFn: () => PolabyGroup.apiV1DishesGETCall.call(
+                      mealId: widget.mealId,
+                      isDeleted: false,
+                      orderByDescending: false,
+                      order: 'kcal',
+                      pageIndex: 1,
+                      pageSize: 50,
+                    ),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 32.0,
+                          height: 32.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
+                        ),
                       );
                     }
+                    final listViewApiV1DishesGETResponse = snapshot.data!;
 
-                    return ListView.separated(
-                      padding: const EdgeInsets.fromLTRB(
-                        0,
-                        16.0,
-                        0,
-                        16.0,
-                      ),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: eachDish.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 16.0),
-                      itemBuilder: (context, eachDishIndex) {
-                        final eachDishItem = eachDish[eachDishIndex];
-                        return Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              await showModalBottomSheet(
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                enableDrag: false,
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                    padding: MediaQuery.viewInsetsOf(context),
-                                    child: SizedBox(
-                                      height:
-                                          MediaQuery.sizeOf(context).height *
+                    return Builder(
+                      builder: (context) {
+                        final eachDish = PolabyGroup.apiV1DishesGETCall
+                                .dishes(
+                                  listViewApiV1DishesGETResponse.jsonBody,
+                                )
+                                ?.toList() ??
+                            [];
+                        if (eachDish.isEmpty) {
+                          return const SizedBox(
+                            height: 250.0,
+                            child: EmptyWidget(),
+                          );
+                        }
+
+                        return ListView.separated(
+                          padding: const EdgeInsets.fromLTRB(
+                            0,
+                            16.0,
+                            0,
+                            16.0,
+                          ),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: eachDish.length,
+                          separatorBuilder: (_, __) => const SizedBox(height: 16.0),
+                          itemBuilder: (context, eachDishIndex) {
+                            final eachDishItem = eachDish[eachDishIndex];
+                            return Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: SizedBox(
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
                                               0.95,
-                                      child: ChiTietMonAnWidget(
-                                        dishId: getJsonField(
-                                          eachDishItem,
-                                          r'''$.id''',
-                                        ).toString(),
-                                        dishName: getJsonField(
-                                          eachDishItem,
-                                          r'''$.name''',
-                                        ).toString(),
-                                        dishImage: getJsonField(
-                                          eachDishItem,
-                                          r'''$.image''',
-                                        ).toString(),
-                                        kcal: getJsonField(
-                                          eachDishItem,
-                                          r'''$.kcal''',
+                                          child: ChiTietMonAnWidget(
+                                            dishId: getJsonField(
+                                              eachDishItem,
+                                              r'''$.id''',
+                                            ).toString(),
+                                            dishName: getJsonField(
+                                              eachDishItem,
+                                              r'''$.name''',
+                                            ).toString(),
+                                            dishImage: getJsonField(
+                                              eachDishItem,
+                                              r'''$.image''',
+                                            ).toString(),
+                                            kcal: (double.tryParse(getJsonField(
+                                              eachDishItem,
+                                              r'''$.kcal''',
+                                            ).toString()))!,
+                                            protein:
+                                                (double.tryParse(getJsonField(
+                                              eachDishItem,
+                                              r'''$.protein''',
+                                            ).toString()))!,
+                                            carbohydrates:
+                                                (double.tryParse(getJsonField(
+                                              eachDishItem,
+                                              r'''$.carbohydrates''',
+                                            ).toString()))!,
+                                            fat: (double.tryParse(getJsonField(
+                                              eachDishItem,
+                                              r'''$.fat''',
+                                            ).toString()))!,
+                                          ),
                                         ),
-                                        protein: getJsonField(
-                                          eachDishItem,
-                                          r'''$.protein''',
-                                        ),
-                                        carbohydrates: getJsonField(
-                                          eachDishItem,
-                                          r'''$.carbohydrates''',
-                                        ),
-                                        fat: getJsonField(
-                                          eachDishItem,
-                                          r'''$.fat''',
-                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
+                                },
+                                child: Material(
+                                  color: Colors.transparent,
+                                  elevation: 0.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(16.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate,
                                       ),
                                     ),
-                                  );
-                                },
-                              ).then((value) => safeSetState(() {}));
-                            },
-                            child: Material(
-                              color: Colors.transparent,
-                              elevation: 0.0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Row(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: const Duration(
-                                                      milliseconds: 500),
-                                                  fadeOutDuration: const Duration(
-                                                      milliseconds: 500),
-                                                  imageUrl: getJsonField(
-                                                    eachDishItem,
-                                                    r'''$.image''',
-                                                  ).toString(),
-                                                  width: 64.0,
-                                                  height: 64.0,
-                                                  fit: BoxFit.cover,
+                                              Flexible(
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: CachedNetworkImage(
+                                                        fadeInDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        fadeOutDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                        imageUrl: getJsonField(
+                                                          eachDishItem,
+                                                          r'''$.image''',
+                                                        ).toString(),
+                                                        width: 64.0,
+                                                        height: 64.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            getJsonField(
+                                                              eachDishItem,
+                                                              r'''$.name''',
+                                                            ).toString(),
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            maxLines: 3,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
+                                                          Text(
+                                                            '${(String var1) {
+                                                              return double.tryParse(
+                                                                          var1)
+                                                                      ?.toStringAsFixed(
+                                                                          1) ??
+                                                                  '0.0';
+                                                            }(getJsonField(
+                                                              eachDishItem,
+                                                              r'''$.kcal''',
+                                                            ).toString())} kcal',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ].divide(
+                                                      const SizedBox(width: 8.0)),
                                                 ),
                                               ),
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    getJsonField(
-                                                      eachDishItem,
-                                                      r'''$.name''',
-                                                    ).toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    getJsonField(
-                                                      eachDishItem,
-                                                      r'''$.kcal''',
-                                                    ).toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ],
+                                              const Icon(
+                                                Icons.arrow_forward_ios,
+                                                color: Color(0xFFC5C5C7),
+                                                size: 16.0,
                                               ),
-                                            ].divide(const SizedBox(width: 4.0)),
-                                          ),
-                                          const Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: Color(0xFFC5C5C7),
-                                            size: 16.0,
+                                            ],
                                           ),
                                         ],
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         );
                       },
                     );
                   },
-                );
-              },
+                ),
+              ],
             ),
-          ].divide(const SizedBox(height: 16.0)),
-        ),
+          ),
+        ].divide(const SizedBox(height: 16.0)),
       ),
     );
   }
