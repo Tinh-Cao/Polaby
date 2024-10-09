@@ -86,7 +86,7 @@ class _TimeDatePickerWidgetState extends State<TimeDatePickerWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 8.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 16.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -119,249 +119,254 @@ class _TimeDatePickerWidgetState extends State<TimeDatePickerWidget> {
             ],
           ),
         ),
-        Stack(
-          alignment: const AlignmentDirectional(0.0, 0.0),
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Flexible(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
-                          child: Builder(
-                            builder: (context) {
-                              final hours = functions.hours().toList();
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+          child: Stack(
+            alignment: const AlignmentDirectional(0.0, 0.0),
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Align(
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            child: Builder(
+                              builder: (context) {
+                                final hours = functions.hours().toList();
 
-                              return SizedBox(
-                                width: 55.0,
-                                height: 250.0,
-                                child: CarouselSlider.builder(
-                                  itemCount: hours.length,
-                                  itemBuilder: (context, hoursIndex, _) {
-                                    final hoursItem = hours[hoursIndex];
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          hoursIndex.toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 16.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                  carouselController: _model.hoursController ??=
-                                      CarouselController(),
-                                  options: CarouselOptions(
-                                    initialPage: max(
-                                        0,
-                                        min(
-                                            valueOrDefault<int>(
-                                              widget.hour,
-                                              1,
-                                            ),
-                                            hours.length - 1)),
-                                    viewportFraction: 0.2,
-                                    disableCenter: true,
-                                    enlargeCenterPage: true,
-                                    enlargeFactor: 0.25,
-                                    enableInfiniteScroll: true,
-                                    scrollDirection: Axis.vertical,
-                                    autoPlay: false,
-                                    onPageChanged: (index, _) =>
-                                        _model.hoursCurrentIndex = index,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        child: Text(
-                          ':',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 22.0,
-                                letterSpacing: 0.0,
-                              ),
-                        ),
-                      ),
-                      Flexible(
-                        child: Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
-                          child: Builder(
-                            builder: (context) {
-                              final minutes = functions.minutes().toList();
-
-                              return SizedBox(
-                                width: 55.0,
-                                height: 250.0,
-                                child: CarouselSlider.builder(
-                                  itemCount: minutes.length,
-                                  itemBuilder: (context, minutesIndex, _) {
-                                    final minutesItem = minutes[minutesIndex];
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          valueOrDefault<String>(
-                                            minutesIndex < 10
-                                                ? '0${minutesIndex.toString()}'
-                                                : minutesIndex.toString(),
-                                            '00',
+                                return SizedBox(
+                                  width: 55.0,
+                                  height: 250.0,
+                                  child: CarouselSlider.builder(
+                                    itemCount: hours.length,
+                                    itemBuilder: (context, hoursIndex, _) {
+                                      final hoursItem = hours[hoursIndex];
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            hoursIndex.toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 16.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
+                                        ],
+                                      );
+                                    },
+                                    carouselController:
+                                        _model.hoursController ??=
+                                            CarouselController(),
+                                    options: CarouselOptions(
+                                      initialPage: max(
+                                          0,
+                                          min(
+                                              valueOrDefault<int>(
+                                                widget.hour,
+                                                1,
                                               ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                  carouselController:
-                                      _model.minutesController ??=
-                                          CarouselController(),
-                                  options: CarouselOptions(
-                                    initialPage: max(
-                                        0,
-                                        min(
-                                            valueOrDefault<int>(
-                                              widget.minute,
-                                              1,
-                                            ),
-                                            minutes.length - 1)),
-                                    viewportFraction: 0.2,
-                                    disableCenter: true,
-                                    enlargeCenterPage: true,
-                                    enlargeFactor: 0.25,
-                                    enableInfiniteScroll: true,
-                                    scrollDirection: Axis.vertical,
-                                    autoPlay: false,
-                                    onPageChanged: (index, _) =>
-                                        _model.minutesCurrentIndex = index,
+                                              hours.length - 1)),
+                                      viewportFraction: 0.2,
+                                      disableCenter: true,
+                                      enlargeCenterPage: true,
+                                      enlargeFactor: 0.25,
+                                      enableInfiniteScroll: true,
+                                      scrollDirection: Axis.vertical,
+                                      autoPlay: false,
+                                      onPageChanged: (index, _) =>
+                                          _model.hoursCurrentIndex = index,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Builder(
-                      builder: (context) {
-                        final date =
-                            functions.generateFormattedDateList()?.toList() ??
-                                [];
-
-                        return SizedBox(
-                          height: 250.0,
-                          child: CarouselSlider.builder(
-                            itemCount: date.length,
-                            itemBuilder: (context, dateIndex, _) {
-                              final dateItem = date[dateIndex];
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    dateItem,
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                ],
-                              );
-                            },
-                            carouselController: _model.dateController ??=
-                                CarouselController(),
-                            options: CarouselOptions(
-                              initialPage: max(
-                                  0,
-                                  min(
-                                      valueOrDefault<int>(
-                                        functions.getIndexForDate(),
-                                        0,
-                                      ),
-                                      date.length - 1)),
-                              viewportFraction: 0.2,
-                              disableCenter: true,
-                              enlargeCenterPage: true,
-                              enlargeFactor: 0.4,
-                              enableInfiniteScroll: true,
-                              scrollDirection: Axis.vertical,
-                              autoPlay: false,
-                              onPageChanged: (index, _) =>
-                                  _model.dateCurrentIndex = index,
+                                );
+                              },
                             ),
                           ),
-                        );
-                      },
+                        ),
+                        Flexible(
+                          child: Text(
+                            ':',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 22.0,
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: Builder(
+                              builder: (context) {
+                                final minutes = functions.minutes().toList();
+
+                                return SizedBox(
+                                  width: 55.0,
+                                  height: 250.0,
+                                  child: CarouselSlider.builder(
+                                    itemCount: minutes.length,
+                                    itemBuilder: (context, minutesIndex, _) {
+                                      final minutesItem = minutes[minutesIndex];
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            valueOrDefault<String>(
+                                              minutesIndex < 10
+                                                  ? '0${minutesIndex.toString()}'
+                                                  : minutesIndex.toString(),
+                                              '00',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                    carouselController:
+                                        _model.minutesController ??=
+                                            CarouselController(),
+                                    options: CarouselOptions(
+                                      initialPage: max(
+                                          0,
+                                          min(
+                                              valueOrDefault<int>(
+                                                widget.minute,
+                                                1,
+                                              ),
+                                              minutes.length - 1)),
+                                      viewportFraction: 0.2,
+                                      disableCenter: true,
+                                      enlargeCenterPage: true,
+                                      enlargeFactor: 0.25,
+                                      enableInfiniteScroll: true,
+                                      scrollDirection: Axis.vertical,
+                                      autoPlay: false,
+                                      onPageChanged: (index, _) =>
+                                          _model.minutesCurrentIndex = index,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ].addToStart(const SizedBox(width: 16.0)),
-            ),
-            Material(
-              color: Colors.transparent,
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
+                  Flexible(
+                    child: Align(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Builder(
+                        builder: (context) {
+                          final date =
+                              functions.generateFormattedDateList()?.toList() ??
+                                  [];
+
+                          return SizedBox(
+                            height: 250.0,
+                            child: CarouselSlider.builder(
+                              itemCount: date.length,
+                              itemBuilder: (context, dateIndex, _) {
+                                final dateItem = date[dateIndex];
+                                return Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      dateItem,
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ],
+                                );
+                              },
+                              carouselController: _model.dateController ??=
+                                  CarouselController(),
+                              options: CarouselOptions(
+                                initialPage: max(
+                                    0,
+                                    min(
+                                        valueOrDefault<int>(
+                                          functions.getIndexForDate(),
+                                          0,
+                                        ),
+                                        date.length - 1)),
+                                viewportFraction: 0.2,
+                                disableCenter: true,
+                                enlargeCenterPage: true,
+                                enlargeFactor: 0.4,
+                                enableInfiniteScroll: true,
+                                scrollDirection: Axis.vertical,
+                                autoPlay: false,
+                                onPageChanged: (index, _) =>
+                                    _model.dateCurrentIndex = index,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ].addToStart(const SizedBox(width: 16.0)),
               ),
-              child: Container(
-                width: double.infinity,
-                height: 40.0,
-                decoration: BoxDecoration(
-                  color: const Color(0x19212121),
+              Material(
+                color: Colors.transparent,
+                elevation: 0.0,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
+                child: Container(
+                  width: double.infinity,
+                  height: 40.0,
+                  decoration: BoxDecoration(
+                    color: const Color(0x19212121),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

@@ -54,7 +54,7 @@ class _TrimesterPickerWidgetState extends State<TrimesterPickerWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 8.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,

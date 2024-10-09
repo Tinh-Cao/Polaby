@@ -55,9 +55,7 @@
 
 
 	<key>PermissionGroupNotification</key>
-    <string>Để có thể nhận được các thông báo, hãy bật nhận thông báo.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Để có thể tải được hình từ thư viện ảnh của bạn lên ứng dụng, hãy cho phép ứng dụng truy cập thư viện ảnh.</string>
+    <string>Để có thể nhận được các thông báo, vui lòng bật nhận thông báo.</string>
 
 
 	<key>UILaunchStoryboardName</key>

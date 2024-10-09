@@ -83,69 +83,73 @@ class _KhongAnToanWidgetState extends State<KhongAnToanWidget> {
           top: true,
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16.0),
-                  child: Image.network(
-                    widget.image!,
-                    width: double.infinity,
-                    height: 200.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                    child: Text(
-                      widget.isSafed == true ? 'An toàn' : 'Không an toàn',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).error,
-                            fontSize: 15.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w600,
-                          ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Flexible(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16.0),
+                      child: Image.network(
+                        widget.image!,
+                        width: double.infinity,
+                        height: 200.0,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                  Align(
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      child: Text(
+                        widget.isSafed == true ? 'An toàn' : 'Không an toàn',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).error,
+                              fontSize: 15.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.txtName,
+                          'thực phẩm',
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              fontSize: 20.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Text(
                       valueOrDefault<String>(
-                        widget.txtName,
-                        'thực phẩm',
+                        widget.description,
+                        'mô tả',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
-                            fontSize: 20.0,
+                            color: FlutterFlowTheme.of(context).secondaryText,
                             letterSpacing: 0.0,
-                            fontWeight: FontWeight.bold,
                           ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
-                  child: Text(
-                    valueOrDefault<String>(
-                      widget.description,
-                      'mô tả',
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

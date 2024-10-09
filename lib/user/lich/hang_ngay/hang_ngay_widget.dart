@@ -11,6 +11,7 @@ import '/user/lich/health_daily_value/health_daily_value_widget.dart';
 import '/user/lich/them_ghi_chu_hang_ngay/them_ghi_chu_hang_ngay_widget.dart';
 import '/user/lich/them_lich_hen/them_lich_hen_widget.dart';
 import '/user/lich/xem_lich_hen/xem_lich_hen_widget.dart';
+import '/user/nang_cap_tai_khoan/nang_cap_tai_khoan_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -510,52 +511,145 @@ class _HangNgayWidgetState extends State<HangNgayWidget> {
                                                 parent: _model
                                                     .dailyCollection?.reference,
                                               );
-
-                                              await ScheduleRecord.createDoc(
-                                                      _model.dailyCollection!
-                                                          .reference)
-                                                  .set(createScheduleRecordData(
-                                                index:
-                                                    _model.numberOfSchedule! +
-                                                        1,
-                                                time: '1 : 01',
-                                              ));
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                isDismissible: false,
-                                                enableDrag: false,
-                                                context: context,
-                                                builder: (context) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: SizedBox(
-                                                      height: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .height *
-                                                          0.6,
-                                                      child: ThemLichHenWidget(
-                                                        datePicked:
-                                                            valueOrDefault<
-                                                                String>(
-                                                          functions
-                                                              .convertToApiDateFormatDate(
-                                                                  widget
-                                                                      .datePicked!),
-                                                          '0',
+                                              if ((FFAppState()
+                                                          .UserInfo
+                                                          .data
+                                                          .isSubscriptionActive ==
+                                                      false) &&
+                                                  (_model.numberOfSchedule! <=
+                                                      2)) {
+                                                await ScheduleRecord.createDoc(
+                                                        _model.dailyCollection!
+                                                            .reference)
+                                                    .set(
+                                                        createScheduleRecordData(
+                                                  index:
+                                                      _model.numberOfSchedule! +
+                                                          1,
+                                                  time: '1 : 01',
+                                                ));
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  isDismissible: false,
+                                                  enableDrag: false,
+                                                  useSafeArea: true,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: SizedBox(
+                                                        height:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .height *
+                                                                0.6,
+                                                        child:
+                                                            ThemLichHenWidget(
+                                                          datePicked:
+                                                              valueOrDefault<
+                                                                  String>(
+                                                            functions
+                                                                .convertToApiDateFormatDate(
+                                                                    widget
+                                                                        .datePicked!),
+                                                            '0',
+                                                          ),
+                                                          index: _model
+                                                                  .numberOfSchedule! +
+                                                              1,
                                                         ),
-                                                        index: _model
-                                                                .numberOfSchedule! +
-                                                            1,
                                                       ),
-                                                    ),
-                                                  );
-                                                },
-                                              ).then((value) =>
-                                                  safeSetState(() {}));
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              } else {
+                                                if (FFAppState()
+                                                        .UserInfo
+                                                        .data
+                                                        .isSubscriptionActive ==
+                                                    true) {
+                                                  await ScheduleRecord
+                                                          .createDoc(_model
+                                                              .dailyCollection!
+                                                              .reference)
+                                                      .set(
+                                                          createScheduleRecordData(
+                                                    index: _model
+                                                            .numberOfSchedule! +
+                                                        1,
+                                                    time: '1 : 01',
+                                                  ));
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    isDismissible: false,
+                                                    enableDrag: false,
+                                                    useSafeArea: true,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: SizedBox(
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  0.6,
+                                                          child:
+                                                              ThemLichHenWidget(
+                                                            datePicked:
+                                                                valueOrDefault<
+                                                                    String>(
+                                                              functions
+                                                                  .convertToApiDateFormatDate(
+                                                                      widget
+                                                                          .datePicked!),
+                                                              '0',
+                                                            ),
+                                                            index: _model
+                                                                    .numberOfSchedule! +
+                                                                1,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+                                                } else {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    useSafeArea: true,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: SizedBox(
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  0.9,
+                                                          child:
+                                                              const NangCapTaiKhoanWidget(),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+                                                }
+                                              }
 
                                               safeSetState(() {});
                                             },
@@ -852,38 +946,121 @@ class _HangNgayWidgetState extends State<HangNgayWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                context: context,
-                                                builder: (context) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: SizedBox(
-                                                      height: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .height *
-                                                          0.4,
-                                                      child:
-                                                          ThemGhiChuHangNgayWidget(
-                                                        datePicked:
-                                                            valueOrDefault<
-                                                                String>(
-                                                          functions
-                                                              .convertToApiDateFormatDate(
-                                                                  widget
-                                                                      .datePicked!),
-                                                          '0',
+                                              _model.numberOfNoteDaily =
+                                                  await queryNoteDailyRecordCount(
+                                                parent: _model
+                                                    .dailyCollection?.reference,
+                                              );
+                                              if ((FFAppState()
+                                                          .UserInfo
+                                                          .data
+                                                          .isSubscriptionActive ==
+                                                      false) &&
+                                                  (_model.numberOfNoteDaily! <=
+                                                      3)) {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  useSafeArea: true,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: SizedBox(
+                                                        height:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .height *
+                                                                0.4,
+                                                        child:
+                                                            ThemGhiChuHangNgayWidget(
+                                                          datePicked:
+                                                              valueOrDefault<
+                                                                  String>(
+                                                            functions
+                                                                .convertToApiDateFormatDate(
+                                                                    widget
+                                                                        .datePicked!),
+                                                            '0',
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  );
-                                                },
-                                              ).then((value) =>
-                                                  safeSetState(() {}));
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              } else {
+                                                if (FFAppState()
+                                                        .UserInfo
+                                                        .data
+                                                        .isSubscriptionActive ==
+                                                    true) {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    useSafeArea: true,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: SizedBox(
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  0.4,
+                                                          child:
+                                                              ThemGhiChuHangNgayWidget(
+                                                            datePicked:
+                                                                valueOrDefault<
+                                                                    String>(
+                                                              functions
+                                                                  .convertToApiDateFormatDate(
+                                                                      widget
+                                                                          .datePicked!),
+                                                              '0',
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+                                                } else {
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    useSafeArea: true,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: SizedBox(
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  0.9,
+                                                          child:
+                                                              const NangCapTaiKhoanWidget(),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+                                                }
+                                              }
+
+                                              safeSetState(() {});
                                             },
                                             child: Text(
                                               'Thêm',

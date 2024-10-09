@@ -54,7 +54,7 @@ class _FilterIngredientPickerWidgetState
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(8.0, 16.0, 8.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

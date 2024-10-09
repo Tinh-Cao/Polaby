@@ -314,6 +314,7 @@ class _ThemGhiChuWidgetState extends State<ThemGhiChuWidget> {
                                               fontSize: 13.0,
                                               letterSpacing: 0.0,
                                             ),
+                                        maxLines: null,
                                         validator: _model
                                             .textControllerValidator
                                             .asValidator(context),
@@ -533,7 +534,7 @@ class _ThemGhiChuWidgetState extends State<ThemGhiChuWidget> {
                                             child: SizedBox(
                                               height: MediaQuery.sizeOf(context)
                                                       .height *
-                                                  0.35,
+                                                  0.4,
                                               child: const TimeDatePickerWidget(
                                                 date: '',
                                                 hour: 0,

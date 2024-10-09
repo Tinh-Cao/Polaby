@@ -151,144 +151,158 @@ class _InputSizeWidgetState extends State<InputSizeWidget> {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (widget.size != 0.0)
-                  TextFormField(
-                    controller: _model.textController1,
-                    focusNode: _model.textFieldFocusNode1,
-                    autofocus: true,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      labelText: 'Nhập số đo vòng bụng',
-                      labelStyle: FlutterFlowTheme.of(context)
-                          .bodySmall
-                          .override(
-                            fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 14.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.normal,
+                Form(
+                  key: _model.formKey2,
+                  autovalidateMode: AutovalidateMode.always,
+                  child: Visibility(
+                    visible: widget.size != 0.0,
+                    child: TextFormField(
+                      controller: _model.textController1,
+                      focusNode: _model.textFieldFocusNode1,
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: false,
+                        labelText: 'Nhập số đo vòng bụng',
+                        labelStyle: FlutterFlowTheme.of(context)
+                            .bodySmall
+                            .override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.normal,
+                            ),
+                        hintStyle: FlutterFlowTheme.of(context)
+                            .bodyMedium
+                            .override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.normal,
+                            ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 1.0,
                           ),
-                      hintStyle: FlutterFlowTheme.of(context)
-                          .bodyMedium
-                          .override(
-                            fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 14.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.normal,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
                           ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
+                          borderRadius: BorderRadius.circular(16.0),
                         ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(16.0),
                         ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(16.0),
                         ),
-                        borderRadius: BorderRadius.circular(16.0),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            letterSpacing: 0.0,
+                          ),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      validator:
+                          _model.textController1Validator.asValidator(context),
+                      inputFormatters: [_model.textFieldMask1],
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          letterSpacing: 0.0,
-                        ),
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    validator:
-                        _model.textController1Validator.asValidator(context),
                   ),
-                if (widget.size == 0.0)
-                  TextFormField(
-                    controller: _model.textController2,
-                    focusNode: _model.textFieldFocusNode2,
-                    autofocus: true,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: false,
-                      labelText: 'Nhập số đo vòng bụng',
-                      labelStyle: FlutterFlowTheme.of(context)
-                          .bodySmall
-                          .override(
-                            fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 14.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.normal,
+                ),
+                Form(
+                  key: _model.formKey1,
+                  autovalidateMode: AutovalidateMode.always,
+                  child: Visibility(
+                    visible: widget.size == 0.0,
+                    child: TextFormField(
+                      controller: _model.textController2,
+                      focusNode: _model.textFieldFocusNode2,
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: false,
+                        labelText: 'Nhập số đo vòng bụng',
+                        labelStyle: FlutterFlowTheme.of(context)
+                            .bodySmall
+                            .override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.normal,
+                            ),
+                        hintStyle: FlutterFlowTheme.of(context)
+                            .bodyMedium
+                            .override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.normal,
+                            ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 1.0,
                           ),
-                      hintStyle: FlutterFlowTheme.of(context)
-                          .bodyMedium
-                          .override(
-                            fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 14.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.normal,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
                           ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
+                          borderRadius: BorderRadius.circular(16.0),
                         ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(16.0),
                         ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(16.0),
                         ),
-                        borderRadius: BorderRadius.circular(16.0),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      filled: true,
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            letterSpacing: 0.0,
+                          ),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      validator:
+                          _model.textController2Validator.asValidator(context),
+                      inputFormatters: [_model.textFieldMask2],
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          letterSpacing: 0.0,
-                        ),
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    validator:
-                        _model.textController2Validator.asValidator(context),
                   ),
+                ),
               ],
             ),
             Expanded(
@@ -300,6 +314,10 @@ class _InputSizeWidgetState extends State<InputSizeWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       if (widget.size == 0.0) {
+                        if (_model.formKey1.currentState == null ||
+                            !_model.formKey1.currentState!.validate()) {
+                          return;
+                        }
                         _model.apiResultb6y =
                             await PolabyGroup.apiV1HealthsPOSTCall.call(
                           userId: currentUserUid,
@@ -339,6 +357,10 @@ class _InputSizeWidgetState extends State<InputSizeWidget> {
                           FFAppState().update(() {});
                         }
                       } else {
+                        if (_model.formKey2.currentState == null ||
+                            !_model.formKey2.currentState!.validate()) {
+                          return;
+                        }
                         _model.apiResultb7y =
                             await PolabyGroup.apiV1HealthsidPUTCall.call(
                           id: widget.id,

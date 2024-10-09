@@ -5,10 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/info_component/display_item_search/display_item_search_widget.dart';
-import '/backend/schema/structs/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'an_toan_thuc_pham_model.dart';
 export 'an_toan_thuc_pham_model.dart';
@@ -90,7 +87,8 @@ class _AnToanThucPhamWidgetState extends State<AnToanThucPhamWidget> {
                   onTap: () async {
                     await showModalBottomSheet(
                       isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                       isDismissible: false,
                       enableDrag: false,
                       context: context,
@@ -204,7 +202,7 @@ class _AnToanThucPhamWidgetState extends State<AnToanThucPhamWidget> {
                                         orderByDescending: true,
                                         isDeleted: false,
                                         pageIndex: 1,
-                                        pageSize: 20,
+                                        pageSize: 200,
                                         search: FFAppState().search,
                                         order: 'aaaaaaaaaaa',
                                         isSafe: () {
@@ -342,23 +340,18 @@ class _AnToanThucPhamWidgetState extends State<AnToanThucPhamWidget> {
                                                                     0.0,
                                                               ),
                                                         ),
-                                                        if (IsSafeStruct
-                                                                .maybeFromMap(
-                                                                    getJsonField(
+                                                        if (getJsonField(
                                                               eachSafeFoodsItem,
                                                               r'''$.isSafe''',
-                                                            ))?.isSafe ==
-                                                            true)
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            child: SvgPicture
-                                                                .asset(
-                                                              'assets/images/Contents_-_Trailing.svg',
-                                                              fit: BoxFit.cover,
-                                                            ),
+                                                            ) ==
+                                                            false)
+                                                          Icon(
+                                                            Icons
+                                                                .error_outline_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .error,
+                                                            size: 24.0,
                                                           ),
                                                       ],
                                                     ),
@@ -386,11 +379,17 @@ class _AnToanThucPhamWidgetState extends State<AnToanThucPhamWidget> {
                                     16.0, 0.0, 16.0, 0.0),
                                 child: Container(
                                   decoration: const BoxDecoration(),
-                                  child: PagedListView<ApiPagingParams,
-                                      dynamic>.separated(
-                                    pagingController:
-                                        _model.setListViewController2(
-                                      (nextPageMarker) => PolabyGroup
+                                  child: FutureBuilder<ApiCallResponse>(
+                                    future: FFAppState()
+                                        .ingredient(
+                                      uniqueQueryKey: currentUserUid,
+                                      overrideCache: (_model
+                                                  .displayItemSearchModel
+                                                  .textController
+                                                  .text !=
+                                              FFAppState().search) ||
+                                          (FFAppState().filterState != null),
+                                      requestFn: () => PolabyGroup
                                           .apiV1SafefoodsGETCall
                                           .call(
                                         orderByDescending: true,
@@ -400,10 +399,9 @@ class _AnToanThucPhamWidgetState extends State<AnToanThucPhamWidget> {
                                                     .data
                                                     .isSubscriptionActive ==
                                                 true
-                                            ? (nextPageMarker.nextPageNumber +
-                                                1)
+                                            ? 1
                                             : 1,
-                                        pageSize: 20,
+                                        pageSize: 200,
                                         search: FFAppState().search,
                                         order: 'aaaaaaaaaaa',
                                         isSafe: () {
@@ -417,151 +415,188 @@ class _AnToanThucPhamWidgetState extends State<AnToanThucPhamWidget> {
                                           }
                                         }(),
                                       ),
-                                    ),
-                                    padding: const EdgeInsets.fromLTRB(
-                                      0,
-                                      0,
-                                      0,
-                                      16.0,
-                                    ),
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    reverse: false,
-                                    scrollDirection: Axis.vertical,
-                                    separatorBuilder: (_, __) =>
-                                        const SizedBox(height: 8.0),
-                                    builderDelegate:
-                                        PagedChildBuilderDelegate<dynamic>(
-                                      // Customize what your widget looks like when it's loading the first page.
-                                      firstPageProgressIndicatorBuilder: (_) =>
-                                          Center(
-                                        child: SizedBox(
-                                          width: 32.0,
-                                          height: 32.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      // Customize what your widget looks like when it's loading another page.
-                                      newPageProgressIndicatorBuilder: (_) =>
-                                          Center(
-                                        child: SizedBox(
-                                          width: 32.0,
-                                          height: 32.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-
-                                      itemBuilder:
-                                          (context, _, eachSafeFoodsIndex) {
-                                        final eachSafeFoodsItem = _model
-                                            .listViewPagingController2!
-                                            .itemList![eachSafeFoodsIndex];
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed(
-                                                  'khong_an_toan',
-                                                  queryParameters: {
-                                                    'txtName': serializeParam(
-                                                      getJsonField(
-                                                        eachSafeFoodsItem,
-                                                        r'''$.name''',
-                                                      ).toString(),
-                                                      ParamType.String,
-                                                    ),
-                                                    'isSafed': serializeParam(
-                                                      getJsonField(
-                                                        eachSafeFoodsItem,
-                                                        r'''$.isSafe''',
-                                                      ),
-                                                      ParamType.bool,
-                                                    ),
-                                                    'description':
-                                                        serializeParam(
-                                                      getJsonField(
-                                                        eachSafeFoodsItem,
-                                                        r'''$.description''',
-                                                      ).toString(),
-                                                      ParamType.String,
-                                                    ),
-                                                    'image': serializeParam(
-                                                      getJsonField(
-                                                        eachSafeFoodsItem,
-                                                        r'''$.imageUrl''',
-                                                      ).toString(),
-                                                      ParamType.String,
-                                                    ),
-                                                  }.withoutNulls,
-                                                );
-                                              },
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    getJsonField(
-                                                      eachSafeFoodsItem,
-                                                      r'''$.name''',
-                                                    ).toString(),
-                                                    maxLines: 2,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  if (IsSafeStruct.maybeFromMap(
-                                                          getJsonField(
-                                                        eachSafeFoodsItem,
-                                                        r'''$.isSafe''',
-                                                      ))?.isSafe ==
-                                                      true)
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                      child: SvgPicture.asset(
-                                                        'assets/images/Contents_-_Trailing.svg',
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                ],
+                                    )
+                                        .then((result) {
+                                      try {
+                                        _model.apiRequestCompleted = true;
+                                        _model.apiRequestLastUniqueKey =
+                                            currentUserUid;
+                                      } finally {}
+                                      return result;
+                                    }),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 32.0,
+                                            height: 32.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
                                               ),
                                             ),
-                                            Divider(
-                                              height: 1.0,
-                                              thickness: 1.0,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                            ),
-                                          ].divide(const SizedBox(height: 8.0)),
+                                          ),
                                         );
-                                      },
-                                    ),
+                                      }
+                                      final listViewApiV1SafefoodsGETResponse =
+                                          snapshot.data!;
+
+                                      return Builder(
+                                        builder: (context) {
+                                          final eachSafeFoods =
+                                              PolabyGroup.apiV1SafefoodsGETCall
+                                                      .safeFoods(
+                                                        listViewApiV1SafefoodsGETResponse
+                                                            .jsonBody,
+                                                      )
+                                                      ?.toList() ??
+                                                  [];
+
+                                          return RefreshIndicator(
+                                            key: const Key(
+                                                'RefreshIndicator_p8kxicfc'),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            onRefresh: () async {
+                                              safeSetState(() {
+                                                FFAppState()
+                                                    .clearIngredientCacheKey(_model
+                                                        .apiRequestLastUniqueKey);
+                                                _model.apiRequestCompleted =
+                                                    false;
+                                              });
+                                              await _model
+                                                  .waitForApiRequestCompleted();
+                                            },
+                                            child: ListView.separated(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                0,
+                                                0,
+                                                0,
+                                                16.0,
+                                              ),
+                                              primary: false,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount: eachSafeFoods.length,
+                                              separatorBuilder: (_, __) =>
+                                                  const SizedBox(height: 8.0),
+                                              itemBuilder: (context,
+                                                  eachSafeFoodsIndex) {
+                                                final eachSafeFoodsItem =
+                                                    eachSafeFoods[
+                                                        eachSafeFoodsIndex];
+                                                return Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                          'khong_an_toan',
+                                                          queryParameters: {
+                                                            'txtName':
+                                                                serializeParam(
+                                                              getJsonField(
+                                                                eachSafeFoodsItem,
+                                                                r'''$.name''',
+                                                              ).toString(),
+                                                              ParamType.String,
+                                                            ),
+                                                            'isSafed':
+                                                                serializeParam(
+                                                              getJsonField(
+                                                                eachSafeFoodsItem,
+                                                                r'''$.isSafe''',
+                                                              ),
+                                                              ParamType.bool,
+                                                            ),
+                                                            'description':
+                                                                serializeParam(
+                                                              getJsonField(
+                                                                eachSafeFoodsItem,
+                                                                r'''$.description''',
+                                                              ).toString(),
+                                                              ParamType.String,
+                                                            ),
+                                                            'image':
+                                                                serializeParam(
+                                                              getJsonField(
+                                                                eachSafeFoodsItem,
+                                                                r'''$.imageUrl''',
+                                                              ).toString(),
+                                                              ParamType.String,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            getJsonField(
+                                                              eachSafeFoodsItem,
+                                                              r'''$.name''',
+                                                            ).toString(),
+                                                            maxLines: 2,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                          ),
+                                                          if (getJsonField(
+                                                                eachSafeFoodsItem,
+                                                                r'''$.isSafe''',
+                                                              ) ==
+                                                              false)
+                                                            Icon(
+                                                              Icons
+                                                                  .error_outline_rounded,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .error,
+                                                              size: 24.0,
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Divider(
+                                                      height: 1.0,
+                                                      thickness: 1.0,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                    ),
+                                                  ].divide(
+                                                      const SizedBox(height: 8.0)),
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
                                   ),
                                 ),
                               );

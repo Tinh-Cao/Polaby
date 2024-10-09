@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +32,6 @@ class _DisplayItemWidgetState extends State<DisplayItemWidget> {
     super.initState();
     _model = createModel(context, () => DisplayItemModel());
 
-    _model.textController ??= TextEditingController(text: widget.lastName);
-    _model.textFieldFocusNode ??= FocusNode();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -68,68 +64,46 @@ class _DisplayItemWidgetState extends State<DisplayItemWidget> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 16.0, 16.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      widget.txtTitle,
-                      style: FlutterFlowTheme.of(context).labelLarge.override(
-                            fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w500,
-                          ),
-                    ),
-                  ),
                   Flexible(
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: TextFormField(
-                        controller: _model.textController,
-                        focusNode: _model.textFieldFocusNode,
-                        autofocus: true,
-                        readOnly: true,
-                        obscureText: false,
-                        decoration: const InputDecoration(
-                          isDense: true,
-                          alignLabelWithHint: false,
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          focusedErrorBorder: InputBorder.none,
-                        ),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        widget.txtTitle,
                         style: FlutterFlowTheme.of(context).labelLarge.override(
                               fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).primaryText,
                               letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
                             ),
-                        textAlign: TextAlign.end,
-                        validator:
-                            _model.textControllerValidator.asValidator(context),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 16.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderRadius: 20.0,
-                      borderWidth: 0.0,
-                      buttonSize: 32.0,
-                      icon: Icon(
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        widget.lastName!,
+                        textAlign: TextAlign.end,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 16.0,
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                      Icon(
                         Icons.arrow_forward_ios_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryText,
+                        color: FlutterFlowTheme.of(context).accent4,
                         size: 16.0,
                       ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
-                      },
-                    ),
+                    ].divide(const SizedBox(width: 8.0)),
                   ),
                 ].divide(const SizedBox(width: 0.0)),
               ),

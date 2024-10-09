@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +34,6 @@ class _DisplayItemV3WidgetState extends State<DisplayItemV3Widget> {
     super.initState();
     _model = createModel(context, () => DisplayItemV3Model());
 
-    _model.textController ??= TextEditingController(text: widget.value);
-    _model.textFieldFocusNode ??= FocusNode();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -70,7 +66,7 @@ class _DisplayItemV3WidgetState extends State<DisplayItemV3Widget> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 16.0, 16.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,69 +85,38 @@ class _DisplayItemV3WidgetState extends State<DisplayItemV3Widget> {
                           ),
                     ),
                   ),
-                  Flexible(
-                    child: SizedBox(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      child: TextFormField(
-                        controller: _model.textController,
-                        focusNode: _model.textFieldFocusNode,
-                        autofocus: true,
-                        readOnly: true,
-                        obscureText: false,
-                        decoration: const InputDecoration(
-                          isDense: true,
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          focusedErrorBorder: InputBorder.none,
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        widget.value!,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 16.0,
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                      Text(
+                        valueOrDefault<String>(
+                          widget.unit,
+                          'a',
                         ),
                         style: FlutterFlowTheme.of(context).labelLarge.override(
                               fontFamily: 'Inter',
                               letterSpacing: 0.0,
                             ),
-                        textAlign: TextAlign.end,
-                        validator:
-                            _model.textControllerValidator.asValidator(context),
                       ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
-                        child: Text(
-                          valueOrDefault<String>(
-                            widget.unit,
-                            'a',
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).labelLarge.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
+                            const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                        child: Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: FlutterFlowTheme.of(context).accent4,
+                          size: 16.0,
                         ),
                       ),
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 16.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 20.0,
-                      borderWidth: 0.0,
-                      buttonSize: 32.0,
-                      icon: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 16.0,
-                      ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
-                      },
-                    ),
+                    ].divide(const SizedBox(width: 4.0)),
                   ),
                 ].divide(const SizedBox(width: 0.0)),
               ),

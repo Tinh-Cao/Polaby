@@ -5,6 +5,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/info_component/display_item_search/display_item_search_widget.dart';
+import '/user/cong_dong/chuc_nang_them/chuc_nang_them_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -125,6 +127,7 @@ class _BaiVietCuaBanWidgetState extends State<BaiVietCuaBanWidget> {
                             wrapWithModel(
                               model: _model.displayItemSearchModel,
                               updateCallback: () => safeSetState(() {}),
+                              updateOnChange: true,
                               child: const DisplayItemSearchWidget(),
                             ),
                           ]
@@ -220,388 +223,443 @@ class _BaiVietCuaBanWidgetState extends State<BaiVietCuaBanWidget> {
                                             final listViewPostsRecord =
                                                 listViewPostsRecordList[
                                                     listViewIndex];
-                                            return Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, -1.0),
-                                              child: StreamBuilder<UsersRecord>(
-                                                stream: UsersRecord.getDocument(
-                                                    listViewPostsRecord
-                                                        .postUser!),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50,
-                                                        height: 50,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          valueColor:
-                                                              AlwaysStoppedAnimation<
-                                                                  Color>(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryBackground,
+                                            return Visibility(
+                                              visible: functions.showResultSearch(
+                                                      _model
+                                                          .displayItemSearchModel
+                                                          .textController
+                                                          .text,
+                                                      listViewPostsRecord
+                                                          .content) ??
+                                                  true,
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, -1.0),
+                                                child:
+                                                    StreamBuilder<UsersRecord>(
+                                                  stream:
+                                                      UsersRecord.getDocument(
+                                                          listViewPostsRecord
+                                                              .postUser!),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            valueColor:
+                                                                AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondaryBackground,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  }
+                                                      );
+                                                    }
 
-                                                  final containerUsersRecord =
-                                                      snapshot.data!;
+                                                    final containerUsersRecord =
+                                                        snapshot.data!;
 
-                                                  return Container(
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16.0),
-                                                      border: Border.all(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                    return Container(
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16.0),
+                                                        border: Border.all(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    alignment:
-                                                        const AlignmentDirectional(
-                                                            0.0, -1.0),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  0.0,
-                                                                  8.0,
-                                                                  0.0),
-                                                      child:
-                                                          SingleChildScrollView(
-                                                        primary: false,
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                          const BorderRadius
-                                                                              .only(
-                                                                        bottomLeft:
-                                                                            Radius.circular(50.0),
-                                                                        bottomRight:
-                                                                            Radius.circular(50.0),
-                                                                        topLeft:
-                                                                            Radius.circular(50.0),
-                                                                        topRight:
-                                                                            Radius.circular(50.0),
-                                                                      ),
-                                                                      child: Image
-                                                                          .network(
-                                                                        'https://picsum.photos/seed/194/600',
-                                                                        width:
-                                                                            35.0,
-                                                                        height:
-                                                                            35.0,
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children: [
-                                                                              InkWell(
-                                                                                splashColor: Colors.transparent,
-                                                                                focusColor: Colors.transparent,
-                                                                                hoverColor: Colors.transparent,
-                                                                                highlightColor: Colors.transparent,
-                                                                                onTap: () async {
-                                                                                  context.pushNamed(
-                                                                                    'chi_tiet',
-                                                                                    queryParameters: {
-                                                                                      'postUserID': serializeParam(
-                                                                                        listViewPostsRecord.postUser,
-                                                                                        ParamType.DocumentReference,
-                                                                                      ),
-                                                                                      'userId': serializeParam(
-                                                                                        containerUsersRecord.userId,
-                                                                                        ParamType.String,
-                                                                                      ),
-                                                                                    }.withoutNulls,
-                                                                                  );
-                                                                                },
-                                                                                child: Text(
-                                                                                  containerUsersRecord.firstName,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Inter',
-                                                                                        fontSize: 12.0,
-                                                                                        letterSpacing: 0.0,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                              if (containerUsersRecord.role == 'Expert')
-                                                                                Padding(
-                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                  child: ClipRRect(
-                                                                                    borderRadius: BorderRadius.circular(8.0),
-                                                                                    child: SvgPicture.asset(
-                                                                                      'assets/images/briefcase-medical.svg',
-                                                                                      width: 16.0,
-                                                                                      height: 16.0,
-                                                                                      fit: BoxFit.cover,
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                            ],
-                                                                          ),
-                                                                          Text(
-                                                                            valueOrDefault<String>(
-                                                                              listViewPostsRecord.createDate?.toString(),
-                                                                              '2024/02/2032',
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Inter',
-                                                                                  color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                  fontSize: 11.0,
-                                                                                  letterSpacing: 0.0,
-                                                                                ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .more_vert,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                                  size: 17.0,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            if (listViewPostsRecord
-                                                                        .imageUrl !=
-                                                                    '')
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                child: Image
-                                                                    .network(
-                                                                  listViewPostsRecord
-                                                                      .imageUrl,
-                                                                  width: 334.0,
-                                                                  height: 200.0,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ),
-                                                            Align(
-                                                              alignment:
-                                                                  const AlignmentDirectional(
-                                                                      -1.0,
-                                                                      0.0),
-                                                              child: Text(
-                                                                listViewPostsRecord
-                                                                    .content,
-                                                                textAlign:
-                                                                    TextAlign
+                                                      alignment:
+                                                          const AlignmentDirectional(
+                                                              0.0, -1.0),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    8.0,
+                                                                    0.0,
+                                                                    8.0,
+                                                                    0.0),
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          primary: false,
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
                                                                         .start,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    ToggleIcon(
-                                                                      onPressed:
-                                                                          () async {
-                                                                        final liekCountElement =
-                                                                            columnUsersRecord?.reference;
-                                                                        final liekCountUpdate = listViewPostsRecord.liekCount.contains(liekCountElement)
-                                                                            ? FieldValue.arrayRemove([
-                                                                                liekCountElement
-                                                                              ])
-                                                                            : FieldValue.arrayUnion([
-                                                                                liekCountElement
-                                                                              ]);
-                                                                        await listViewPostsRecord
-                                                                            .reference
-                                                                            .update({
-                                                                          ...mapToFirestore(
-                                                                            {
-                                                                              'liekCount': liekCountUpdate,
-                                                                            },
-                                                                          ),
-                                                                        });
-                                                                      },
-                                                                      value: listViewPostsRecord
-                                                                          .liekCount
-                                                                          .contains(
-                                                                              columnUsersRecord?.reference),
-                                                                      onIcon:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .favorite_rounded,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primary,
-                                                                        size:
-                                                                            25.0,
-                                                                      ),
-                                                                      offIcon:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .favorite_border_rounded,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
-                                                                        size:
-                                                                            25.0,
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                      listViewPostsRecord
-                                                                          .liekCount
-                                                                          .length
-                                                                          .toString(),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primary,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                          ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          5.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          ClipRRect(
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      ClipRRect(
                                                                         borderRadius:
-                                                                            BorderRadius.circular(8.0),
-                                                                        child: SvgPicture
-                                                                            .asset(
-                                                                          'assets/images/Button.svg',
+                                                                            const BorderRadius.only(
+                                                                          bottomLeft:
+                                                                              Radius.circular(50.0),
+                                                                          bottomRight:
+                                                                              Radius.circular(50.0),
+                                                                          topLeft:
+                                                                              Radius.circular(50.0),
+                                                                          topRight:
+                                                                              Radius.circular(50.0),
+                                                                        ),
+                                                                        child: Image
+                                                                            .network(
+                                                                          'https://picsum.photos/seed/194/600',
                                                                           width:
-                                                                              24.0,
+                                                                              35.0,
                                                                           height:
-                                                                              24.0,
+                                                                              35.0,
                                                                           fit: BoxFit
                                                                               .cover,
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                    Text(
-                                                                      listViewPostsRecord
-                                                                          .comments
-                                                                          .toString(),
-                                                                      style: FlutterFlowTheme.of(
+                                                                      Padding(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                InkWell(
+                                                                                  splashColor: Colors.transparent,
+                                                                                  focusColor: Colors.transparent,
+                                                                                  hoverColor: Colors.transparent,
+                                                                                  highlightColor: Colors.transparent,
+                                                                                  onTap: () async {
+                                                                                    context.pushNamed(
+                                                                                      'chi_tiet',
+                                                                                      queryParameters: {
+                                                                                        'postUserID': serializeParam(
+                                                                                          listViewPostsRecord.postUser,
+                                                                                          ParamType.DocumentReference,
+                                                                                        ),
+                                                                                        'userId': serializeParam(
+                                                                                          containerUsersRecord.userId,
+                                                                                          ParamType.String,
+                                                                                        ),
+                                                                                      }.withoutNulls,
+                                                                                    );
+                                                                                  },
+                                                                                  child: Text(
+                                                                                    containerUsersRecord.firstName,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          fontSize: 12.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FontWeight.bold,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                if (containerUsersRecord.role == 'Expert')
+                                                                                  Padding(
+                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                    child: ClipRRect(
+                                                                                      borderRadius: BorderRadius.circular(8.0),
+                                                                                      child: SvgPicture.asset(
+                                                                                        'assets/images/briefcase-medical.svg',
+                                                                                        width: 16.0,
+                                                                                        height: 16.0,
+                                                                                        fit: BoxFit.cover,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                              ],
+                                                                            ),
+                                                                            Text(
+                                                                              valueOrDefault<String>(
+                                                                                listViewPostsRecord.createDate?.toString(),
+                                                                                '2024/02/2032',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Inter',
+                                                                                    color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                    fontSize: 11.0,
+                                                                                    letterSpacing: 0.0,
+                                                                                  ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      await showModalBottomSheet(
+                                                                        isScrollControlled:
+                                                                            true,
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondaryBackground,
+                                                                        useSafeArea:
+                                                                            true,
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (context) {
+                                                                          return GestureDetector(
+                                                                            onTap: () =>
+                                                                                FocusScope.of(context).unfocus(),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: MediaQuery.viewInsetsOf(context),
+                                                                              child: SizedBox(
+                                                                                height: MediaQuery.sizeOf(context).height * 0.4,
+                                                                                child: ChucNangThemWidget(
+                                                                                  postId: listViewPostsRecord.reference,
+                                                                                  userId: columnUsersRecord!.reference,
+                                                                                  postUser: listViewPostsRecord.postUser!,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      ).then((value) =>
+                                                                          safeSetState(
+                                                                              () {}));
+                                                                    },
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .more_vert,
+                                                                      color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                          ),
+                                                                          .secondaryText,
+                                                                      size:
+                                                                          17.0,
                                                                     ),
-                                                                  ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              if (listViewPostsRecord
+                                                                          .imageUrl !=
+                                                                      '')
+                                                                ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .network(
+                                                                    listViewPostsRecord
+                                                                        .imageUrl,
+                                                                    width:
+                                                                        334.0,
+                                                                    height:
+                                                                        200.0,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
                                                                 ),
-                                                              ].divide(const SizedBox(
-                                                                  width: 16.0)),
-                                                            ),
-                                                          ]
-                                                              .divide(const SizedBox(
-                                                                  height: 16.0))
-                                                              .addToStart(
-                                                                  const SizedBox(
-                                                                      height:
-                                                                          16.0))
-                                                              .addToEnd(const SizedBox(
-                                                                  height:
-                                                                      16.0)),
+                                                              Align(
+                                                                alignment:
+                                                                    const AlignmentDirectional(
+                                                                        -1.0,
+                                                                        0.0),
+                                                                child: Text(
+                                                                  listViewPostsRecord
+                                                                      .content,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Inter',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      ToggleIcon(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          final liekCountElement =
+                                                                              columnUsersRecord?.reference;
+                                                                          final liekCountUpdate = listViewPostsRecord.liekCount.contains(liekCountElement)
+                                                                              ? FieldValue.arrayRemove([
+                                                                                  liekCountElement
+                                                                                ])
+                                                                              : FieldValue.arrayUnion([
+                                                                                  liekCountElement
+                                                                                ]);
+                                                                          await listViewPostsRecord
+                                                                              .reference
+                                                                              .update({
+                                                                            ...mapToFirestore(
+                                                                              {
+                                                                                'liekCount': liekCountUpdate,
+                                                                              },
+                                                                            ),
+                                                                          });
+                                                                        },
+                                                                        value: listViewPostsRecord
+                                                                            .liekCount
+                                                                            .contains(columnUsersRecord?.reference),
+                                                                        onIcon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .favorite_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          size:
+                                                                              25.0,
+                                                                        ),
+                                                                        offIcon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .favorite_border_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryText,
+                                                                          size:
+                                                                              25.0,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        listViewPostsRecord
+                                                                            .liekCount
+                                                                            .length
+                                                                            .toString(),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: FlutterFlowTheme.of(context).primary,
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            ClipRRect(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(8.0),
+                                                                          child:
+                                                                              SvgPicture.asset(
+                                                                            'assets/images/Button.svg',
+                                                                            width:
+                                                                                24.0,
+                                                                            height:
+                                                                                24.0,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        listViewPostsRecord
+                                                                            .comments
+                                                                            .toString(),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ].divide(const SizedBox(
+                                                                    width:
+                                                                        16.0)),
+                                                              ),
+                                                            ]
+                                                                .divide(const SizedBox(
+                                                                    height:
+                                                                        16.0))
+                                                                .addToStart(
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            16.0))
+                                                                .addToEnd(const SizedBox(
+                                                                    height:
+                                                                        16.0)),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  );
-                                                },
+                                                    );
+                                                  },
+                                                ),
                                               ),
                                             );
                                           },

@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/user/chuyen_gia_view_nguoi_dung/write_review/write_review_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -123,8 +124,14 @@ class _ChiTietWidgetState extends State<ChiTietWidget>
             alignment: const AlignmentDirectional(0.0, 1.0),
             children: [
               StreamBuilder<List<UsersRecord>>(
-                stream: queryUsersRecord(
-                  singleRecord: true,
+                stream: FFAppState().chiTietNguoiDangBai(
+                  uniqueQueryKey: valueOrDefault<String>(
+                    widget.postUserID?.id,
+                    '0',
+                  ),
+                  requestFn: () => queryUsersRecord(
+                    singleRecord: true,
+                  ),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -218,140 +225,91 @@ class _ChiTietWidgetState extends State<ChiTietWidget>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          if (PolabyGroup.apiV1AccountsidGETCall
-                                                  .role(
-                                                (_model.apiResult7sx
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ) ==
-                                              'Expert')
-                                            Text(
-                                              valueOrDefault<String>(
-                                                PolabyGroup
-                                                    .apiV1AccountsidGETCall
-                                                    .level(
-                                                      (_model.apiResult7sx
-                                                              ?.jsonBody ??
-                                                          ''),
-                                                    )
-                                                    ?.toString(),
-                                                'không có dữ liệu ',
-                                              ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Inter',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    fontSize: 15.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              PolabyGroup.apiV1AccountsidGETCall
+                                                  .level(
+                                                    (_model.apiResult7sx
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  )
+                                                  ?.toString(),
+                                              'không có dữ liệu ',
                                             ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  PolabyGroup
-                                                      .apiV1AccountsidGETCall
-                                                      .lastName(
-                                                    (_model.apiResult7sx
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  'dữ liệu',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  fontSize: 15.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                              ),
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  PolabyGroup
-                                                      .apiV1AccountsidGETCall
-                                                      .firstName(
-                                                    (_model.apiResult7sx
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  'không có',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                              ),
-                                            ].divide(const SizedBox(width: 2.0)),
                                           ),
-                                          if (PolabyGroup.apiV1AccountsidGETCall
-                                                  .role(
+                                          Text(
+                                            '${valueOrDefault<String>(
+                                              PolabyGroup.apiV1AccountsidGETCall
+                                                  .lastName(
                                                 (_model.apiResult7sx
                                                         ?.jsonBody ??
                                                     ''),
-                                              ) ==
-                                              'Expert')
-                                            Text(
-                                              valueOrDefault<String>(
-                                                PolabyGroup
-                                                    .apiV1AccountsidGETCall
-                                                    .yesrsOfExperience(
-                                                      (_model.apiResult7sx
-                                                              ?.jsonBody ??
-                                                          ''),
-                                                    )
-                                                    ?.toString(),
-                                                'không có dữ liệu',
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          if (PolabyGroup.apiV1AccountsidGETCall
-                                                  .role(
+                                              'dữ liệu',
+                                            )} ${valueOrDefault<String>(
+                                              PolabyGroup.apiV1AccountsidGETCall
+                                                  .firstName(
                                                 (_model.apiResult7sx
                                                         ?.jsonBody ??
                                                     ''),
-                                              ) ==
-                                              'Expert')
-                                            Text(
-                                              valueOrDefault<String>(
-                                                PolabyGroup
-                                                    .apiV1AccountsidGETCall
-                                                    .workplace(
-                                                  (_model.apiResult7sx
-                                                          ?.jsonBody ??
-                                                      ''),
+                                              ),
+                                              'dữ liệu',
+                                            )}',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                                'không có dữ liệu',
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                          ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              PolabyGroup.apiV1AccountsidGETCall
+                                                  .yesrsOfExperience(
+                                                    (_model.apiResult7sx
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  )
+                                                  ?.toString(),
+                                              'không có dữ liệu',
                                             ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              PolabyGroup.apiV1AccountsidGETCall
+                                                  .workplace(
+                                                (_model.apiResult7sx
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ),
+                                              'không có dữ liệu',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
                                         ],
                                       ),
                                     ].divide(const SizedBox(width: 16.0)),
@@ -787,17 +745,20 @@ class _ChiTietWidgetState extends State<ChiTietWidget>
                                                                                       crossAxisAlignment: CrossAxisAlignment.center,
                                                                                       children: [
                                                                                         Icon(
-                                                                                          Icons.favorite_rounded,
-                                                                                          color: FlutterFlowTheme.of(context).primary,
+                                                                                          Icons.favorite_border_rounded,
+                                                                                          color: FlutterFlowTheme.of(context).secondaryText,
                                                                                           size: 24.0,
                                                                                         ),
-                                                                                        Text(
-                                                                                          listViewPostsRecord.liekCount.length.toString(),
-                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                fontFamily: 'Inter',
-                                                                                                color: FlutterFlowTheme.of(context).primary,
-                                                                                                letterSpacing: 0.0,
-                                                                                              ),
+                                                                                        Padding(
+                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 0.0, 0.0),
+                                                                                          child: Text(
+                                                                                            listViewPostsRecord.liekCount.length.toString(),
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  fontFamily: 'Inter',
+                                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                ),
+                                                                                          ),
                                                                                         ),
                                                                                       ],
                                                                                     ),
@@ -1046,27 +1007,82 @@ class _ChiTietWidgetState extends State<ChiTietWidget>
                                                   ),
                                                 ),
                                               ),
-                                              Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Text(
-                                                  'Đánh giá mới nhất',
-                                                  textAlign: TextAlign.center,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        fontSize: 16.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.check_circle,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 24.0,
+                                                  ),
+                                                  InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        enableDrag: false,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return GestureDetector(
+                                                            onTap: () =>
+                                                                FocusScope.of(
+                                                                        context)
+                                                                    .unfocus(),
+                                                            child: Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child: SizedBox(
+                                                                height: MediaQuery.sizeOf(
+                                                                            context)
+                                                                        .height *
+                                                                    0.95,
+                                                                child:
+                                                                    WriteReviewWidget(
+                                                                  expertID: widget
+                                                                      .userId!,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          safeSetState(() {}));
+                                                    },
+                                                    child: Text(
+                                                      'Viết đánh giá ',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            fontSize: 16.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                               Flexible(
                                                 child: Container(
@@ -1352,36 +1368,28 @@ class _ChiTietWidgetState extends State<ChiTietWidget>
                                                                   .of(context)
                                                               .alternate,
                                                         ),
-                                                        if (PolabyGroup
+                                                        Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            PolabyGroup
                                                                 .apiV1AccountsidGETCall
-                                                                .role(
+                                                                .clinicAddress(
                                                               (_model.apiResult7sx
                                                                       ?.jsonBody ??
                                                                   ''),
-                                                            ) ==
-                                                            'Expert')
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              PolabyGroup
-                                                                  .apiV1AccountsidGETCall
-                                                                  .clinicAddress(
-                                                                (_model.apiResult7sx
-                                                                        ?.jsonBody ??
-                                                                    ''),
-                                                              ),
-                                                              'không có dữ liệu',
                                                             ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                            'không có dữ liệu',
                                                           ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
                                                       ]
                                                           .divide(const SizedBox(
                                                               height: 8.0))
@@ -1466,37 +1474,29 @@ class _ChiTietWidgetState extends State<ChiTietWidget>
                                                                   .of(context)
                                                               .alternate,
                                                         ),
-                                                        if (PolabyGroup
+                                                        Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            PolabyGroup
                                                                 .apiV1AccountsidGETCall
-                                                                .role(
+                                                                .description(
                                                               (_model.apiResult7sx
                                                                       ?.jsonBody ??
                                                                   ''),
-                                                            ) ==
-                                                            'Expert')
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              PolabyGroup
-                                                                  .apiV1AccountsidGETCall
-                                                                  .description(
-                                                                (_model.apiResult7sx
-                                                                        ?.jsonBody ??
-                                                                    ''),
-                                                              ),
-                                                              'không có dữ liệu',
                                                             ),
-                                                            maxLines: 5,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                            'không có dữ liệu',
                                                           ),
+                                                          maxLines: 5,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
                                                       ]
                                                           .divide(const SizedBox(
                                                               height: 8.0))
@@ -1581,36 +1581,28 @@ class _ChiTietWidgetState extends State<ChiTietWidget>
                                                                   .of(context)
                                                               .alternate,
                                                         ),
-                                                        if (PolabyGroup
+                                                        Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            PolabyGroup
                                                                 .apiV1AccountsidGETCall
-                                                                .role(
+                                                                .education(
                                                               (_model.apiResult7sx
                                                                       ?.jsonBody ??
                                                                   ''),
-                                                            ) ==
-                                                            'Expert')
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              PolabyGroup
-                                                                  .apiV1AccountsidGETCall
-                                                                  .education(
-                                                                (_model.apiResult7sx
-                                                                        ?.jsonBody ??
-                                                                    ''),
-                                                              ),
-                                                              'không có dữ liệu',
                                                             ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                            'không có dữ liệu',
                                                           ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
                                                       ]
                                                           .divide(const SizedBox(
                                                               height: 8.0))

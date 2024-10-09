@@ -98,40 +98,30 @@ class _CardItemWidgetState extends State<CardItemWidget> {
                       ].divide(const SizedBox(width: 8.0)),
                     ),
                   ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed('chao_mung');
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          valueOrDefault<String>(
-                            widget.txtSubtitleV1,
-                            'Xem thêm',
-                          ),
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).labelSmall.override(
-                                    fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context).info,
-                                    fontSize: 10.0,
-                                    letterSpacing: 0.0,
-                                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        valueOrDefault<String>(
+                          widget.txtSubtitleV1,
+                          'Xem thêm',
                         ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: FlutterFlowTheme.of(context).info,
-                          size: 12.0,
-                        ),
-                      ],
-                    ),
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).labelSmall.override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).info,
+                              fontSize: 10.0,
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 12.0,
+                      ),
+                    ],
                   ),
                 ],
               ),

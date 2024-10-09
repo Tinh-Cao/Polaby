@@ -962,70 +962,75 @@ class _CanNangHangNgayWidgetState extends State<CanNangHangNgayWidget> {
                   ),
                   Align(
                     alignment: const AlignmentDirectional(1.0, 1.0),
-                    child: FlutterFlowIconButton(
-                      borderRadius: 20.0,
-                      buttonSize: 40.0,
-                      fillColor: FlutterFlowTheme.of(context).primary,
-                      icon: Icon(
-                        Icons.add,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          context: context,
-                          builder: (context) {
-                            return GestureDetector(
-                              onTap: () => FocusScope.of(context).unfocus(),
-                              child: Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: SizedBox(
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.4,
-                                  child: InputWeightWidget(
-                                    weight: valueOrDefault<double>(
-                                      (FFAppState().healthWeight1.isNotEmpty
-                                                  ? valueOrDefault<String>(
-                                                      getJsonField(
-                                                        FFAppState()
-                                                            .healthWeight1
-                                                            .last,
-                                                        r'''$.date''',
-                                                      )?.toString(),
-                                                      '0',
-                                                    )
-                                                  : '0') ==
-                                              functions
-                                                  .convertToApiDateFormatString(
-                                                      functions
-                                                          .getDateNow()!
-                                                          .toString())
-                                          ? getJsonField(
-                                              FFAppState().healthWeight1.last,
-                                              r'''$.value''',
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                      child: FlutterFlowIconButton(
+                        borderRadius: 20.0,
+                        buttonSize: 40.0,
+                        fillColor: FlutterFlowTheme.of(context).primary,
+                        icon: Icon(
+                          Icons.add,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            useSafeArea: true,
+                            context: context,
+                            builder: (context) {
+                              return GestureDetector(
+                                onTap: () => FocusScope.of(context).unfocus(),
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: SizedBox(
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 0.4,
+                                    child: InputWeightWidget(
+                                      weight: valueOrDefault<double>(
+                                        (FFAppState().healthWeight1.isNotEmpty
+                                                    ? valueOrDefault<String>(
+                                                        getJsonField(
+                                                          FFAppState()
+                                                              .healthWeight1
+                                                              .last,
+                                                          r'''$.date''',
+                                                        )?.toString(),
+                                                        '0',
+                                                      )
+                                                    : '0') ==
+                                                functions
+                                                    .convertToApiDateFormatString(
+                                                        functions
+                                                            .getDateNow()!
+                                                            .toString())
+                                            ? getJsonField(
+                                                FFAppState().healthWeight1.last,
+                                                r'''$.value''',
+                                              )
+                                            : 0.0,
+                                        0.0,
+                                      ),
+                                      id: FFAppState().healthWeight1.isNotEmpty
+                                          ? valueOrDefault<String>(
+                                              getJsonField(
+                                                FFAppState().healthWeight1.last,
+                                                r'''$.id''',
+                                              )?.toString(),
+                                              '0',
                                             )
-                                          : 0.0,
-                                      0.0,
+                                          : '0',
                                     ),
-                                    id: FFAppState().healthWeight1.isNotEmpty
-                                        ? valueOrDefault<String>(
-                                            getJsonField(
-                                              FFAppState().healthWeight1.last,
-                                              r'''$.id''',
-                                            )?.toString(),
-                                            '0',
-                                          )
-                                        : '0',
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
-                      },
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
+                        },
+                      ),
                     ),
                   ),
                 ],

@@ -15,6 +15,7 @@ class DisplayItemHeaderWidget extends StatefulWidget {
     this.txtTitle2,
     this.txtTitle3,
     this.weight,
+    this.weeks,
   });
 
   final String? txtTitle1;
@@ -22,6 +23,7 @@ class DisplayItemHeaderWidget extends StatefulWidget {
   final String? txtTitle2;
   final String? txtTitle3;
   final double? weight;
+  final int? weeks;
 
   @override
   State<DisplayItemHeaderWidget> createState() =>
@@ -85,6 +87,7 @@ class _DisplayItemHeaderWidgetState extends State<DisplayItemHeaderWidget> {
                       isScrollControlled: true,
                       backgroundColor:
                           FlutterFlowTheme.of(context).secondaryBackground,
+                      useSafeArea: true,
                       context: context,
                       builder: (context) {
                         return Padding(
@@ -93,6 +96,7 @@ class _DisplayItemHeaderWidgetState extends State<DisplayItemHeaderWidget> {
                             height: MediaQuery.sizeOf(context).height * 0.4,
                             child: WeekPostPickerWidget(
                               index: FFAppState().weekPost,
+                              weeks: widget.weeks,
                             ),
                           ),
                         );

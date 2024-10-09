@@ -19,6 +19,20 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "liekCount",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "createDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "posts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "isProfessional",
           "order": "ASCENDING"
         },

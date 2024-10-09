@@ -17,9 +17,9 @@ class ThongTinDangKyCaNhanModel
 
   DateTime? dateOfBirth;
 
-  double? height;
+  double? height = 0.0;
 
-  double? weight;
+  double? weight = 0.0;
 
   ///  State fields for stateful widgets in this page.
 

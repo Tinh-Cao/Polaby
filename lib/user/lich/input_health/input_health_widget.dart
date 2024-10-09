@@ -178,77 +178,82 @@ class _InputHealthWidgetState extends State<InputHealthWidget> {
                     letterSpacing: 0.0,
                   ),
             ),
-            TextFormField(
-              controller: _model.textController1,
-              focusNode: _model.textFieldFocusNode1,
-              autofocus: true,
-              obscureText: false,
-              decoration: InputDecoration(
-                isDense: false,
-                labelText: () {
-                  if (widget.isWeight == true) {
-                    return 'Nhập cân nặng';
-                  } else if (widget.isSize == true) {
-                    return 'Nhập vòng bụng';
-                  } else if (widget.isBloodSys == true) {
-                    return 'Huyết áp tâm thu';
-                  } else {
-                    return 'Nhập huyết áp';
-                  }
-                }(),
-                labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                      fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      fontSize: 14.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.normal,
+            Form(
+              key: _model.formKey,
+              autovalidateMode: AutovalidateMode.always,
+              child: TextFormField(
+                controller: _model.textController1,
+                focusNode: _model.textFieldFocusNode1,
+                autofocus: true,
+                obscureText: false,
+                decoration: InputDecoration(
+                  isDense: false,
+                  labelText: () {
+                    if (widget.isWeight == true) {
+                      return 'Nhập cân nặng';
+                    } else if (widget.isSize == true) {
+                      return 'Nhập vòng bụng';
+                    } else if (widget.isBloodSys == true) {
+                      return 'Huyết áp tâm thu';
+                    } else {
+                      return 'Nhập huyết áp';
+                    }
+                  }(),
+                  labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
+                        fontFamily: 'Inter',
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        fontSize: 14.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                  hintStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Inter',
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        fontSize: 14.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).alternate,
+                      width: 1.0,
                     ),
-                hintStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      fontSize: 14.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.normal,
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primary,
+                      width: 1.0,
                     ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).alternate,
-                    width: 1.0,
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).primary,
-                    width: 1.0,
+                  errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).error,
-                    width: 1.0,
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
-                  borderRadius: BorderRadius.circular(16.0),
+                  filled: true,
+                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).error,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                filled: true,
-                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Inter',
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      letterSpacing: 0.0,
+                    ),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                validator: _model.textController1Validator.asValidator(context),
+                inputFormatters: [_model.textFieldMask1],
               ),
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Inter',
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    letterSpacing: 0.0,
-                  ),
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              validator: _model.textController1Validator.asValidator(context),
             ),
             if (widget.isBloodDia == true)
               TextFormField(
@@ -323,6 +328,10 @@ class _InputHealthWidgetState extends State<InputHealthWidget> {
                     onPressed: () async {
                       if (widget.isWeight == true) {
                         if (widget.value == 0.0) {
+                          if (_model.formKey.currentState == null ||
+                              !_model.formKey.currentState!.validate()) {
+                            return;
+                          }
                           _model.apiResultb6y =
                               await PolabyGroup.apiV1HealthsPOSTCall.call(
                             userId: currentUserUid,
@@ -333,6 +342,10 @@ class _InputHealthWidgetState extends State<InputHealthWidget> {
                                 widget.date!.toString()),
                           );
                         } else {
+                          if (_model.formKey.currentState == null ||
+                              !_model.formKey.currentState!.validate()) {
+                            return;
+                          }
                           _model.apiResultbt6y =
                               await PolabyGroup.apiV1HealthsidPUTCall.call(
                             id: widget.id,
@@ -347,12 +360,16 @@ class _InputHealthWidgetState extends State<InputHealthWidget> {
                             (_model.apiResultbt6y?.succeeded ?? true)) {
                           FFAppState().updateWeight =
                               double.parse(_model.textController1.text);
-                          safeSetState(() {});
+                          FFAppState().update(() {});
                           Navigator.pop(context);
                         }
                       } else {
                         if (widget.isSize == true) {
                           if (widget.value == 0.0) {
+                            if (_model.formKey.currentState == null ||
+                                !_model.formKey.currentState!.validate()) {
+                              return;
+                            }
                             _model.apiResultb7y =
                                 await PolabyGroup.apiV1HealthsPOSTCall.call(
                               userId: currentUserUid,
@@ -364,6 +381,10 @@ class _InputHealthWidgetState extends State<InputHealthWidget> {
                                   widget.date!.toString()),
                             );
                           } else {
+                            if (_model.formKey.currentState == null ||
+                                !_model.formKey.currentState!.validate()) {
+                              return;
+                            }
                             _model.apiResultbty =
                                 await PolabyGroup.apiV1HealthsidPUTCall.call(
                               id: widget.id,
@@ -379,12 +400,16 @@ class _InputHealthWidgetState extends State<InputHealthWidget> {
                               (_model.apiResultbty?.succeeded ?? true)) {
                             FFAppState().updateSize =
                                 double.parse(_model.textController1.text);
-                            safeSetState(() {});
+                            FFAppState().update(() {});
                             Navigator.pop(context);
                           }
                         } else {
                           if ((widget.bloodDia == 0.0) &&
                               (widget.bloodSys == 0.0)) {
+                            if (_model.formKey.currentState == null ||
+                                !_model.formKey.currentState!.validate()) {
+                              return;
+                            }
                             await Future.wait([
                               Future(() async {
                                 _model.apiResultb8y =
@@ -418,10 +443,14 @@ class _InputHealthWidgetState extends State<InputHealthWidget> {
                                   double.parse(_model.textController1.text);
                               FFAppState().updateBloodDia =
                                   double.parse(_model.textController2.text);
-                              safeSetState(() {});
+                              FFAppState().update(() {});
                               Navigator.pop(context);
                             }
                           } else {
+                            if (_model.formKey.currentState == null ||
+                                !_model.formKey.currentState!.validate()) {
+                              return;
+                            }
                             await Future.wait([
                               Future(() async {
                                 _model.apiResultb10y = await PolabyGroup

@@ -148,67 +148,72 @@ class _UpdateSizeWidgetState extends State<UpdateSizeWidget> {
                     letterSpacing: 0.0,
                   ),
             ),
-            TextFormField(
-              controller: _model.textController,
-              focusNode: _model.textFieldFocusNode,
-              autofocus: false,
-              obscureText: false,
-              decoration: InputDecoration(
-                isDense: false,
-                labelText: 'Nhập số đo vòng bụng',
-                labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
-                      fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      fontSize: 14.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.normal,
+            Form(
+              key: _model.formKey,
+              autovalidateMode: AutovalidateMode.always,
+              child: TextFormField(
+                controller: _model.textController,
+                focusNode: _model.textFieldFocusNode,
+                autofocus: false,
+                obscureText: false,
+                decoration: InputDecoration(
+                  isDense: false,
+                  labelText: 'Nhập số đo vòng bụng',
+                  labelStyle: FlutterFlowTheme.of(context).bodySmall.override(
+                        fontFamily: 'Inter',
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        fontSize: 14.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                  hintStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Inter',
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        fontSize: 14.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).alternate,
+                      width: 1.0,
                     ),
-                hintStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      fontSize: 14.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.normal,
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primary,
+                      width: 1.0,
                     ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).alternate,
-                    width: 1.0,
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).primary,
-                    width: 1.0,
+                  errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).error,
-                    width: 1.0,
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
-                  borderRadius: BorderRadius.circular(16.0),
+                  filled: true,
+                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).error,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                filled: true,
-                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Inter',
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      letterSpacing: 0.0,
+                    ),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                validator: _model.textControllerValidator.asValidator(context),
+                inputFormatters: [_model.textFieldMask],
               ),
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Inter',
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    letterSpacing: 0.0,
-                  ),
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              validator: _model.textControllerValidator.asValidator(context),
             ),
             Expanded(
               child: Column(
@@ -218,6 +223,10 @@ class _UpdateSizeWidgetState extends State<UpdateSizeWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
+                      if (_model.formKey.currentState == null ||
+                          !_model.formKey.currentState!.validate()) {
+                        return;
+                      }
                       _model.apiResultb7y =
                           await PolabyGroup.apiV1HealthsidPUTCall.call(
                         id: widget.id,

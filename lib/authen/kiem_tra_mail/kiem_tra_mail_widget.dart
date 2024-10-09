@@ -230,79 +230,82 @@ class _KiemTraMailWidgetState extends State<KiemTraMailWidget> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      FFButtonWidget(
-                        onPressed: () async {
-                          _model.verifyEmailResult = await PolabyGroup
-                              .apiV1AuthenticationEmailVerifyGETCall
-                              .call(
-                            email: widget.email,
-                            verificationCode: _model.pinCodeController!.text,
-                          );
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            _model.verifyEmailResult = await PolabyGroup
+                                .apiV1AuthenticationEmailVerifyGETCall
+                                .call(
+                              email: widget.email,
+                              verificationCode: _model.pinCodeController!.text,
+                            );
 
-                          if ((_model.verifyEmailResult?.succeeded ?? true)) {
-                            FFAppState().loginInfo = LoginInfoStruct(
-                              username: widget.email,
-                              password: widget.password,
-                            );
-                            safeSetState(() {});
-                            if (Navigator.of(context).canPop()) {
-                              context.pop();
-                            }
-                            context.pushNamed(
-                              'thong_tin_dang_ky_ca_nhan',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: const TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType:
-                                      PageTransitionType.rightToLeft,
-                                  duration: Duration(milliseconds: 200),
-                                ),
-                              },
-                            );
-                          } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: const Text('Lỗi Pin xác nhận'),
-                                  content: const Text(
-                                      'Mã code không chính xác vui lòng kiểm tra lại'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: const Text('Đồng ý'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
+                            if ((_model.verifyEmailResult?.succeeded ?? true)) {
+                              FFAppState().loginInfo = LoginInfoStruct(
+                                username: widget.email,
+                                password: widget.password,
+                              );
+                              safeSetState(() {});
 
-                          safeSetState(() {});
-                        },
-                        text: 'Xác thực',
-                        options: FFButtonOptions(
-                          height: 50.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Inter',
-                                    color: Colors.white,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
+                              context.goNamed(
+                                'thong_tin_dang_ky_ca_nhan',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType:
+                                        PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 200),
                                   ),
-                          elevation: 0.0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                                },
+                              );
+                            } else {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: const Text('Lỗi Pin xác nhận'),
+                                    content: const Text(
+                                        'Mã code không chính xác vui lòng kiểm tra lại'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: const Text('Đồng ý'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+
+                            safeSetState(() {});
+                          },
+                          text: 'Xác thực',
+                          options: FFButtonOptions(
+                            height: 50.0,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                16.0, 0.0, 16.0, 0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: Colors.white,
+                                  fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                            elevation: 0.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                          borderRadius: BorderRadius.circular(12.0),
                         ),
                       ),
                     ],

@@ -546,8 +546,8 @@ class _BuocCuoiCungTenBeWidgetState extends State<BuocCuoiCungTenBeWidget> {
                                           }),
                                         ]);
 
-                                        context.pushNamedAuth(
-                                            'trang_chu', context.mounted);
+                                        context.goNamedAuth(
+                                            'Intermediate', context.mounted);
                                       }
                                     }
                                   }),

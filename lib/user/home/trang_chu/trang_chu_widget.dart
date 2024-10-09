@@ -10,7 +10,8 @@ import '/suc_khoe/health_size/health_size_widget.dart';
 import '/suc_khoe/health_size_empty/health_size_empty_widget.dart';
 import '/suc_khoe/health_weight/health_weight_widget.dart';
 import '/suc_khoe/health_weight_empty/health_weight_empty_widget.dart';
-import '/user/tai_khoan/nang_cap_tai_khoan/nang_cap_tai_khoan_widget.dart';
+import '/user/lich/hang_ngay/hang_ngay_widget.dart';
+import '/user/nang_cap_tai_khoan/nang_cap_tai_khoan_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -58,61 +59,68 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
             FFAppState().update(() {});
           }),
           Future(() async {
-            await Future.wait([
-              Future(() async {
-                _model.healthWeight =
-                    await PolabyGroup.apiV1HealthsGETCall.call(
-                  order: 'date',
-                  date: '0001-01-01',
-                  userId: currentUserUid,
-                  orderByDescending: false,
-                  filterWeight: true,
-                  filterHeight: false,
-                  filterSize: false,
-                  filterBloodPressureSys: false,
-                  filterBloodPressureDia: false,
-                  filterHeartbeat: false,
-                  filterContractility: false,
-                  pageIndex: 1,
-                  pageSize: 30,
-                  isDeleted: false,
-                );
+            if (UserInfoStruct.maybeFromMap(
+                        (_model.getUserInfo?.jsonBody ?? ''))
+                    ?.data
+                    .role !=
+                'Expert') {
+              await Future.wait([
+                Future(() async {
+                  _model.healthWeight =
+                      await PolabyGroup.apiV1HealthsGETCall.call(
+                    order: 'date',
+                    date: '0001-01-01',
+                    userId: currentUserUid,
+                    orderByDescending: false,
+                    filterWeight: true,
+                    filterHeight: false,
+                    filterSize: false,
+                    filterBloodPressureSys: false,
+                    filterBloodPressureDia: false,
+                    filterHeartbeat: false,
+                    filterContractility: false,
+                    pageIndex: 1,
+                    pageSize: 30,
+                    isDeleted: false,
+                  );
 
-                FFAppState().healthWeight1 = PolabyGroup.apiV1HealthsGETCall
-                    .healths(
-                      (_model.healthWeight?.jsonBody ?? ''),
-                    )!
-                    .toList()
-                    .cast<dynamic>();
-                FFAppState().update(() {});
-              }),
-              Future(() async {
-                _model.healthSize = await PolabyGroup.apiV1HealthsGETCall.call(
-                  order: 'date',
-                  date: '0001-01-01',
-                  userId: currentUserUid,
-                  orderByDescending: false,
-                  filterWeight: false,
-                  filterHeight: false,
-                  filterSize: true,
-                  filterBloodPressureSys: false,
-                  filterBloodPressureDia: false,
-                  filterHeartbeat: false,
-                  filterContractility: false,
-                  pageIndex: 1,
-                  pageSize: 30,
-                  isDeleted: false,
-                );
+                  FFAppState().healthWeight1 = PolabyGroup.apiV1HealthsGETCall
+                      .healths(
+                        (_model.healthWeight?.jsonBody ?? ''),
+                      )!
+                      .toList()
+                      .cast<dynamic>();
+                  FFAppState().update(() {});
+                }),
+                Future(() async {
+                  _model.healthSize =
+                      await PolabyGroup.apiV1HealthsGETCall.call(
+                    order: 'date',
+                    date: '0001-01-01',
+                    userId: currentUserUid,
+                    orderByDescending: false,
+                    filterWeight: false,
+                    filterHeight: false,
+                    filterSize: true,
+                    filterBloodPressureSys: false,
+                    filterBloodPressureDia: false,
+                    filterHeartbeat: false,
+                    filterContractility: false,
+                    pageIndex: 1,
+                    pageSize: 30,
+                    isDeleted: false,
+                  );
 
-                FFAppState().healthSize = PolabyGroup.apiV1HealthsGETCall
-                    .healths(
-                      (_model.healthSize?.jsonBody ?? ''),
-                    )!
-                    .toList()
-                    .cast<dynamic>();
-                FFAppState().update(() {});
-              }),
-            ]);
+                  FFAppState().healthSize = PolabyGroup.apiV1HealthsGETCall
+                      .healths(
+                        (_model.healthSize?.jsonBody ?? ''),
+                      )!
+                      .toList()
+                      .cast<dynamic>();
+                  FFAppState().update(() {});
+                }),
+              ]);
+            }
           }),
           Future(() async {
             _model.checkUserExist = await queryUsersRecordOnce(
@@ -338,7 +346,81 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                       focusColor: Colors.transparent,
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
-                                      onTap: () async {},
+                                      onTap: () async {
+                                        _model.daily =
+                                            await queryDailyRecordOnce(
+                                          queryBuilder: (dailyRecord) =>
+                                              dailyRecord
+                                                  .where(
+                                                    'userId',
+                                                    isEqualTo: currentUserUid,
+                                                  )
+                                                  .where(
+                                                    'date',
+                                                    isEqualTo: functions
+                                                        .convertToApiDateFormatDate(
+                                                            functions.dateTimeParse(
+                                                                functions
+                                                                    .convertToApiDateFormatDate(
+                                                                        getCurrentTimestamp))!),
+                                                  ),
+                                          singleRecord: true,
+                                        ).then((s) => s.firstOrNull);
+                                        if (_model.daily?.reference == null) {
+                                          var dailyRecordReference =
+                                              DailyRecord.collection.doc();
+                                          await dailyRecordReference
+                                              .set(createDailyRecordData(
+                                            date: functions
+                                                .convertToApiDateFormatDate(
+                                                    getCurrentTimestamp),
+                                            userId: currentUserUid,
+                                          ));
+                                          _model.dailyCollection =
+                                              DailyRecord.getDocumentFromData(
+                                                  createDailyRecordData(
+                                                    date: functions
+                                                        .convertToApiDateFormatDate(
+                                                            getCurrentTimestamp),
+                                                    userId: currentUserUid,
+                                                  ),
+                                                  dailyRecordReference);
+                                        }
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          barrierColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          context: context,
+                                          builder: (context) {
+                                            return GestureDetector(
+                                              onTap: () =>
+                                                  FocusScope.of(context)
+                                                      .unfocus(),
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: SizedBox(
+                                                  height:
+                                                      MediaQuery.sizeOf(context)
+                                                              .height *
+                                                          0.95,
+                                                  child: HangNgayWidget(
+                                                    datePicked: functions
+                                                        .dateTimeParse(functions
+                                                            .convertToApiDateFormatDate(
+                                                                getCurrentTimestamp))!,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ).then((value) => safeSetState(() {}));
+
+                                        safeSetState(() {});
+                                      },
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -414,14 +496,15 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                                               ),
                                             ].divide(const SizedBox(width: 8.0)),
                                           ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: SvgPicture.asset(
-                                              'assets/images/Frame_11.svg',
-                                              width: 64.0,
-                                              height: 112.0,
-                                              fit: BoxFit.cover,
+                                          Flexible(
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: SvgPicture.asset(
+                                                'assets/images/Frame_11.svg',
+                                                height: 112.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -1205,7 +1288,7 @@ class _TrangChuWidgetState extends State<TrangChuWidget> {
                       ),
                     ]
                         .divide(const SizedBox(height: 16.0))
-                        .addToEnd(const SizedBox(height: 128.0)),
+                        .addToEnd(const SizedBox(height: 64.0)),
                   ),
                 ),
                 Container(

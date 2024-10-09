@@ -154,6 +154,7 @@ class _BaiVietTuanWidgetState extends State<BaiVietTuanWidget> {
                                         columnApiV1WeeklyPostsWeeksweekGETResponse
                                             .jsonBody,
                                       ),
+                                      weeks: widget.week,
                                     ),
                                   ),
                                 ),

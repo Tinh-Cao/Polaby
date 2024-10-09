@@ -584,6 +584,19 @@ class _ChiTietMonAnWidgetState extends State<ChiTietMonAnWidget> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              child: Text(
+                'Tài liệu tham khảo: Bộ Y tế Việt Nam (2015).Thành phần Thực phẩm Việt Nam.NXB Y học.Hà Nội.',
+                textAlign: TextAlign.center,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Inter',
+                      color: FlutterFlowTheme.of(context).accent4,
+                      fontSize: 10.0,
+                      letterSpacing: 0.0,
+                    ),
+              ),
+            ),
           ].divide(const SizedBox(height: 16.0)),
         ),
       ),

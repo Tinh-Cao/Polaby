@@ -12,11 +12,13 @@ class WeekPostPickerWidget extends StatefulWidget {
     this.weekSelected,
     required this.index,
     this.type,
+    this.weeks,
   });
 
   final String? weekSelected;
   final int? index;
   final int? type;
+  final int? weeks;
 
   @override
   State<WeekPostPickerWidget> createState() => _WeekPostPickerWidgetState();

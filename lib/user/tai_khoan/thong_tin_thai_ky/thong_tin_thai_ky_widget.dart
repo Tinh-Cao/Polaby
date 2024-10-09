@@ -331,37 +331,7 @@ class _ThongTinThaiKyWidgetState extends State<ThongTinThaiKyWidget> {
                             focusColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
-                            onTap: () async {
-                              context.pushNamed(
-                                'chinh_sua_thong_tin_thai_ky',
-                                queryParameters: {
-                                  'txtTitle': serializeParam(
-                                    'Năm sinh',
-                                    ParamType.String,
-                                  ),
-                                  'isYearOfBirth': serializeParam(
-                                    true,
-                                    ParamType.bool,
-                                  ),
-                                  'yearOfBirth': serializeParam(
-                                    valueOrDefault<String>(
-                                      functions.changeFormatDatime(
-                                          FFAppState().UserInfo.data.dueDate),
-                                      '26',
-                                    ),
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: const TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType:
-                                        PageTransitionType.rightToLeft,
-                                    duration: Duration(milliseconds: 200),
-                                  ),
-                                },
-                              );
-                            },
+                            onTap: () async {},
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

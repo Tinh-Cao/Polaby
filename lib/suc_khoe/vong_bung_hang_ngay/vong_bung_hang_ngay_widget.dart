@@ -318,7 +318,7 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  '${FFAppState().UserInfo.data.initialWeight.toString()} Kg',
+                                                  '0 cm',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .labelLarge
@@ -357,7 +357,7 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  '0 Kg',
+                                                  '0 cm',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .labelLarge
@@ -396,7 +396,7 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  '0 Kg',
+                                                  '0 cm',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .labelLarge
@@ -556,7 +556,7 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                                             BorderRadius.circular(16.0),
                                       ),
                                       child: Container(
-                                        height: 200.0,
+                                        height: 250.0,
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
                                               .primaryBackground,
@@ -564,9 +564,11 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                                               BorderRadius.circular(16.0),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 32.0, 16.0, 0.0),
                                           child: SizedBox(
-                                            height: 184.0,
+                                            height: 218.0,
                                             child: FlutterFlowLineChart(
                                               data: [
                                                 FFLineChartData(
@@ -594,9 +596,7 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                                                 borderWidth: 1.0,
                                               ),
                                               axisBounds: const AxisBounds(
-                                                minX: 1.0,
-                                                minY: 40.0,
-                                                maxX: 30.0,
+                                                minY: 0.0,
                                                 maxY: 100.0,
                                               ),
                                               xAxisLabelInfo: AxisLabelInfo(
@@ -604,7 +604,7 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                                                 labelTextStyle: TextStyle(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .accent4,
+                                                      .primaryBackground,
                                                   fontWeight: FontWeight.normal,
                                                   fontSize: 12.0,
                                                 ),
@@ -612,7 +612,7 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                                                 reservedSize: 32.0,
                                               ),
                                               yAxisLabelInfo: AxisLabelInfo(
-                                                title: 'Kg',
+                                                title: 'cm',
                                                 titleTextStyle: TextStyle(
                                                   color: FlutterFlowTheme.of(
                                                           context)
@@ -977,67 +977,74 @@ class _VongBungHangNgayWidgetState extends State<VongBungHangNgayWidget> {
                   ),
                   Align(
                     alignment: const AlignmentDirectional(1.0, 1.0),
-                    child: FlutterFlowIconButton(
-                      borderRadius: 20.0,
-                      buttonSize: 40.0,
-                      fillColor: FlutterFlowTheme.of(context).primary,
-                      icon: Icon(
-                        Icons.add,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          context: context,
-                          builder: (context) {
-                            return GestureDetector(
-                              onTap: () => FocusScope.of(context).unfocus(),
-                              child: Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: SizedBox(
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.4,
-                                  child: InputSizeWidget(
-                                    size: valueOrDefault<String>(
-                                              FFAppState().healthSize.isNotEmpty
-                                                  ? getJsonField(
-                                                      FFAppState()
-                                                          .healthSize
-                                                          .last,
-                                                      r'''$.date''',
-                                                    ).toString()
-                                                  : '0',
-                                              '0',
-                                            ) ==
-                                            functions
-                                                .convertToApiDateFormatString(
-                                                    functions
-                                                        .getDateNow()!
-                                                        .toString())
-                                        ? getJsonField(
-                                            FFAppState().healthSize.last,
-                                            r'''$.value''',
-                                          )
-                                        : 0.0,
-                                    id: FFAppState().healthSize.isNotEmpty
-                                        ? valueOrDefault<String>(
-                                            getJsonField(
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                      child: FlutterFlowIconButton(
+                        borderRadius: 20.0,
+                        buttonSize: 40.0,
+                        fillColor: FlutterFlowTheme.of(context).primary,
+                        icon: Icon(
+                          Icons.add,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            useSafeArea: true,
+                            context: context,
+                            builder: (context) {
+                              return GestureDetector(
+                                onTap: () => FocusScope.of(context).unfocus(),
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: SizedBox(
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 0.4,
+                                    child: InputSizeWidget(
+                                      size: valueOrDefault<String>(
+                                                FFAppState()
+                                                        .healthSize
+                                                        .isNotEmpty
+                                                    ? getJsonField(
+                                                        FFAppState()
+                                                            .healthSize
+                                                            .last,
+                                                        r'''$.date''',
+                                                      ).toString()
+                                                    : '0',
+                                                '0',
+                                              ) ==
+                                              functions
+                                                  .convertToApiDateFormatString(
+                                                      functions
+                                                          .getDateNow()!
+                                                          .toString())
+                                          ? getJsonField(
                                               FFAppState().healthSize.last,
-                                              r'''$.id''',
-                                            )?.toString(),
-                                            '0',
-                                          )
-                                        : '0',
+                                              r'''$.value''',
+                                            )
+                                          : 0.0,
+                                      id: FFAppState().healthSize.isNotEmpty
+                                          ? valueOrDefault<String>(
+                                              getJsonField(
+                                                FFAppState().healthSize.last,
+                                                r'''$.id''',
+                                              )?.toString(),
+                                              '0',
+                                            )
+                                          : '0',
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
-                      },
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
+                        },
+                      ),
                     ),
                   ),
                 ],

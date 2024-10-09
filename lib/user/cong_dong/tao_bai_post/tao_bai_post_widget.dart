@@ -184,41 +184,53 @@ class _TaoBaiPostWidgetState extends State<TaoBaiPostWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Stack(
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      if (_model.isOpen == true)
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://picsum.photos/seed/776/600',
-                            height: 175.0,
-                            fit: BoxFit.fill,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Image.asset(
-                              'assets/images/error_image.svg',
-                              height: 175.0,
-                              fit: BoxFit.fill,
-                            ),
-                            cacheWidth: 300,
-                            cacheHeight: 175,
+                      Expanded(
+                        child: SizedBox(
+                          height: 200.0,
+                          child: Stack(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            children: [
+                              if (_model.isOpen == true)
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(
+                                    'https://picsum.photos/seed/776/600',
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.fill,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            Image.asset(
+                                      'assets/images/error_image.svg',
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.fill,
+                                    ),
+                                    cacheHeight: 200,
+                                  ),
+                                ),
+                              if (_model.isOpen == false)
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/563d0201e4359c2e890569e254ea14790eb370b71d08b6de5052511cc0352313.jpg',
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                    alignment: const Alignment(0.0, 0.0),
+                                    cacheHeight: 200,
+                                  ),
+                                ),
+                            ],
                           ),
                         ),
-                      if (_model.isOpen == false)
-                        Align(
-                          alignment: const AlignmentDirectional(0.2, 0.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/563d0201e4359c2e890569e254ea14790eb370b71d08b6de5052511cc0352313.jpg',
-                              width: 154.0,
-                              height: 163.0,
-                              fit: BoxFit.cover,
-                              alignment: const Alignment(0.0, 0.0),
-                            ),
-                          ),
-                        ),
+                      ),
                     ],
                   ),
                   Padding(

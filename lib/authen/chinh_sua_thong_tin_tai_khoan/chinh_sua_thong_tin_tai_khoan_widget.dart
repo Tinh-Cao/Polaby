@@ -146,621 +146,635 @@ class _ChinhSuaThongTinTaiKhoanWidgetState
         ),
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (widget.isMail == true)
-                  TextFormField(
-                    controller: _model.textController1,
-                    focusNode: _model.textFieldFocusNode1,
-                    onChanged: (_) => EasyDebounce.debounce(
-                      '_model.textController1',
-                      const Duration(milliseconds: 2000),
-                      () => safeSetState(() {}),
+          child: Form(
+            key: _model.formKey,
+            autovalidateMode: AutovalidateMode.always,
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (widget.isMail == true)
+                    TextFormField(
+                      controller: _model.textController1,
+                      focusNode: _model.textFieldFocusNode1,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.textController1',
+                        const Duration(milliseconds: 2000),
+                        () => safeSetState(() {}),
+                      ),
+                      onFieldSubmitted: (_) async {
+                        if (widget.isMail == true) {
+                          FFAppState().updateUserInfoStruct(
+                            (e) => e
+                              ..updateData(
+                                (e) => e..email = widget.value,
+                              ),
+                          );
+                          safeSetState(() {});
+                        }
+                      },
+                      autofocus: true,
+                      textInputAction: TextInputAction.done,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  letterSpacing: 0.0,
+                                ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        suffixIcon: _model.textController1!.text.isNotEmpty
+                            ? InkWell(
+                                onTap: () async {
+                                  _model.textController1?.clear();
+                                  safeSetState(() {});
+                                },
+                                child: Icon(
+                                  Icons.clear,
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  size: 16.0,
+                                ),
+                              )
+                            : null,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                      validator:
+                          _model.textController1Validator.asValidator(context),
                     ),
-                    onFieldSubmitted: (_) async {
-                      if (widget.isMail == true) {
+                  if ((widget.isFirstName == true) &&
+                      (widget.isLastName == true))
+                    TextFormField(
+                      controller: _model.textController2,
+                      focusNode: _model.textFieldFocusNode2,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.textController2',
+                        const Duration(milliseconds: 2000),
+                        () => safeSetState(() {}),
+                      ),
+                      onFieldSubmitted: (_) async {
                         FFAppState().updateUserInfoStruct(
                           (e) => e
                             ..updateData(
-                              (e) => e..email = widget.value,
+                              (e) => e..lastName = _model.textController2.text,
                             ),
                         );
                         safeSetState(() {});
-                      }
-                    },
-                    autofocus: true,
-                    textInputAction: TextInputAction.done,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      labelStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).accent4,
-                                letterSpacing: 0.0,
-                              ),
-                      hintStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Color(0x00000000),
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      suffixIcon: _model.textController1!.text.isNotEmpty
-                          ? InkWell(
-                              onTap: () async {
-                                _model.textController1?.clear();
-                                safeSetState(() {});
-                              },
-                              child: Icon(
-                                Icons.clear,
-                                color: FlutterFlowTheme.of(context).accent4,
-                                size: 16.0,
-                              ),
-                            )
-                          : null,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                    validator:
-                        _model.textController1Validator.asValidator(context),
-                  ),
-                if ((widget.isFirstName == true) &&
-                    (widget.isLastName == true))
-                  TextFormField(
-                    controller: _model.textController2,
-                    focusNode: _model.textFieldFocusNode2,
-                    onChanged: (_) => EasyDebounce.debounce(
-                      '_model.textController2',
-                      const Duration(milliseconds: 2000),
-                      () => safeSetState(() {}),
-                    ),
-                    onFieldSubmitted: (_) async {
-                      FFAppState().updateUserInfoStruct(
-                        (e) => e
-                          ..updateData(
-                            (e) => e..lastName = _model.textController2.text,
-                          ),
-                      );
-                      safeSetState(() {});
-                    },
-                    autofocus: true,
-                    textInputAction: TextInputAction.done,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      labelStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).accent4,
-                                letterSpacing: 0.0,
-                              ),
-                      hintStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Color(0x00000000),
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      suffixIcon: _model.textController2!.text.isNotEmpty
-                          ? InkWell(
-                              onTap: () async {
-                                _model.textController2?.clear();
-                                safeSetState(() {});
-                              },
-                              child: Icon(
-                                Icons.clear,
-                                color: FlutterFlowTheme.of(context).accent4,
-                                size: 16.0,
-                              ),
-                            )
-                          : null,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                    validator:
-                        _model.textController2Validator.asValidator(context),
-                  ),
-                if ((widget.isFirstName == true) &&
-                    (widget.isLastName == true))
-                  TextFormField(
-                    controller: _model.textController3,
-                    focusNode: _model.textFieldFocusNode3,
-                    onChanged: (_) => EasyDebounce.debounce(
-                      '_model.textController3',
-                      const Duration(milliseconds: 2000),
-                      () => safeSetState(() {}),
-                    ),
-                    onFieldSubmitted: (_) async {
-                      FFAppState().updateUserInfoStruct(
-                        (e) => e
-                          ..updateData(
-                            (e) => e..firstName = _model.textController3.text,
-                          ),
-                      );
-                      safeSetState(() {});
-                    },
-                    autofocus: true,
-                    textInputAction: TextInputAction.done,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      labelStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).accent4,
-                                letterSpacing: 0.0,
-                              ),
-                      hintStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Color(0x00000000),
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      suffixIcon: _model.textController3!.text.isNotEmpty
-                          ? InkWell(
-                              onTap: () async {
-                                _model.textController3?.clear();
-                                safeSetState(() {});
-                              },
-                              child: Icon(
-                                Icons.clear,
-                                color: FlutterFlowTheme.of(context).accent4,
-                                size: 16.0,
-                              ),
-                            )
-                          : null,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                    validator:
-                        _model.textController3Validator.asValidator(context),
-                  ),
-                if (widget.isHeight == true)
-                  TextFormField(
-                    controller: _model.textController4,
-                    focusNode: _model.textFieldFocusNode4,
-                    onChanged: (_) => EasyDebounce.debounce(
-                      '_model.textController4',
-                      const Duration(milliseconds: 2000),
-                      () => safeSetState(() {}),
-                    ),
-                    onFieldSubmitted: (_) async {
-                      FFAppState().updateUserInfoStruct(
-                        (e) => e
-                          ..updateData(
-                            (e) => e
-                              ..height =
-                                  double.tryParse(_model.textController4.text),
-                          ),
-                      );
-                      safeSetState(() {});
-                    },
-                    autofocus: true,
-                    textInputAction: TextInputAction.done,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      labelStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).accent4,
-                                letterSpacing: 0.0,
-                              ),
-                      hintStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Color(0x00000000),
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      suffixIcon: _model.textController4!.text.isNotEmpty
-                          ? InkWell(
-                              onTap: () async {
-                                _model.textController4?.clear();
-                                safeSetState(() {});
-                              },
-                              child: Icon(
-                                Icons.clear,
-                                color: FlutterFlowTheme.of(context).accent4,
-                                size: 16.0,
-                              ),
-                            )
-                          : null,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    validator:
-                        _model.textController4Validator.asValidator(context),
-                  ),
-                if (widget.isWeight == true)
-                  TextFormField(
-                    controller: _model.textController5,
-                    focusNode: _model.textFieldFocusNode5,
-                    onChanged: (_) => EasyDebounce.debounce(
-                      '_model.textController5',
-                      const Duration(milliseconds: 2000),
-                      () => safeSetState(() {}),
-                    ),
-                    onFieldSubmitted: (_) async {
-                      FFAppState().updateUserInfoStruct(
-                        (e) => e
-                          ..updateData(
-                            (e) => e
-                              ..initialWeight =
-                                  double.tryParse(_model.textController5.text),
-                          ),
-                      );
-                      safeSetState(() {});
-                    },
-                    autofocus: true,
-                    textInputAction: TextInputAction.done,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      labelStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).accent4,
-                                letterSpacing: 0.0,
-                              ),
-                      hintStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Inter',
-                                letterSpacing: 0.0,
-                              ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Color(0x00000000),
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      suffixIcon: _model.textController5!.text.isNotEmpty
-                          ? InkWell(
-                              onTap: () async {
-                                _model.textController5?.clear();
-                                safeSetState(() {});
-                              },
-                              child: Icon(
-                                Icons.clear,
-                                color: FlutterFlowTheme.of(context).accent4,
-                                size: 16.0,
-                              ),
-                            )
-                          : null,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    validator:
-                        _model.textController5Validator.asValidator(context),
-                  ),
-                if (widget.isActivity == true)
-                  FlutterFlowDropDown<String>(
-                    controller: _model.dropDownValueController1 ??=
-                        FormFieldController<String>(
-                      _model.dropDownValue1 ??= widget.value,
-                    ),
-                    options: const ['Nhẹ nhàng', 'Trung bình', 'Nặng'],
-                    onChanged: (val) async {
-                      safeSetState(() => _model.dropDownValue1 = val);
-                      FFAppState().updateUserInfoStruct(
-                        (e) => e
-                          ..updateData(
-                            (e) => e
-                              ..frequencyOfActivity = () {
-                                if (_model.dropDownValue1 == 'Nhẹ nhàng') {
-                                  return 0;
-                                } else if (_model.dropDownValue1 ==
-                                    'Trung bình') {
-                                  return 1;
-                                } else {
-                                  return 2;
-                                }
-                              }(),
-                          ),
-                      );
-                      safeSetState(() {});
-                    },
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: FlutterFlowTheme.of(context).accent4,
-                      size: 24.0,
-                    ),
-                    fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                    elevation: 2.0,
-                    borderColor: Colors.transparent,
-                    borderWidth: 2.0,
-                    borderRadius: 8.0,
-                    margin: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 8.0, 0.0),
-                    hidesUnderline: true,
-                    isOverButton: true,
-                    isSearchable: false,
-                    isMultiSelect: false,
-                  ),
-                if (widget.isDiet == true)
-                  FlutterFlowDropDown<String>(
-                    controller: _model.dropDownValueController2 ??=
-                        FormFieldController<String>(
-                      _model.dropDownValue2 ??= widget.value,
-                    ),
-                    options: const [
-                      'Ăn chay',
-                      'Ăn 30-90g thịt,../ngày',
-                      'Ăn > 90g thịt,../ngày'
-                    ],
-                    onChanged: (val) async {
-                      safeSetState(() => _model.dropDownValue2 = val);
-                      FFAppState().updateUserInfoStruct(
-                        (e) => e
-                          ..updateData(
-                            (e) => e
-                              ..diet = () {
-                                if (_model.dropDownValue2 == 'Ăn chay') {
-                                  return 0;
-                                } else if (_model.dropDownValue2 ==
-                                    'Ăn 30-90g thịt,../ngày') {
-                                  return 1;
-                                } else {
-                                  return 2;
-                                }
-                              }(),
-                          ),
-                      );
-                      safeSetState(() {});
-                    },
-                    textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: FlutterFlowTheme.of(context).accent4,
-                      size: 24.0,
-                    ),
-                    fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                    elevation: 2.0,
-                    borderColor: Colors.transparent,
-                    borderWidth: 2.0,
-                    borderRadius: 8.0,
-                    margin: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 8.0, 0.0),
-                    hidesUnderline: true,
-                    isOverButton: true,
-                    isSearchable: false,
-                    isMultiSelect: false,
-                  ),
-                if (widget.isDate == true)
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        isDismissible: false,
-                        enableDrag: false,
-                        context: context,
-                        builder: (context) {
-                          return GestureDetector(
-                            onTap: () => FocusScope.of(context).unfocus(),
-                            child: Padding(
-                              padding: MediaQuery.viewInsetsOf(context),
-                              child: SizedBox(
-                                height: MediaQuery.sizeOf(context).height * 0.4,
-                                child: const DatePickerBirthdayWidget(),
-                              ),
-                            ),
-                          );
-                        },
-                      ).then((value) => safeSetState(() {}));
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 40.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            if ((widget.isDate == true) &&
-                                (FFAppState().day == 0))
-                              Text(
-                                valueOrDefault<String>(
-                                  widget.value,
-                                  '20',
+                      },
+                      autofocus: true,
+                      textInputAction: TextInputAction.done,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  letterSpacing: 0.0,
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        suffixIcon: _model.textController2!.text.isNotEmpty
+                            ? InkWell(
+                                onTap: () async {
+                                  _model.textController2?.clear();
+                                  safeSetState(() {});
+                                },
+                                child: Icon(
+                                  Icons.clear,
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  size: 16.0,
+                                ),
+                              )
+                            : null,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                      validator:
+                          _model.textController2Validator.asValidator(context),
+                    ),
+                  if ((widget.isFirstName == true) &&
+                      (widget.isLastName == true))
+                    TextFormField(
+                      controller: _model.textController3,
+                      focusNode: _model.textFieldFocusNode3,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.textController3',
+                        const Duration(milliseconds: 2000),
+                        () => safeSetState(() {}),
+                      ),
+                      onFieldSubmitted: (_) async {
+                        FFAppState().updateUserInfoStruct(
+                          (e) => e
+                            ..updateData(
+                              (e) => e..firstName = _model.textController3.text,
+                            ),
+                        );
+                        safeSetState(() {});
+                      },
+                      autofocus: true,
+                      textInputAction: TextInputAction.done,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  letterSpacing: 0.0,
+                                ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        suffixIcon: _model.textController3!.text.isNotEmpty
+                            ? InkWell(
+                                onTap: () async {
+                                  _model.textController3?.clear();
+                                  safeSetState(() {});
+                                },
+                                child: Icon(
+                                  Icons.clear,
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  size: 16.0,
+                                ),
+                              )
+                            : null,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                      validator:
+                          _model.textController3Validator.asValidator(context),
+                    ),
+                  if (widget.isHeight == true)
+                    TextFormField(
+                      controller: _model.textController4,
+                      focusNode: _model.textFieldFocusNode4,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.textController4',
+                        const Duration(milliseconds: 2000),
+                        () => safeSetState(() {}),
+                      ),
+                      onFieldSubmitted: (_) async {
+                        FFAppState().updateUserInfoStruct(
+                          (e) => e
+                            ..updateData(
+                              (e) => e
+                                ..height = double.tryParse(
+                                    _model.textController4.text),
+                            ),
+                        );
+                        safeSetState(() {});
+                      },
+                      autofocus: true,
+                      textInputAction: TextInputAction.done,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  letterSpacing: 0.0,
+                                ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        suffixIcon: _model.textController4!.text.isNotEmpty
+                            ? InkWell(
+                                onTap: () async {
+                                  _model.textController4?.clear();
+                                  safeSetState(() {});
+                                },
+                                child: Icon(
+                                  Icons.clear,
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  size: 16.0,
+                                ),
+                              )
+                            : null,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      validator:
+                          _model.textController4Validator.asValidator(context),
+                    ),
+                  if (widget.isActivity == true)
+                    FlutterFlowDropDown<String>(
+                      controller: _model.dropDownValueController1 ??=
+                          FormFieldController<String>(
+                        _model.dropDownValue1 ??= widget.value,
+                      ),
+                      options: const ['Nhẹ nhàng', 'Trung bình', 'Nặng'],
+                      onChanged: (val) async {
+                        safeSetState(() => _model.dropDownValue1 = val);
+                        FFAppState().updateUserInfoStruct(
+                          (e) => e
+                            ..updateData(
+                              (e) => e
+                                ..frequencyOfActivity = () {
+                                  if (_model.dropDownValue1 == 'Nhẹ nhàng') {
+                                    return 0;
+                                  } else if (_model.dropDownValue1 ==
+                                      'Trung bình') {
+                                    return 1;
+                                  } else {
+                                    return 2;
+                                  }
+                                }(),
+                            ),
+                        );
+                        safeSetState(() {});
+                      },
+                      textStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Inter',
+                                letterSpacing: 0.0,
                               ),
-                            if ((FFAppState().day != 0) &&
-                                ((FFAppState().month != 0) &&
-                                    (FFAppState().year != 0)))
-                              Text(
-                                '${functions.getDayFromIndex(FFAppState().day) < 10 ? '0${functions.getDayFromIndex(FFAppState().day).toString()}' : functions.getDayFromIndex(FFAppState().day).toString()}/${functions.getMonthFromIndex(FFAppState().month) < 10 ? '0${functions.getMonthFromIndex(FFAppState().month).toString()}' : functions.getMonthFromIndex(FFAppState().month).toString()}/${FFAppState().year.toString()}',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: FlutterFlowTheme.of(context).accent4,
+                        size: 24.0,
+                      ),
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                      elevation: 2.0,
+                      borderColor: Colors.transparent,
+                      borderWidth: 2.0,
+                      borderRadius: 8.0,
+                      margin:
+                          const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 8.0, 0.0),
+                      hidesUnderline: true,
+                      isOverButton: true,
+                      isSearchable: false,
+                      isMultiSelect: false,
+                    ),
+                  if (widget.isDiet == true)
+                    FlutterFlowDropDown<String>(
+                      controller: _model.dropDownValueController2 ??=
+                          FormFieldController<String>(
+                        _model.dropDownValue2 ??= widget.value,
+                      ),
+                      options: const [
+                        'Ăn chay',
+                        'Ăn 30-90g thịt,../ngày',
+                        'Ăn > 90g thịt,../ngày'
+                      ],
+                      onChanged: (val) async {
+                        safeSetState(() => _model.dropDownValue2 = val);
+                        FFAppState().updateUserInfoStruct(
+                          (e) => e
+                            ..updateData(
+                              (e) => e
+                                ..diet = () {
+                                  if (_model.dropDownValue2 == 'Ăn chay') {
+                                    return 0;
+                                  } else if (_model.dropDownValue2 ==
+                                      'Ăn 30-90g thịt,../ngày') {
+                                    return 1;
+                                  } else {
+                                    return 2;
+                                  }
+                                }(),
+                            ),
+                        );
+                        safeSetState(() {});
+                      },
+                      textStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: 'Inter',
+                                letterSpacing: 0.0,
                               ),
-                          ],
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: FlutterFlowTheme.of(context).accent4,
+                        size: 24.0,
+                      ),
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                      elevation: 2.0,
+                      borderColor: Colors.transparent,
+                      borderWidth: 2.0,
+                      borderRadius: 8.0,
+                      margin:
+                          const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 8.0, 0.0),
+                      hidesUnderline: true,
+                      isOverButton: true,
+                      isSearchable: false,
+                      isMultiSelect: false,
+                    ),
+                  if (widget.isWeight == true)
+                    TextFormField(
+                      controller: _model.textController5,
+                      focusNode: _model.textFieldFocusNode5,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.textController5',
+                        const Duration(milliseconds: 2000),
+                        () => safeSetState(() {}),
+                      ),
+                      onFieldSubmitted: (_) async {
+                        FFAppState().updateUserInfoStruct(
+                          (e) => e
+                            ..updateData(
+                              (e) => e
+                                ..initialWeight = double.tryParse(
+                                    _model.textController5.text),
+                            ),
+                        );
+                        safeSetState(() {});
+                      },
+                      autofocus: true,
+                      textInputAction: TextInputAction.done,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  letterSpacing: 0.0,
+                                ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0x00000000),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        suffixIcon: _model.textController5!.text.isNotEmpty
+                            ? InkWell(
+                                onTap: () async {
+                                  _model.textController5?.clear();
+                                  safeSetState(() {});
+                                },
+                                child: Icon(
+                                  Icons.clear,
+                                  color: FlutterFlowTheme.of(context).accent4,
+                                  size: 16.0,
+                                ),
+                              )
+                            : null,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            letterSpacing: 0.0,
+                          ),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      validator:
+                          _model.textController5Validator.asValidator(context),
+                    ),
+                  if (widget.isDate == true)
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          isDismissible: false,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: SizedBox(
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.4,
+                                  child: const DatePickerBirthdayWidget(),
+                                ),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 40.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              12.0, 0.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              if ((widget.isDate == true) &&
+                                  (FFAppState().day == 0))
+                                Text(
+                                  valueOrDefault<String>(
+                                    widget.value,
+                                    '20',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              if ((FFAppState().day != 0) &&
+                                  ((FFAppState().month != 0) &&
+                                      (FFAppState().year != 0)))
+                                Text(
+                                  '${functions.getDayFromIndex(FFAppState().day) < 10 ? '0${functions.getDayFromIndex(FFAppState().day).toString()}' : functions.getDayFromIndex(FFAppState().day).toString()}/${functions.getMonthFromIndex(FFAppState().month) < 10 ? '0${functions.getMonthFromIndex(FFAppState().month).toString()}' : functions.getMonthFromIndex(FFAppState().month).toString()}/${FFAppState().year.toString()}',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-              ]
-                  .divide(const SizedBox(height: 8.0))
-                  .addToStart(const SizedBox(height: 16.0)),
+                ]
+                    .divide(const SizedBox(height: 8.0))
+                    .addToStart(const SizedBox(height: 16.0)),
+              ),
             ),
           ),
         ),

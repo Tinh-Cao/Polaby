@@ -17,6 +17,8 @@ class CongDongModel extends FlutterFlowModel<CongDongWidget> {
 
   bool state = false;
 
+  bool? searchActive;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for displayItemSearch component.

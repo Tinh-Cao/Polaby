@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/user/lich/input_health/input_health_widget.dart';
+import '/user/nang_cap_tai_khoan/nang_cap_tai_khoan_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -180,44 +181,62 @@ class _HealthDailyValueWidgetState extends State<HealthDailyValueWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor:
-                        FlutterFlowTheme.of(context).secondaryBackground,
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.viewInsetsOf(context),
-                        child: SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.4,
-                          child: InputHealthWidget(
-                            date: widget.date,
-                            isSize: true,
-                            value: double.tryParse(valueOrDefault<String>(
-                              getJsonField(
-                                functions
-                                    .getItemsWithType(
-                                        widget.healths?.toList(), 2)
-                                    ?.first,
-                                r'''$.value''',
-                              )?.toString(),
-                              '0',
-                            )),
-                            id: valueOrDefault<String>(
-                              getJsonField(
-                                functions
-                                    .getItemsWithType(
-                                        widget.healths?.toList(), 2)
-                                    ?.first,
-                                r'''$.id''',
-                              )?.toString(),
-                              '0',
+                  if (FFAppState().UserInfo.data.isSubscriptionActive == true) {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.4,
+                            child: InputHealthWidget(
+                              date: widget.date,
+                              isSize: true,
+                              value: double.tryParse(valueOrDefault<String>(
+                                getJsonField(
+                                  functions
+                                      .getItemsWithType(
+                                          widget.healths?.toList(), 2)
+                                      ?.first,
+                                  r'''$.value''',
+                                )?.toString(),
+                                '0',
+                              )),
+                              id: valueOrDefault<String>(
+                                getJsonField(
+                                  functions
+                                      .getItemsWithType(
+                                          widget.healths?.toList(), 2)
+                                      ?.first,
+                                  r'''$.id''',
+                                )?.toString(),
+                                '0',
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ).then((value) => safeSetState(() {}));
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  } else {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      useSafeArea: true,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.9,
+                            child: const NangCapTaiKhoanWidget(),
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  }
                 },
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -289,66 +308,84 @@ class _HealthDailyValueWidgetState extends State<HealthDailyValueWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor:
-                        FlutterFlowTheme.of(context).secondaryBackground,
-                    context: context,
-                    builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.viewInsetsOf(context),
-                        child: SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.4,
-                          child: InputHealthWidget(
-                            date: widget.date,
-                            isBloodSys: true,
-                            isBloodDia: true,
-                            isSize: false,
-                            bloodSys: double.tryParse(valueOrDefault<String>(
-                              getJsonField(
-                                functions
-                                    .getItemsWithType(
-                                        widget.healths?.toList(), 3)
-                                    ?.first,
-                                r'''$.value''',
-                              )?.toString(),
-                              '0',
-                            )),
-                            bloodDia: double.tryParse(valueOrDefault<String>(
-                              getJsonField(
-                                functions
-                                    .getItemsWithType(
-                                        widget.healths?.toList(), 4)
-                                    ?.first,
-                                r'''$.value''',
-                              )?.toString(),
-                              '0',
-                            )),
-                            id: valueOrDefault<String>(
-                              getJsonField(
-                                functions
-                                    .getItemsWithType(
-                                        widget.healths?.toList(), 3)
-                                    ?.first,
-                                r'''$.id''',
-                              )?.toString(),
-                              '0',
-                            ),
-                            id2: valueOrDefault<String>(
-                              getJsonField(
-                                functions
-                                    .getItemsWithType(
-                                        widget.healths?.toList(), 4)
-                                    ?.first,
-                                r'''$.id''',
-                              )?.toString(),
-                              '0',
+                  if (FFAppState().UserInfo.data.isSubscriptionActive == true) {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.4,
+                            child: InputHealthWidget(
+                              date: widget.date,
+                              isBloodSys: true,
+                              isBloodDia: true,
+                              isSize: false,
+                              bloodSys: double.tryParse(valueOrDefault<String>(
+                                getJsonField(
+                                  functions
+                                      .getItemsWithType(
+                                          widget.healths?.toList(), 3)
+                                      ?.first,
+                                  r'''$.value''',
+                                )?.toString(),
+                                '0',
+                              )),
+                              bloodDia: double.tryParse(valueOrDefault<String>(
+                                getJsonField(
+                                  functions
+                                      .getItemsWithType(
+                                          widget.healths?.toList(), 4)
+                                      ?.first,
+                                  r'''$.value''',
+                                )?.toString(),
+                                '0',
+                              )),
+                              id: valueOrDefault<String>(
+                                getJsonField(
+                                  functions
+                                      .getItemsWithType(
+                                          widget.healths?.toList(), 3)
+                                      ?.first,
+                                  r'''$.id''',
+                                )?.toString(),
+                                '0',
+                              ),
+                              id2: valueOrDefault<String>(
+                                getJsonField(
+                                  functions
+                                      .getItemsWithType(
+                                          widget.healths?.toList(), 4)
+                                      ?.first,
+                                  r'''$.id''',
+                                )?.toString(),
+                                '0',
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ).then((value) => safeSetState(() {}));
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  } else {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      useSafeArea: true,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.9,
+                            child: const NangCapTaiKhoanWidget(),
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  }
                 },
                 child: Column(
                   mainAxisSize: MainAxisSize.max,

@@ -195,7 +195,7 @@ class _ThucDonMauWidgetState extends State<ThucDonMauWidget> {
                                         }),
                                         Future(() async {
                                           FFAppState().isMenuSaved = true;
-                                          safeSetState(() {});
+                                          _model.updatePage(() {});
                                         }),
                                       ]);
                                     }

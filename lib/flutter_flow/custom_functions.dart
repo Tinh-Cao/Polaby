@@ -1954,13 +1954,29 @@ double? calculateDifference(
   int index,
 ) {
   // Kiểm tra nếu danh sách không đủ phần tử hoặc chỉ mục không hợp lệ
-  if (jsonList.length <= index || index < 0 || index + 1 >= jsonList.length) {
+  if (jsonList.length <= index || index < 0 || index + 1 > jsonList.length) {
     return 0.0;
   }
+  // Kiểm tra nếu danh sách trống, hoặc có ít hơn 2 phần tử, hoặc chỉ mục không hợp lệ
+  if (jsonList.isEmpty ||
+      jsonList.length < 2 ||
+      index < 0 ||
+      index >= jsonList.length) {
+    return 0.0;
+  }
+  var firstItem;
+  var secondItem;
 
-  // Lấy phần tử tại chỉ mục và phần tử kế tiếp
-  var firstItem = jsonList[index];
-  var secondItem = index - 1 < 0 ? jsonList[0] : jsonList[index - 1];
+  // Nếu index + 1 bằng với độ dài của jsonList, chọn phần tử đầu tiên làm index + 1
+  // và phần tử thứ hai là index hiện tại
+  if (index + 1 == jsonList.length) {
+    firstItem = jsonList[jsonList.length - 1]; // Phần tử đầu tiên
+    secondItem = jsonList[jsonList.length - 2]; // Phần tử hiện tại
+  } else {
+    // Trường hợp bình thường, lấy phần tử hiện tại và phần tử trước đó
+    firstItem = jsonList[index];
+    secondItem = index - 1 < 0 ? jsonList[0] : jsonList[index - 1];
+  }
 
   // Kiểm tra nếu giá trị của phần tử tại chỉ mục hoặc phần tử kế tiếp là null
   if (firstItem['value'] == null || secondItem['value'] == null) {
@@ -2067,4 +2083,11 @@ List<String> weekPostPicker() {
 
 List<double>? convertToDoubleList(List<String>? intList) {
   return intList?.map((number) => double.tryParse(number) ?? 0.0).toList();
+}
+
+bool? showResultSearch(
+  String textSearchFor,
+  String textSearchIn,
+) {
+  return textSearchIn.toLowerCase().contains(textSearchFor);
 }

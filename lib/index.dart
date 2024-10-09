@@ -62,3 +62,7 @@ export '/user/tai_khoan/chinh_sua_thong_tin_thai_ky/chinh_sua_thong_tin_thai_ky_
     show ChinhSuaThongTinThaiKyWidget;
 export '/suc_khoe/vong_bung_hang_ngay/vong_bung_hang_ngay_widget.dart'
     show VongBungHangNgayWidget;
+export '/user/chuyen_gia_view_nguoi_dung/chi_tiet_nguoidung/chi_tiet_nguoidung_widget.dart'
+    show ChiTietNguoidungWidget;
+export '/user/home/intermediate/intermediate_widget.dart'
+    show IntermediateWidget;

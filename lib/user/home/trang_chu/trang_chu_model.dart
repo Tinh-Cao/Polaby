@@ -48,6 +48,10 @@ class TrangChuModel extends FlutterFlowModel<TrangChuWidget> {
   UsersRecord? userDocument;
   // Model for cardItem component.
   late CardItemModel cardItemModel;
+  // Stores action output result for [Firestore Query - Query a collection] action in Row widget.
+  DailyRecord? daily;
+  // Stores action output result for [Backend Call - Create Document] action in Row widget.
+  DailyRecord? dailyCollection;
   // Model for healthWeight component.
   late HealthWeightModel healthWeightModel;
   // Model for healthWeightEmpty component.

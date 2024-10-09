@@ -80,6 +80,7 @@ class _DangKyWidgetState extends State<DangKyWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Padding(
@@ -620,128 +621,222 @@ class _DangKyWidgetState extends State<DangKyWidget> {
                             ),
                           ].divide(const SizedBox(height: 16.0)),
                         ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            FFButtonWidget(
+                              onPressed: () async {
+                                _model.registerResult = await PolabyGroup
+                                    .apiV1AuthenticationRegisterPOSTCall
+                                    .call(
+                                  email: _model.textController1.text,
+                                  password: _model.textController3.text,
+                                  confirmPassword: _model.textController4.text,
+                                  firstName: null,
+                                  lastName: null,
+                                  role: null,
+                                );
+
+                                if ((_model.registerResult?.succeeded ??
+                                    true)) {
+                                  context.pushNamed(
+                                    'kiem_tra_mail',
+                                    queryParameters: {
+                                      'email': serializeParam(
+                                        _model.textController1.text,
+                                        ParamType.String,
+                                      ),
+                                      'password': serializeParam(
+                                        _model.textController3.text,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType:
+                                            PageTransitionType.rightToLeft,
+                                        duration: Duration(milliseconds: 200),
+                                      ),
+                                    },
+                                  );
+                                } else {
+                                  if ((String var1) {
+                                    return var1 == 'Email already exists';
+                                  }(getJsonField(
+                                    (_model.registerResult?.jsonBody ?? ''),
+                                    r'''$.message''',
+                                  ).toString())) {
+                                    _model.isCheck = true;
+                                    safeSetState(() {});
+                                  } else {
+                                    if ((String var1, String var2) {
+                                      return var1 ==
+                                              'Password and confirm password does not match' ||
+                                          var2 ==
+                                              'Password and confirm password does not match';
+                                    }(
+                                        PolabyGroup
+                                            .apiV1AuthenticationRegisterPOSTCall
+                                            .confirmPassword1(
+                                          (_model.registerResult?.jsonBody ??
+                                              ''),
+                                        )!,
+                                        PolabyGroup
+                                            .apiV1AuthenticationRegisterPOSTCall
+                                            .confirmPassword2(
+                                          (_model.registerResult?.jsonBody ??
+                                              ''),
+                                        )!)) {
+                                      safeSetState(() {
+                                        _model.textController4?.clear();
+                                      });
+                                    }
+                                  }
+
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: const Text('Lỗi đăng ký'),
+                                        content: const Text(
+                                            'Vui lòng kiểm tra lại thông tin đăng ký'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: const Text('Đồng ý'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+
+                                safeSetState(() {});
+                              },
+                              text: 'Đăng ký',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 50.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: Colors.white,
+                                      fontSize: 14.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                elevation: 0.0,
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Bằng việc đăng ký, bạn đã đồng ý với các',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await launchURL(
+                                            'https://polaby.vercel.app/chinh-sach-bao-mat');
+                                      },
+                                      child: Text(
+                                        'Điều khoản dịch vụ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                    Text(
+                                      'và',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await launchURL(
+                                            'https://polaby.vercel.app/chinh-sach-bao-mat');
+                                      },
+                                      child: Text(
+                                        'Chính sách bảo mật',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                  ].divide(const SizedBox(width: 4.0)),
+                                ),
+                                Text(
+                                  'của Polaby',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ]
+                              .divide(const SizedBox(height: 16.0))
+                              .addToStart(const SizedBox(height: 64.0))
+                              .addToEnd(const SizedBox(height: 16.0)),
+                        ),
                       ].divide(const SizedBox(height: 16.0)),
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    FFButtonWidget(
-                      onPressed: () async {
-                        _model.registerResult = await PolabyGroup
-                            .apiV1AuthenticationRegisterPOSTCall
-                            .call(
-                          email: _model.textController1.text,
-                          password: _model.textController3.text,
-                          confirmPassword: _model.textController4.text,
-                          firstName: null,
-                          lastName: null,
-                          role: null,
-                        );
-
-                        if ((_model.registerResult?.succeeded ?? true)) {
-                          context.pushNamed(
-                            'kiem_tra_mail',
-                            queryParameters: {
-                              'email': serializeParam(
-                                _model.textController1.text,
-                                ParamType.String,
-                              ),
-                              'password': serializeParam(
-                                _model.textController3.text,
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: const TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.rightToLeft,
-                                duration: Duration(milliseconds: 200),
-                              ),
-                            },
-                          );
-                        } else {
-                          if ((String var1) {
-                            return var1 == 'Email already exists';
-                          }(getJsonField(
-                            (_model.registerResult?.jsonBody ?? ''),
-                            r'''$.message''',
-                          ).toString())) {
-                            _model.isCheck = true;
-                            safeSetState(() {});
-                          } else {
-                            if ((String var1, String var2) {
-                              return var1 ==
-                                      'Password and confirm password does not match' ||
-                                  var2 ==
-                                      'Password and confirm password does not match';
-                            }(
-                                PolabyGroup.apiV1AuthenticationRegisterPOSTCall
-                                    .confirmPassword1(
-                                  (_model.registerResult?.jsonBody ?? ''),
-                                )!,
-                                PolabyGroup.apiV1AuthenticationRegisterPOSTCall
-                                    .confirmPassword2(
-                                  (_model.registerResult?.jsonBody ?? ''),
-                                )!)) {
-                              safeSetState(() {
-                                _model.textController4?.clear();
-                              });
-                            }
-                          }
-
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: const Text('Lỗi đăng ký'),
-                                content: const Text(
-                                    'Vui lòng kiểm tra lại thông tin đăng ký'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: const Text('Đồng ý'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-
-                        safeSetState(() {});
-                      },
-                      text: 'Đăng ký',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 50.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                        elevation: 0.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ],

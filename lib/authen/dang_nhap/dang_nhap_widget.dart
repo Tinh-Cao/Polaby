@@ -289,11 +289,34 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
                       );
 
                       if (((_model.loginResponse?.succeeded ?? true) == true) &&
-                          (PolabyGroup.apiV1AuthenticationLoginPOSTCall
-                                  .informationRequired(
-                                (_model.loginResponse?.jsonBody ?? ''),
-                              ) ==
-                              false)) {
+                          () {
+                            if ((PolabyGroup.apiV1AuthenticationLoginPOSTCall
+                                        .informationRequired(
+                                      (_model.loginResponse?.jsonBody ?? ''),
+                                    ) ==
+                                    false) &&
+                                (PolabyGroup.apiV1AuthenticationLoginPOSTCall
+                                        .role(
+                                      (_model.loginResponse?.jsonBody ?? ''),
+                                    ) ==
+                                    1)) {
+                              return true;
+                            } else if ((PolabyGroup
+                                        .apiV1AuthenticationLoginPOSTCall
+                                        .informationRequired(
+                                      (_model.loginResponse?.jsonBody ?? ''),
+                                    ) ==
+                                    false) &&
+                                (PolabyGroup.apiV1AuthenticationLoginPOSTCall
+                                        .role(
+                                      (_model.loginResponse?.jsonBody ?? ''),
+                                    ) ==
+                                    2)) {
+                              return true;
+                            } else {
+                              return false;
+                            }
+                          }()) {
                         GoRouter.of(context).prepareAuthEvent();
                         await authManager.signIn(
                           authenticationToken: PolabyGroup
@@ -312,7 +335,7 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
                           ),
                         );
 
-                        context.pushNamedAuth('trang_chu', context.mounted);
+                        context.goNamedAuth('Intermediate', context.mounted);
                       } else {
                         if ((PolabyGroup.apiV1AuthenticationLoginPOSTCall
                                     .message(
@@ -393,7 +416,7 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
                                 ) ??
                                 false;
                             if (confirmDialogResponse) {
-                              context.pushNamedAuth(
+                              context.goNamedAuth(
                                   'thong_tin_dang_ky_ca_nhan', context.mounted);
                             }
                           }
@@ -419,7 +442,8 @@ class _DangNhapWidgetState extends State<DangNhapWidget> {
                                 fontWeight: FontWeight.w500,
                               ),
                       elevation: 0.0,
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).primary,
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(12.0),

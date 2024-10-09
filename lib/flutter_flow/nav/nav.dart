@@ -73,14 +73,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const TrangChuWidget() : const ChaoMungWidget(),
+      errorBuilder: (context, state) => RootPageContext.wrap(
+        appStateNotifier.loggedIn ? const IntermediateWidget() : const ChaoMungWidget(),
+        errorRoute: state.uri.toString(),
+      ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? const TrangChuWidget() : const ChaoMungWidget(),
+          builder: (context, _) => RootPageContext.wrap(
+            appStateNotifier.loggedIn ? const IntermediateWidget() : const ChaoMungWidget(),
+          ),
         ),
         FFRoute(
           name: 'chao_mung',
@@ -894,6 +897,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'vong_bung_hang_ngay',
           path: '/vongBungHangNgay',
           builder: (context, params) => const VongBungHangNgayWidget(),
+        ),
+        FFRoute(
+          name: 'chi_tiet_nguoidung',
+          path: '/chiTietNguoidung',
+          builder: (context, params) => ChiTietNguoidungWidget(
+            postUserID: params.getParam(
+              'postUserID',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['users'],
+            ),
+            userId: params.getParam(
+              'userId',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Intermediate',
+          path: '/intermediate',
+          builder: (context, params) => const IntermediateWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -1080,13 +1104,14 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Container(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/happy-earth.svg',
-                      width: double.infinity,
-                      fit: BoxFit.contain,
+              ? Center(
+                  child: SizedBox(
+                    width: 32.0,
+                    height: 32.0,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
+                      ),
                     ),
                   ),
                 )

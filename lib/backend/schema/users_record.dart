@@ -45,6 +45,16 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get isFollowing => _isFollowing ?? const [];
   bool hasIsFollowing() => _isFollowing != null;
 
+  // "hiddenPost" field.
+  List<DocumentReference>? _hiddenPost;
+  List<DocumentReference> get hiddenPost => _hiddenPost ?? const [];
+  bool hasHiddenPost() => _hiddenPost != null;
+
+  // "banUser" field.
+  List<DocumentReference>? _banUser;
+  List<DocumentReference> get banUser => _banUser ?? const [];
+  bool hasBanUser() => _banUser != null;
+
   void _initializeFields() {
     _firstName = snapshotData['firstName'] as String?;
     _lastName = snapshotData['lastName'] as String?;
@@ -52,6 +62,8 @@ class UsersRecord extends FirestoreRecord {
     _role = snapshotData['role'] as String?;
     _createDate = snapshotData['createDate'] as String?;
     _isFollowing = getDataList(snapshotData['isFollowing']);
+    _hiddenPost = getDataList(snapshotData['hiddenPost']);
+    _banUser = getDataList(snapshotData['banUser']);
   }
 
   static CollectionReference get collection =>
@@ -118,7 +130,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.userId == e2?.userId &&
         e1?.role == e2?.role &&
         e1?.createDate == e2?.createDate &&
-        listEquality.equals(e1?.isFollowing, e2?.isFollowing);
+        listEquality.equals(e1?.isFollowing, e2?.isFollowing) &&
+        listEquality.equals(e1?.hiddenPost, e2?.hiddenPost) &&
+        listEquality.equals(e1?.banUser, e2?.banUser);
   }
 
   @override
@@ -128,7 +142,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.userId,
         e?.role,
         e?.createDate,
-        e?.isFollowing
+        e?.isFollowing,
+        e?.hiddenPost,
+        e?.banUser
       ]);
 
   @override

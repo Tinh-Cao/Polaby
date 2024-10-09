@@ -172,6 +172,7 @@ class PolabyGroup {
   static AccountGetCall accountGetCall = AccountGetCall();
   static AccountSubscriptionCall accountSubscriptionCall =
       AccountSubscriptionCall();
+  static RatingsPOSTCall ratingsPOSTCall = RatingsPOSTCall();
 }
 
 class ApiV1AccountsPOSTCall {
@@ -401,6 +402,10 @@ class ApiV1AccountsidGETCall {
   String? clinicAddress(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.data.clinicAddress''',
+      ));
+  String? modifiedBy(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.modifiedBy''',
       ));
 }
 
@@ -688,6 +693,10 @@ class ApiV1AuthenticationLoginPOSTCall {
   String? errors(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.errors.Email[0]''',
+      ));
+  int? role(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.role''',
       ));
 }
 
@@ -2760,6 +2769,15 @@ class ApiV1SafefoodsGETCall {
         r'''$[:]''',
         true,
       ) as List?;
+  List<bool>? isSafe(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].isSafe''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<bool>(x))
+          .withoutNulls
+          .toList();
 }
 
 class ApiV1SafefoodsidPUTCall {
@@ -3534,6 +3552,35 @@ class AccountSubscriptionCall {
   }
 }
 
+class RatingsPOSTCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? expertId = '',
+    int? start,
+    String? comment = '',
+    String? subscriptionId = '',
+  }) async {
+    final baseUrl = PolabyGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'ratingsPOST',
+      apiUrl: '$baseUrl/api/v1/ratings',
+      callType: ApiCallType.POST,
+      headers: {
+        'ngrok-skip-browser-warning': '69420',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End Polaby Group Code
 
 /// Start PolabyV2 Group Code
@@ -4251,6 +4298,11 @@ class RatingsPostCall {
       alwaysAllowBody: false,
     );
   }
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
 }
 
 class NotificationsettingsGetCall {

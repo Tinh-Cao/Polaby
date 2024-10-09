@@ -81,20 +81,13 @@ class _NhuCauDinhDuongWidgetState extends State<NhuCauDinhDuongWidget> {
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: FutureBuilder<ApiCallResponse>(
-              future: FFAppState().thucDon(
-                uniqueQueryKey: functions
-                    .caculateBmi(FFAppState().UserInfo.data.initialWeight,
-                        FFAppState().UserInfo.data.height)
-                    .toString(),
-                requestFn: () =>
-                    PolabyGroup.apiV1MenusRecommendationsGETCall.call(
-                  accountId: currentUserUid,
-                  pageIndex: 1,
-                  pageSize:
-                      FFAppState().UserInfo.data.isSubscriptionActive == false
-                          ? 5
-                          : 50,
-                ),
+              future: PolabyGroup.apiV1MenusRecommendationsGETCall.call(
+                accountId: currentUserUid,
+                pageIndex: 1,
+                pageSize:
+                    FFAppState().UserInfo.data.isSubscriptionActive == false
+                        ? 5
+                        : 50,
               ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.

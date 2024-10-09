@@ -14,7 +14,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io'; // Import File
 import 'package:path_provider/path_provider.dart';
 
-Future<String> uploadImageToFirebaseStorage(FFUploadedFile file) async {
+Future<String> uploadImageToFirebaseStorage(
+    FFUploadedFile file, String userId) async {
   try {
     if (Platform.isAndroid || Platform.isIOS) {
       // Tạo tệp tạm thời
@@ -25,9 +26,8 @@ Future<String> uploadImageToFirebaseStorage(FFUploadedFile file) async {
 
       // Tạo tham chiếu đến vị trí Firebase Storage mong muốn
       FirebaseStorage storage = FirebaseStorage.instance;
-      Reference storageRef = storage
-          .ref()
-          .child('${DateTime.now().millisecondsSinceEpoch}_${file.name}');
+      Reference storageRef = storage.ref().child(
+          '$userId/${DateTime.now().millisecondsSinceEpoch}_${file.name}');
 
       // Tải tệp lên Firebase Storage
       UploadTask uploadTask = storageRef.putFile(tempFile);

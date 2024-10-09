@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'flutter_flow/request_manager.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
@@ -607,6 +606,12 @@ class FFAppState extends ChangeNotifier {
     _yearly = value;
   }
 
+  bool _searchActive = false;
+  bool get searchActive => _searchActive;
+  set searchActive(bool value) {
+    _searchActive = value;
+  }
+
   final _ingredientManager = FutureRequestManager<ApiCallResponse>();
   Future<ApiCallResponse> ingredient({
     String? uniqueQueryKey,
@@ -652,20 +657,20 @@ class FFAppState extends ChangeNotifier {
   void clearNutrientCacheKey(String? uniqueKey) =>
       _nutrientManager.clearRequest(uniqueKey);
 
-  final _thucDonManager = FutureRequestManager<ApiCallResponse>();
-  Future<ApiCallResponse> thucDon({
+  final _chiTietNguoiDangBaiManager = StreamRequestManager<List<UsersRecord>>();
+  Stream<List<UsersRecord>> chiTietNguoiDangBai({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Future<ApiCallResponse> Function() requestFn,
+    required Stream<List<UsersRecord>> Function() requestFn,
   }) =>
-      _thucDonManager.performRequest(
+      _chiTietNguoiDangBaiManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
         overrideCache: overrideCache,
         requestFn: requestFn,
       );
-  void clearThucDonCache() => _thucDonManager.clear();
-  void clearThucDonCacheKey(String? uniqueKey) =>
-      _thucDonManager.clearRequest(uniqueKey);
+  void clearChiTietNguoiDangBaiCache() => _chiTietNguoiDangBaiManager.clear();
+  void clearChiTietNguoiDangBaiCacheKey(String? uniqueKey) =>
+      _chiTietNguoiDangBaiManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {

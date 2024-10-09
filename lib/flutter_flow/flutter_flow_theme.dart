@@ -39,6 +39,7 @@ abstract class FlutterFlowTheme {
   late Color blue400;
   late Color deepPurple200;
   late Color deepPurple400;
+  late Color success400;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -135,6 +136,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color blue400 = const Color(0xFF42A5F5);
   late Color deepPurple200 = const Color(0xFFB39DDB);
   late Color deepPurple400 = const Color(0xFF7E57C2);
+  late Color success400 = const Color(0xFF4ADE80);
 }
 
 abstract class Typography {

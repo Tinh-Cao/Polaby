@@ -284,7 +284,7 @@ class _ChucMungWidgetState extends State<ChucMungWidget> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         context.pushNamed(

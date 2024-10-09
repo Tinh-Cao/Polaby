@@ -65,16 +65,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.goNamed(
-                      'trang_chu',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.leftToRight,
-                          duration: Duration(milliseconds: 200),
-                        ),
-                      },
-                    );
+                    context.goNamed('trang_chu');
                   },
                   child: Container(
                     width: 56.0,
@@ -136,27 +127,9 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   highlightColor: Colors.transparent,
                   onTap: () async {
                     if (widget.currentPage == 'home') {
-                      context.goNamed(
-                        'lich',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.rightToLeft,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.goNamed('lich');
                     } else {
-                      context.goNamed(
-                        'lich',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.leftToRight,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.goNamed('lich');
                     }
                   },
                   child: Container(
@@ -220,27 +193,9 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   onTap: () async {
                     if ((widget.currentPage == 'home') ||
                         (widget.currentPage == 'calendar')) {
-                      context.goNamed(
-                        'cong_dong',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.rightToLeft,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.goNamed('cong_dong');
                     } else {
-                      context.goNamed(
-                        'cong_dong',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.leftToRight,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.goNamed('cong_dong');
                     }
                   },
                   child: Container(
@@ -305,27 +260,9 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                     if ((widget.currentPage == 'home') ||
                         (widget.currentPage == 'calendar') ||
                         (widget.currentPage == 'community')) {
-                      context.goNamed(
-                        'ghi_chu',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.rightToLeft,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.goNamed('ghi_chu');
                     } else {
-                      context.goNamed(
-                        'ghi_chu',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.leftToRight,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.goNamed('ghi_chu');
                     }
                   },
                   child: Container(
@@ -387,16 +324,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.goNamed(
-                      'tai_khoan',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.rightToLeft,
-                          duration: Duration(milliseconds: 200),
-                        ),
-                      },
-                    );
+                    context.goNamed('tai_khoan');
                   },
                   child: Container(
                     width: 56.0,
@@ -470,16 +398,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.goNamed(
-                      'cong_dong_chuyen_gia',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.leftToRight,
-                          duration: Duration(milliseconds: 200),
-                        ),
-                      },
-                    );
+                    context.goNamed('cong_dong_chuyen_gia');
                   },
                   child: Container(
                     width: 56.0,
@@ -488,7 +407,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (widget.page == 'community')
+                        if (widget.page == 'home')
                           Container(
                             width: double.infinity,
                             height: 2.0,
@@ -541,27 +460,9 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   highlightColor: Colors.transparent,
                   onTap: () async {
                     if (widget.currentPage == 'home') {
-                      context.goNamed(
-                        'thong_bao',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.rightToLeft,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.goNamed('thong_bao');
                     } else {
-                      context.goNamed(
-                        'thong_bao',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.leftToRight,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.goNamed('thong_bao');
                     }
                   },
                   child: Container(
@@ -623,16 +524,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.goNamed(
-                      'chi_tiet_tai_khoan_expert',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.rightToLeft,
-                          duration: Duration(milliseconds: 200),
-                        ),
-                      },
-                    );
+                    context.goNamed('chi_tiet_tai_khoan_expert');
                   },
                   child: Container(
                     width: 56.0,

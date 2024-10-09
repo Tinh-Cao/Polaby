@@ -41,6 +41,8 @@ class HangNgayModel extends FlutterFlowModel<HangNgayWidget> {
   String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Firestore Query - Query a collection] action in Text widget.
   int? numberOfSchedule;
+  // Stores action output result for [Firestore Query - Query a collection] action in Text widget.
+  int? numberOfNoteDaily;
   // State field(s) for ChoiceChips widget.
   FormFieldController<List<String>>? choiceChipsValueController1;
   List<String>? get choiceChipsValues1 => choiceChipsValueController1?.value;
